@@ -33,7 +33,7 @@
 </template>
 
 <script>
-    import cpCalendarMiniWeek from '@/components/cpCalendarMiniWeek'
+    import cpCalendarMiniWeek from './cpCalendarMiniWeek'
 
     export default {
         components: {

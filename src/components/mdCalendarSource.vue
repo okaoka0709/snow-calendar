@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import cpCalendarSource from '@/components/cpCalendarSource'
+    import cpCalendarSource from './cpCalendarSource'
 
     export default {
         components: {

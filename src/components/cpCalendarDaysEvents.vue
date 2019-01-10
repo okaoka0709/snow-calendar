@@ -23,8 +23,8 @@
 </template>
 
 <script>
-    import cpCalendarDaysEventDay from '@/components/cpCalendarDaysEventDay'
-    import cpCalendarDaysEventItem from '@/components/cpCalendarDaysEventItem'
+    import cpCalendarDaysEventDay from './cpCalendarDaysEventDay'
+    import cpCalendarDaysEventItem from './cpCalendarDaysEventItem'
 
     export default {
         components: {

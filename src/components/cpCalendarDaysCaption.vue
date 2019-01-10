@@ -20,8 +20,8 @@
 </template>
 
 <script>
-    import cpCalendarDaysTimeTargets from '@/components/cpCalendarDaysTimeTargets'
-    import cpCalendarDaysEvents from '@/components/cpCalendarDaysEvents'
+    import cpCalendarDaysTimeTargets from './cpCalendarDaysTimeTargets'
+    import cpCalendarDaysEvents from './cpCalendarDaysEvents'
 
     export default {
         components: {

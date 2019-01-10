@@ -14,7 +14,7 @@
 </template>
 
 <script>
-    import cpCalendarYearDate from '@/components/cpCalendarYearDate'
+    import cpCalendarYearDate from './cpCalendarYearDate'
 
     export default {
         components: {

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import cpCalendarDaysTimeEvents from '@/components/cpCalendarDaysTimeEvents'
+    import cpCalendarDaysTimeEvents from './cpCalendarDaysTimeEvents'
 import { POINT_CONVERSION_COMPRESSED } from 'constants';
 
     export default {

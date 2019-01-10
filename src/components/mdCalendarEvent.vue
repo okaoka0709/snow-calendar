@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import cpCalendarEventDays from '@/components/cpCalendarEventDays'
+    import cpCalendarEventDays from './cpCalendarEventDays'
 
     export default {
         components: {

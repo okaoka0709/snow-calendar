@@ -104,8 +104,8 @@
 </template>
 
 <script>
-    import cpCalendarDaysCaption from '@/components/cpCalendarDaysCaption'
-    import cpCalendarDaysTimeEventsList from '@/components/cpCalendarDaysTimeEventsList'
+    import cpCalendarDaysCaption from './cpCalendarDaysCaption'
+    import cpCalendarDaysTimeEventsList from './cpCalendarDaysTimeEventsList'
 
     export default {
         components: {

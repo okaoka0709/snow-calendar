@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import cpCalendarEventEvents from '@/components/cpCalendarEventEvents'
+    import cpCalendarEventEvents from './cpCalendarEventEvents'
 
     export default {
         components: {

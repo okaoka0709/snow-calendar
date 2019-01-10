@@ -78,13 +78,13 @@
 </template>
 
 <script>
-    import mdCalendarMini from '@/components/mdCalendarMini'
-    import mdCalendarController from '@/components/mdCalendarController'
-    import mdCalendarYear from '@/components/mdCalendarYear'
-    import mdCalendarMonth from '@/components/mdCalendarMonth'
-    import mdCalendarDays from '@/components/mdCalendarDays'
-    import mdCalendarEvent from '@/components/mdCalendarEvent'
-    import mdCalendarSource from '@/components/mdCalendarSource'
+    import mdCalendarMini from './mdCalendarMini'
+    import mdCalendarController from './mdCalendarController'
+    import mdCalendarYear from './mdCalendarYear'
+    import mdCalendarMonth from './mdCalendarMonth'
+    import mdCalendarDays from './mdCalendarDays'
+    import mdCalendarEvent from './mdCalendarEvent'
+    import mdCalendarSource from './mdCalendarSource'
 
     export default {
         components: {

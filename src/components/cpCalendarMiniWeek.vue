@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import cpCalendarMiniDate from '@/components/cpCalendarMiniDate'
+    import cpCalendarMiniDate from './cpCalendarMiniDate'
 
     export default {
         components: {

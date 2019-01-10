@@ -29,7 +29,7 @@
 </template>
 
 <script>
-    import cpCalendarYearWeek from '@/components/cpCalendarYearWeek'
+    import cpCalendarYearWeek from './cpCalendarYearWeek'
 
     export default {
         components: {

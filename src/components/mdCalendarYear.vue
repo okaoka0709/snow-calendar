@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    import cpCalendarYearMonth from '@/components/cpCalendarYearMonth'
+    import cpCalendarYearMonth from './cpCalendarYearMonth'
 
     export default {
         components: {

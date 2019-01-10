@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import cpCalendarDaysTimeEvent from '@/components/cpCalendarDaysTimeEvent'
+    import cpCalendarDaysTimeEvent from './cpCalendarDaysTimeEvent'
 
     export default {
         components: {

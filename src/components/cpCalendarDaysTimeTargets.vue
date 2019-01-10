@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import cpCalendarDaysTimeTarget from '@/components/cpCalendarDaysTimeTarget'
+    import cpCalendarDaysTimeTarget from './cpCalendarDaysTimeTarget'
 
     export default {
         components: {
