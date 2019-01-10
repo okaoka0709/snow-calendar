@@ -1,0 +1,291 @@
+//基本 function 擴充================================================================
+
+    @function image-url($url) { //更深的顏色
+        @return url('~@/assets/images/#{$url}');
+    }
+
+    @function lighter( $color, $int: 10) { //更淺的顏色
+        @return lighten( $color, $int);
+    }
+
+    @function deeper( $color, $int: 10) { //更深的顏色
+        @return darken( $color, $int);
+    }
+
+    @function revertColor($color) { //依據背景色轉換文字顏色
+        $r: red($color);
+        $g: green($color);
+        $b: blue($color);
+
+        @if ( $r + $g + $b > 380 ) {
+            @return $deep;
+        } @else {
+            @return $white;
+        }
+    }
+
+//rwd 與 hack================================================================
+
+    @mixin rwd($max, $min: 0) { //自訂 RWD 寬度，第一個參數是最大值，第二個參數是最小值
+
+        $type: 'screen and (max-width: #{$max + 0px }) and (min-width: #{$min + 1px})';
+
+        @media #{$type} {
+            @content;
+        }
+    }
+
+	@mixin media($key) { //查詢瀏覽器媒體，給 rwd 用，$key 為 $media 的 key
+
+        @media #{map-get( $media, $key )} {
+            @content;
+        }
+    }
+
+//reset 重設樣式================================================================
+
+    %reset { //重新設定全部樣式
+        margin: 0;
+        position: static;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        list-style: none;
+        background-color: transparent;
+        font-size: 1rem;
+        font-weight: normal;
+        transition: initial;
+    }
+
+//clear 清除浮動================================================================
+
+    %clear {
+		content: $content;
+		display: block;
+		height: 0;
+		clear: both;
+    }
+
+//隱藏文字與...================================================================
+
+    %hide-text { //隱藏文字的方法
+        text-indent: -9999px;
+        font: 0/0 a;
+        color: transparent;
+    }
+
+    %ellipsis { //單行超過範圍文字變成'...'的方法
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    @mixin re-ellipsis() { //reset %ellipsis 的方法
+        overflow: visible;
+        text-overflow: clip;
+        white-space: normal;
+    }
+
+//背景與圖示================================================================
+
+    %drop {
+        display: none;
+        position: absolute;
+        border-radius: $border-radius;
+        background-color: $white;
+        border: $border;
+        z-index: 1;
+        box-shadow: $box-shadow;
+
+        li {
+
+            + li {
+                border-top: $border;
+            }
+        }
+
+        a {
+            display: block;
+            padding: $interval-m $interval-l;
+            color: $black;
+            border-radius: 0;
+            white-space: nowrap;
+            transition: $transition;
+            line-height: 17px;
+
+            &.icon-font {
+
+                &:before {
+                    font-size: $font-size-l;
+                    margin-right: $interval-s;
+                }
+            }
+
+            &:hover {
+                background-color: $light;
+                text-decoration: none;
+            }
+
+            + a, + input {
+                border-top: $border;
+            }
+        }
+
+        &:hover {
+            display: block;
+        }
+    }
+
+//框架================================================================
+
+    %grid-xs {
+
+        .g, .md {
+
+            + .md {
+                margin-top: $interval-xs;
+            }
+
+            + .g {
+                margin-top: $interval-xs;
+
+                .g, .md {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    %grid-s {
+
+        .g, .md {
+
+            + .md {
+                margin-top: $interval-s;
+            }
+
+            + .g {
+                margin-top: $interval-s;
+
+                .g, .md {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    %grid-m {
+
+        .g, .md {
+
+            + .md {
+                margin-top: $interval-m;
+            }
+
+            + .g {
+                margin-top: $interval-m;
+
+                .g, .md {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    %grid-l {
+
+        .g, .md {
+
+            + .md {
+                margin-top: $interval-l;
+            }
+
+            + .g {
+                margin-top: $interval-l;
+
+                .g:first-child, .md:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+//font-icon =========================
+
+    %font-pseudo {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        vertical-align: middle;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+
+        /* Support for all WebKit browsers. */
+        -webkit-font-smoothing: antialiased;
+        /* Support for Safari and Chrome. */
+        text-rendering: optimizeLegibility;
+
+        /* Support for Firefox. */
+        -moz-osx-font-smoothing: grayscale;
+
+        /* Support for IE. */
+        font-feature-settings: 'liga';
+    }
+
+//other =========================
+
+    %card {
+        background-color: $white;
+        padding: $interval-l;
+        border: $border;
+        border-radius: $border-radius;
+    }
+
+    %card-hover {
+        transform-origin: center;
+        transition-duration: $transition;
+        transition-timing-function: ease-in-out;
+
+        &:hover {
+            transform: scale(1.1);
+            box-shadow: $box-shadow;
+        }
+    }
+
+    %mask {
+        content: $content;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba($white, .6);
+        z-index: 999;
+    }
+
+    %loading {
+
+        &:before {
+            @extend %mask;
+            background-image: image-url('bg_loading.gif');
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+
+    %a {
+        color: blue;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }

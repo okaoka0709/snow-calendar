@@ -1,0 +1,26 @@
+//輸入框樣式
+
+%input {
+    vertical-align: middle;
+    border: $border;
+    box-sizing: border-box;
+    padding: $btnInput_pd;
+    border-radius: $border-radius;
+    line-height: $btnInput_lh;
+    background-color: $white;
+    height: $btnInput_lh + $btnInput_pd * 2;
+    font-family: $base-font-style;
+
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 3px $major-color inset;
+    }
+
+    &[disabled] {
+        background-color: $light-gray;
+    }
+
+    &[type="file"] {
+        height: auto;
+    }
+}

@@ -1,0 +1,12 @@
+.g.article-aside {
+    width: 200px;
+    order: 2;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-left: $interval-m;
+
+    @include media('mobile') {
+        width: auto;
+        margin-left: 0;
+    }
+}

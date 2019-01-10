@@ -1,0 +1,191 @@
+.md.calendar-month {
+
+    @for $i from 1 through 4 {
+
+        .top-#{$i} {
+            top: 2em * ($i - 1);
+        }
+    }
+
+    @for $i from 1 through 7 {
+
+        .left-#{$i} {
+            left: calc(100% / 7 * #{$i - 1});
+        }
+    }
+
+    @for $i from 1 through 7 {
+
+        .width-#{$i} {
+            width: calc(100% / 7 * #{$i} - #{$interval-m});
+        }
+    }
+
+    &.is-drop {
+
+        .calendar-day {
+
+            .days {
+
+                .day {
+
+                    .sensor {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+
+    .calendar-caption {
+        display: flex;
+        flex-direction: row;
+
+        div {
+            width: (100% / 7);
+            text-align: center;
+        }
+    }
+
+    .calendar-day {
+        border: $border;
+
+        .week {
+            position: relative;
+
+            + .week {
+                border-top: $border;
+            }
+        }
+
+        .days {
+            display: flex;
+            flex-direction: row;
+
+            .day {
+                width: (100% / 7);
+                position: relative;
+                box-sizing: border-box;
+                padding: $interval-xs $interval-s;
+                background-color: $white;
+                min-height: 123px;
+
+                + .day {
+                    border-left: $border;
+                }
+
+                &.is-today {
+                    background-color: $light;
+
+                    .date {
+                        color: $major-color;
+                    }
+                }
+
+                &.is-active {
+
+                    .sensor {
+                        background-color: $major-color;
+                    }
+                }
+
+                .sensor {
+                    display: none;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    opacity: $opacity-l;
+                    z-index: 2;
+                }
+            }
+
+            .date {
+                color: inherit;
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .not-thisMonth {
+                // background-color: $light;
+
+                .date {
+                    // color: $gray;
+                }
+            }
+        }
+
+        .events {
+            position: absolute;
+            top: 28px;
+            right: 0;
+            bottom: 0;
+            left: 0;
+
+            a {
+                @extend %ellipsis;
+                position: absolute;
+                box-sizing: border-box;
+                padding: 0 $interval-s;
+                border-radius: $border-radius;
+                font-size: $font-size-xs;
+                margin-left: $interval-xs;
+                transition: $transition;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: $opacity-h;
+                }
+
+                &.is-over {
+                    opacity: $opacity-m;
+                }
+
+                &.date {
+                    color: $white;
+                    z-index: 1;
+
+                    /*i*/.resize {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        width: $interval-s;
+                        background-color: transparent;
+
+                        &:hover {
+                            cursor: e-resize;
+                        }
+                    }
+                }
+
+                &.time {
+                    width: (100% / 7);
+                    color: $deep;
+                }
+
+                &.more {
+                    color: $deep;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                /*i*/.circle {
+                    width: $interval-s;
+                    height: $interval-s;
+                    border-radius: 50%;
+                    margin-right: $interval-xs;
+                    display: inline-block;
+                    vertical-align: middle;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+}

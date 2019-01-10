@@ -1,0 +1,68 @@
+.md.calendar-source {
+
+    ul {
+        @extend %reset;
+
+        &.func  {
+
+            li {
+                float: left;
+                width: 50%;
+                box-sizing: border-box;
+                padding: 1px;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            &:after {
+                @extend %clear;
+            }
+        }
+
+        &.list {
+            padding: 1px;
+
+            li {
+                @extend %card;
+                position: relative;
+                padding: $interval-s $interval-m;
+                padding-right: 25px;
+
+                + li {
+                    margin-top: 2px;
+                }
+
+                &:hover {
+
+                    /*a*/.set {
+                        display: block;
+                    }
+                }
+            }
+
+            /*.cp*/.input {
+                max-width: 100%;
+                overflow: hidden;
+                font-size: $font-size-s;
+
+                span {
+                    color: $deep;
+                }
+            }
+
+            /*a*/.set {
+                display: none;
+                position: absolute;
+                top: 8px;
+                right: 4px;
+                cursor: pointer;
+
+                &:before {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}

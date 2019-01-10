@@ -1,0 +1,156 @@
+.md.calendar-year {
+    background-color: $white;
+    padding: $interval-m;
+
+    ul {
+        @extend %reset;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        li {
+            width: (100% / 4);
+            padding: $interval-m;
+            box-sizing: border-box;
+
+            @include rwd(1200) {
+                width: (100% / 3);
+            }
+
+            @include rwd(800) {
+                width: (100% / 2);
+            }
+
+            @include rwd(420) {
+                width: 100%;
+            }
+        }
+    }
+
+    .caption {
+        font-size: $font-size-l;
+    }
+
+    .calendar-day {
+
+        .week {
+
+        }
+
+        .title {
+
+            > div {
+                float: left;
+                width: (100% / 7);
+                text-align: center;
+                color: $gray;
+            }
+
+            &:after {
+                @extend %clear;
+            }
+        }
+
+        .days {
+
+            @for $i from 1 through 6 {
+
+                &.is-before-#{$i} {
+
+                    &:before {
+                        content: $content;
+                        float: left;
+                        width: (100% / 7) * $i;
+                    }
+                }
+            }
+
+            .day {
+                float: left;
+                width: (100% / 7);
+                text-align: center;
+                color: $gray;
+                padding: 1px;
+                box-sizing: border-box;
+            }
+
+            .date {
+                $size: 26px;
+
+                display: inline-block;
+                vertical-align: middle;
+                height: $size;
+                width: $size;
+                line-height: $size;
+                font-size: $font-size-s;
+                color: $deep;
+                border-radius: $size;
+                transition: $transition;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $deep-gray;
+                    color: $white;
+                }
+            }
+
+            .is-active {
+
+                .date {
+                    background-color: $minor-color;
+                    color: $white;
+                }
+            }
+
+            // .is-holiday {
+            //     $type: map-get($colors, 'danger');
+            //     $background: map-get($type, 'background');
+            //     $text: map-get($type, 'text');
+
+            //     &.is-active {
+
+            //         .date {
+            //             color: $background;
+            //             background-color: $text;
+            //         }
+            //     }
+
+            //     .date {
+            //         color: $text;
+
+            //         &:hover {
+            //             color: $background;
+            //             background-color: $text;
+            //         }
+            //     }
+            // }
+
+            .is-today {
+
+                .date {
+                    background-color: $major-color;
+                    color: $white;
+                    &:hover {
+                        background-color: deeper($major-color);
+                    }
+                }
+            }
+
+            .not-thisMonth {
+
+                .date {
+                    color: $gray;
+
+                    &:hover {
+                        background-color: $gray;
+                        color: $white;
+                    }
+                }
+            }
+
+            &:after {
+                @extend %clear;
+            }
+        }
+    }
+}

@@ -1,0 +1,80 @@
+.md.calendar-controller {
+    margin-bottom: $interval-m;
+    display: flex;
+    flex-direction: row;
+
+    .date-selector {
+
+        a {
+
+            &:hover {
+
+            }
+
+            &.prevMonth {
+
+            }
+
+            &.nextMonth {
+
+            }
+        }
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 $interval-xs;
+            text-align: center;
+            min-width: 100px;
+
+            &.thisMonth {
+                font-size: $font-size-xl;
+            }
+        }
+
+        select {
+            display: inline-block;
+            vertical-align: middle;
+            width: auto;
+
+            @include media('mobile') {
+                display: none;
+            }
+        }
+    }
+
+    .calendar-btns {
+        flex: 1;
+
+        ul {
+            @extend %reset;
+            text-align: right;
+        }
+
+        li {
+            display: inline-block;
+
+            &.change-toToday {
+
+                @include media('mobile') {
+                    display: none;
+                }
+            }
+
+            &.add-event {
+
+            }
+
+            + li {
+
+                a {
+
+                }
+            }
+        }
+
+        a {
+
+        }
+    }
+}

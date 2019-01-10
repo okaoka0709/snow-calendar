@@ -1,0 +1,23 @@
+[
+    {
+        "sn": 1,
+        "sub": "個人行事曆",
+        "color": "#1d88e5",
+        "editable": true,
+        "desc": "測試一"
+    },
+    {
+        "sn": 2,
+        "sub": "分享行事曆",
+        "color": "#e57a1d",
+        "editable": true,
+        "desc": "測試二"
+    },
+    {
+        "sn": 3,
+        "sub": "假日",
+        "color": "#e54288",
+        "editable": false,
+        "desc": "行政院人事行政總處公佈"
+    }
+]

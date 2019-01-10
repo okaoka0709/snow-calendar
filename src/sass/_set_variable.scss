@@ -1,0 +1,190 @@
+//灰階================================================================
+    $white: #ffffff; //白色
+    $light: #f5f6f7; //淺色
+    $light-gray: #e4e4e4; //淺灰
+    $gray: #aaaaaa; //灰色
+    $deep-gray: #646464; //深灰
+    $deep: #343434; //深色
+    $black: #1a1a1a; //黑色
+
+//主要版面顏色================================================================
+    $major-color: #1d88e5; //主色
+    $minor-color: #2d323d; //次色
+
+//其他版面顏色================================================================
+    $colors: (
+        'normal': (
+            'background': #f4f8f9,
+            'border': #e3e3e3,
+            'text': #506068
+        ),
+        'premary': (
+            'background': $major-color,
+            'border': darken($major-color, 5),
+            'text': #ffffff
+        ),
+        'secondary': (
+            'background': $minor-color,
+            'border': darken($minor-color, 5),
+            'text': #ffffff
+        ),
+        'info': (
+            'background': #e9f4fe,
+            'border': #d6e9fc,
+            'text': #1a8cff
+        ),
+        'warning': (
+            'background': #fff3cd,
+            'border': #ffeeba,
+            'text': #856404
+        ),
+        'expert': (
+            'background': #e6e8f4,
+            'border': #b0b6df,
+            'text': #5d68b9
+        ),
+        'danger': (
+            'background': #fff1f1,
+            'border': #f4dddd,
+            'text': #ff676c
+        ),
+        'success': (
+            'background': #d9f6ea,
+            'border': #bfedd4,
+            'text': #00a267
+        )
+    );
+
+//檔案類型圖片 & 顏色物件===============================================================
+    $file-type-map: (
+        'ai': ('pic': 'icon_ai.png', 'color': #5A422A),
+        'avi': ('pic': 'icon_avi.png', 'color': #1E4B84),
+        'bmp': ('pic': 'icon_bmp.png', 'color': #333333),
+        'cdr': ('pic': 'icon_cdr.png', 'color': #39B54A),
+        'css': ('pic': 'icon_css.png', 'color': #BEC730),
+        'csv': ('pic': 'icon_csv.png', 'color': #745076),
+        'dmg': ('pic': 'icon_dmg.png', 'color': #808080),
+        'doc': ('pic': 'icon_doc.png', 'color': #2A5696),
+        'docx': ('pic': 'icon_docx.png', 'color': #2A5696),
+        'exe': ('pic': 'icon_exe.png', 'color': #333333),
+        'gif': ('pic': 'icon_gif.png', 'color': #DCA61F),
+        'html': ('pic': 'icon_html.png', 'color': #25B7D3),
+        'ico': ('pic': 'icon_ico.png', 'color': #A60B09),
+        'jpeg': ('pic': 'icon_jpeg.png', 'color': #208895),
+        'jpg': ('pic': 'icon_jpg.png', 'color': #208895),
+        'js': ('pic': 'icon_js.png', 'color': #5E5021),
+        'link': ('pic': 'icon_link.png', 'color': #0069FF),
+        'md': ('pic': 'icon_md.png', 'color': #333333),
+        'mov': ('pic': 'icon_mov.png', 'color': #0069FF),
+        'mp3': ('pic': 'icon_mp3.png', 'color': #333333),
+        'mp4': ('pic': 'icon_mp4.png', 'color': #333333),
+        'odf': ('pic': 'icon_odf.png', 'color': #03659D),
+        'odp': ('pic': 'icon_odp.png', 'color': #9C3B03),
+        'ods': ('pic': 'icon_ods.png', 'color': #179D03),
+        'odt': ('pic': 'icon_odt.png', 'color': #03659D),
+        'ogg': ('pic': 'icon_ogg.png', 'color': #333333),
+        'ogv': ('pic': 'icon_ogv.png', 'color': #333333),
+        'other': ('pic': 'icon_other.png', 'color': #333333),
+        'pdf': ('pic': 'icon_pdf.png', 'color': #EF1011),
+        'png': ('pic': 'icon_png.png', 'color': #3374AE),
+        'ppt': ('pic': 'icon_ppt.png', 'color': #D04324),
+        'pptx': ('pic': 'icon_pptx.png', 'color': #D04324),
+        'psd': ('pic': 'icon_psd.png', 'color': #2C275D),
+        'rar': ('pic': 'icon_rar.png', 'color': #AA834D),
+        'rss': ('pic': 'icon_rss.png', 'color': #F8991D),
+        'sass': ('pic': 'icon_sass.png', 'color': #CC6699),
+        'svg': ('pic': 'icon_svg.png', 'color': #5A422A),
+        'swf': ('pic': 'icon_swf.png', 'color': #B60000),
+        'tar': ('pic': 'icon_tar.png', 'color': #AA834D),
+        'tif': ('pic': 'icon_tif.png', 'color': #2C275D),
+        'txt': ('pic': 'icon_txt.png', 'color': #333333),
+        'wav': ('pic': 'icon_wav.png', 'color': #254B9D),
+        'webm': ('pic': 'icon_webm.png', 'color': #70BA1D),
+        'xls': ('pic': 'icon_xls.png', 'color': #1D7044),
+        'xlsx': ('pic': 'icon_xlsx.png', 'color': #1D7044),
+        'xml': ('pic': 'icon_xml.png', 'color': #25B7D3),
+        'zip': ('pic': 'icon_zip.png', 'color': #AA834D)
+    );
+
+//文字樣式================================================================
+    $base-font-style: '微軟正黑體','Helvetica Neue',Helvetica,sans-serif,'新細明體';
+
+//文字大小================================================================
+    $font-size-xs: .7rem;
+    $font-size-s: .85rem;
+    $font-size-m: 1rem;
+    $font-size-l: 1.15rem;
+    $font-size-xl: 1.3rem;
+    $font-size-xxl: 1.45rem;
+
+//文字行高================================================================
+    $line-height-xs: 1;
+    $line-height-s: 1.2;
+    $line-height-m: 1.7;
+    $line-height-l: 2;
+    $line-height-xl: 2.4;
+
+//透明度================================================================
+    $opacity-l: .2;
+    $opacity-m: .5;
+    $opacity-h: .8;
+    $opacity-vh: .9;
+
+//變形大小================================================================
+    $size-s: .8;
+    $size-m: 1;
+    $size-l: 1.2;
+
+//間隔設定================================================================
+    $interval-xs: 3px;
+    $interval-s: 6px;
+    $interval-m: 10px;
+    $interval-l: 20px;
+    $interval-xl: 28px;
+    $interval-xxl: 36px;
+
+//基本動畫速度================================================================
+    $transition: 200ms;
+
+//RWD設定================================================================
+    $pc-width: 1280px; //pc寬度
+    $pad-width: 768px; //pad寬度
+    $phone-width: 560px; //phone寬度
+
+//grid 框架設定================================================================
+    $max-child: 10; //最多的分割數量
+
+//預設空文字================================================================
+    $content: '\200B'; //空偽類的字元
+
+//border 設定================================================================
+    $border-width: 1px;
+    $border-style: solid;
+    $border-color: $light-gray;
+    $border: $border-width $border-style $border-color;
+
+//btn Input 高度設定================================================================
+    $btnInput_lh: 22px;
+    $btnInput_pd: $interval-s;
+    $border-width: 1px;
+    $border-style: solid;
+    $border-color: $light-gray;
+    $border: $border-width $border-style $border-color;
+
+//預設圓角、陰影設定================================================================
+    $border-radius: $interval-xs;
+    $box-shadow: 0 0 $interval-m $light-gray;
+
+//瀏覽器媒體，給 rwd 用================================================================
+    $media: (
+        'center': 'screen and (max-width: #{$pc-width})',
+        'pc': 'screen and (max-width: #{$pc-width}) and (min-width: #{$pad-width + 1})',
+        'mobile': 'screen and (max-width: #{$pad-width})',
+        'pad': 'screen and (max-width: #{$pad-width}) and (min-width: #{$phone-width + 1})',
+        'phone': 'screen and (max-width: #{$phone-width})'
+    );
+
+//站台樣式設定================================================================
+    $input_w: 250px; //一般 input 寬度
+    $mobileBtn_w: 54px; //手機側欄按鈕
+    $mobileNav_w: 240px; //手機側欄寬度

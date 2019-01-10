@@ -1,0 +1,163 @@
+.md.calendar-mini {
+    margin-bottom: $interval-m;
+
+    @include media('mobile') {
+        display: none;
+    }
+
+    .calendar-selector {
+        text-align: center;
+
+        a {
+
+            &:hover {
+
+            }
+
+            &.prevMonth {
+
+            }
+
+            &.nextMonth {
+
+            }
+        }
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 $interval-l;
+
+            &.thisMonth {
+                width: 70px;
+                text-align: center;
+                font-size: $font-size-l;
+            }
+        }
+    }
+
+    .calendar-day {
+        margin-top: $interval-xl;
+
+        .week {
+
+        }
+
+        .title {
+
+            > div {
+                float: left;
+                width: (100% / 7);
+                text-align: center;
+                color: $gray;
+            }
+
+            &:after {
+                @extend %clear;
+            }
+        }
+
+        .days {
+
+            @for $i from 1 through 6 {
+
+                &.is-before-#{$i} {
+
+                    &:before {
+                        content: $content;
+                        float: left;
+                        width: (100% / 7) * $i;
+                    }
+                }
+            }
+
+            .day {
+                float: left;
+                width: (100% / 7);
+                text-align: center;
+                color: $gray;
+                padding: 1px;
+                box-sizing: border-box;
+            }
+
+            .date {
+                $size: 26px;
+
+                display: inline-block;
+                vertical-align: middle;
+                height: $size;
+                width: $size;
+                line-height: $size;
+                font-size: $font-size-s;
+                color: $deep;
+                border-radius: $size;
+                transition: $transition;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $deep-gray;
+                    color: $white;
+                }
+            }
+
+            .is-active {
+
+                .date {
+                    background-color: $minor-color;
+                    color: $white;
+                }
+            }
+
+            // .is-holiday {
+            //     $type: map-get($colors, 'danger');
+            //     $background: map-get($type, 'background');
+            //     $text: map-get($type, 'text');
+
+            //     &.is-active {
+
+            //         .date {
+            //             color: $background;
+            //             background-color: $text;
+            //         }
+            //     }
+
+            //     .date {
+            //         color: $text;
+
+            //         &:hover {
+            //             color: $background;
+            //             background-color: $text;
+            //         }
+            //     }
+            // }
+
+            .is-today {
+
+                .date {
+                    background-color: $major-color;
+                    color: $white;
+
+                    &:hover {
+                        background-color: deeper($major-color);
+                    }
+                }
+            }
+
+            .not-thisMonth {
+
+                .date {
+                    color: $gray;
+
+                    &:hover {
+                        background-color: $gray;
+                        color: $white;
+                    }
+                }
+            }
+
+            &:after {
+                @extend %clear;
+            }
+        }
+    }
+}

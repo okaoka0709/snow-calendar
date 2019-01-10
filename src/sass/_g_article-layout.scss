@@ -1,0 +1,12 @@
+.g.article-layout {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    position: relative;
+    line-height: 1.7;
+    user-select: none;
+
+    @include media('mobile') {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,47 @@
+.md.calendar-selector {
+    @extend %card;
+
+    /*ul*/.list {
+        @extend %reset;
+
+        li {
+            @extend %ellipsis;
+            position: relative;
+            transition: $transition;
+            padding: 0 $interval-s;
+            padding-right: 27px;
+
+            &:hover {
+                background-color: $light;
+            }
+        }
+
+        input[type="checkbox"] {
+            $size: 12px;
+
+            width: $size;
+            height: $size;
+            margin-right: $interval-s;
+        }
+
+        i {
+
+        }
+
+        span {
+
+        }
+
+        a {
+            @extend %hide-text;
+            position: absolute;
+            width: 27px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            // background-image: image-url('icon-calendar-dot.png');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+}

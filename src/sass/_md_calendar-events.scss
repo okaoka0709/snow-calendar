@@ -1,0 +1,126 @@
+.md.calendar-events {
+
+    &.is-future {
+        opacity: 1;
+    }
+
+    > ul {
+        @extend %reset;
+
+        > li {
+
+            @include media('phone') {
+                flex-direction: column;
+            }
+
+            &.is-today {
+
+                .time {
+                    color: $major-color;
+                }
+            }
+        }
+    }
+
+    .time {
+        margin-top: $interval-m;
+        padding: $interval-xs $interval-m;
+
+        /*a*/.inner {
+            display: inline-block;
+            color: inherit;
+            cursor: pointer;
+
+            @include media('phone') {
+                display: block;
+                padding: 0 $interval-s;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .date {
+            display: inline-block;
+            vertical-align: baseline;
+        }
+
+        .day {
+            display: inline-block;
+            vertical-align: baseline;
+        }
+    }
+
+    .event {
+        flex: 1;
+
+        > ul {
+            @extend %reset;
+
+            > li {
+
+                + li {
+                    margin-top: $interval-xs;
+                }
+            }
+        }
+
+        a {
+            display: flex;
+            color: $deep;
+            transition: $transition;
+            background-color: $white;
+            cursor: pointer;
+
+            &:hover {
+                opacity: $opacity-h;
+            }
+
+            &.is-over {
+                opacity: $opacity-m;
+            }
+
+            .mark {
+                display: flex;
+                align-items: flex-end;
+                flex-direction: column;
+                justify-content: center;
+                position: relative;
+                min-width: 35px;
+                padding: $interval-m;
+                pointer-events: none;
+
+                i {
+                    position: absolute;
+                    top: 0;
+                    right: -1px;
+                    bottom: 0;
+                    width: 2px;
+                }
+
+                em {
+                    font-style: normal;
+                    font-size: $font-size-s;
+
+                    &.start {
+
+                    }
+
+                    &.end {
+                        color: $gray;
+                    }
+                }
+            }
+
+            .name {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                font-weight: bold;
+                padding: $interval-m;
+                pointer-events: none;
+            }
+        }
+    }
+}

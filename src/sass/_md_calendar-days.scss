@@ -1,0 +1,436 @@
+.md.calendar-days {
+    $day_h: 1440px;
+    $target_w: 46px;
+
+    border: $border;
+    background-color: $white;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 400px;
+
+    &.days-1 {
+
+        .width-1 {
+            width: calc(100% / 1 - #{$interval-m});
+        }
+
+        .left-1 {
+            left: 0;
+        }
+    }
+
+    &.days-4 {
+
+        @for $i from 1 through 4 {
+
+            .width-#{$i} {
+                width: calc(100% / 4 * #{$i} - #{$interval-m});
+            }
+        }
+
+        @for $i from 1 through 4 {
+
+            .left-#{$i} {
+                left: calc(100% / 4 * #{$i - 1});
+            }
+        }
+    }
+
+    &.days-7 {
+
+        @for $i from 1 through 7 {
+
+            .width-#{$i} {
+                width: calc(100% / 7 * #{$i} - #{$interval-m});
+            }
+        }
+
+        @for $i from 1 through 7 {
+
+            .left-#{$i} {
+                left: calc(100% / 7 * #{$i - 1});
+            }
+        }
+    }
+
+    @for $i from 1 through 20 {
+
+        .top-#{$i} {
+            top: 2em * ($i - 1);
+        }
+    }
+
+    .caption-area {
+        padding-left: $target_w;
+        overflow-y: scroll;
+        border-bottom: $border;
+        flex-shrink: 0;
+
+        &.is-drop {
+
+            .calendar-caption {
+
+                .time {
+
+                    .sensor {
+                        display: block;
+                    }
+                }
+            }
+
+            .day-event {
+
+                .days {
+
+                    .day {
+
+                        .sensor {
+                            display: block;
+                        }
+                    }
+                }
+
+                .events {
+                    pointer-events: none;
+                }
+            }
+        }
+
+        .calendar-caption {
+            display: flex;
+            flex-direction: row;
+
+            .time {
+                flex: 1;
+                border-left: $border;
+                padding: $interval-xs 0;
+                box-sizing: border-box;
+                position: relative;
+                text-align: center;
+
+                &.is-today {
+                    background-color: $light;
+
+                    .day {
+                        color: $major-color;
+                    }
+
+                    .date {
+                        color: $major-color;
+                    }
+                }
+
+                &.is-active {
+
+                    .sensor {
+                        background-color: $major-color;
+                    }
+                }
+
+                /*a*/.inner {
+                    color: inherit;
+                    display: inline-block;
+                    cursor: pointer;
+
+                    &:hover {
+
+                        .day {
+                            text-decoration: underline;
+                        }
+
+                        .date {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+
+                .date {
+                    display: inline-block;
+                    vertical-align: baseline;
+                }
+
+                .day {
+                    position: relative;
+                    display: inline-block;
+                    vertical-align: baseline;
+                }
+
+                .sensor {
+                    display: none;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    opacity: $opacity-l;
+                    z-index: 2;
+                }
+            }
+        }
+
+        .day-event {
+            position: relative;
+
+            .days {
+                position: relative;
+                display: flex;
+                flex-direction: row;
+                align-items: stretch;
+
+                .day {
+                    position: relative;
+                    flex: 1;
+                    padding-bottom: $interval-m;
+                    border-left: $border;
+                    box-sizing: border-box;
+
+                    &.is-today {
+                        background-color: $light;
+                    }
+
+                    &.is-active {
+
+                        .sensor {
+                            background-color: $major-color;
+                        }
+                    }
+
+                    .sensor {
+                        display: none;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        opacity: $opacity-l;
+                        z-index: 3;
+                    }
+                }
+
+                @for $i from 1 through 20 {
+
+                    &.height-#{$i} {
+                        height: 1.6em * $i;
+                    }
+                }
+            }
+
+            .events {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+
+                a {
+                    @extend %ellipsis;
+                    position: absolute;
+                    box-sizing: border-box;
+                    padding: 0 $interval-s;
+                    border-radius: $border-radius;
+                    font-size: $font-size-xs;
+                    margin-left: $interval-xs;
+                    transition: $transition;
+                    cursor: pointer;
+
+                    &:hover {
+                        opacity: $opacity-h;
+                    }
+
+                    &.is-over {
+                        opacity: $opacity-m;
+                    }
+
+                    &.date {
+                        color: $white;
+                    }
+
+                    /*i*/.resize {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        width: $interval-s;
+                        background-color: transparent;
+
+                        &:hover {
+                            cursor: e-resize;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    > .day-area {
+        position: relative;
+        overflow-y: scroll;
+
+        .time-line {
+            position: absolute;
+            top: 0;
+            left: $target_w;
+            right: 0;
+            z-index: 1;
+            pointer-events: none;
+
+            /*span*/.now {
+                display: none;
+            }
+
+            ul {
+                @extend %reset;
+            }
+
+            li {
+                @extend %hide-text;
+                height: ( $day_h / 48 - 1 );
+                border-top: $border;
+
+                &:first-child {
+                    border-top-color: transparent;
+                }
+
+                &:nth-child(even) {
+                    border-top-style: dotted;
+                }
+            }
+        }
+
+        .day-line {
+
+            .time-target {
+                position: absolute;
+                left: 0;
+                width: $target_w;
+
+                ul {
+                    @extend %reset;
+                }
+
+                li {
+                    position: relative;
+                    top: -2px;
+                    height: ( $day_h / 24 );
+                    font-size: $font-size-xs;
+                    text-align: center;
+                }
+            }
+
+            .calendar-day {
+                display: flex;
+                position: relative;
+                flex-direction: row;
+                padding-left: $target_w;
+
+                &.is-drop {
+
+                    .sensor {
+                        display: block;
+                    }
+                }
+
+                .sensor {
+                    display: none;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: $target_w;
+                    opacity: $opacity-l;
+                    z-index: 2;
+                }
+
+                .day {
+                    position: relative;
+                    flex: 1;
+                    border-left: $border;
+                    height: $day_h;
+
+                    &.is-today {
+                        background-color: $light;
+                    }
+
+                    /*div*/.is-now {
+                        $type: map-get($colors, 'danger');
+                        $text: map-get($type, 'text');
+                        $height: 2px;
+
+                        &:before {
+                            $size: 10px;
+
+                            content: $content;
+                            position: absolute;
+                            height: $size;
+                            width: $size;
+                            border-radius: $size;
+                            top: 50%;
+                            left: 0;
+                            margin-left: $size * -0.5;
+                            margin-top: $size * -0.5;
+                            background-color: $text;
+                        }
+
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        height: $height;
+                        margin-top: $height * -0.5;
+                        background-color: $text;
+                        z-index: 3;
+                        pointer-events: none;
+                    }
+
+                    a {
+                        @extend %ellipsis;
+                        position: absolute;
+                        display: block;
+                        box-sizing: border-box;
+                        padding: 0 $interval-s;
+                        margin-left: $interval-xs;
+                        border-radius: $border-radius;
+                        font-size: $font-size-xs;
+                        color: $white;
+                        z-index: 2;
+                        overflow: hidden;
+                        transition: $transition;
+                        cursor: pointer;
+
+                        /*i*/.resize {
+                            position: absolute;
+                            right: 0;
+                            bottom: 0;
+                            left: 0;
+                            height: $interval-s;
+                            background-color: transparent;
+                            cursor: s-resize;
+                        }
+
+                        &:hover {
+                            opacity: $opacity-h;
+                        }
+
+                        &.is-over {
+                            opacity: $opacity-m;
+                        }
+
+                        @for $i from 1 through 5 {
+
+                            @for $j from 1 through $i {
+
+                                @for $k from 1 through $i {
+
+                                    &.width-#{$i}-#{$j}-#{$k} {
+                                        width: calc(#{(100% / $i)} * #{$k} - #{$interval-m});
+                                        left: ($j - 1) * (100% / $i);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
