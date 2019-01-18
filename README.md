@@ -1,7 +1,6 @@
 # Snow Calendar
 Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的前端月曆套件，其特色如下：
-* 將事件與資料完全開放，使用者可自行設計操作介面的邏輯。
-* 使用者可自行設計資料交互的方式。
+* 將事件與資料完全開放，您可自行設計操作介面的邏輯及資料交互的方式。
 * 以月為單位 init 資料，您可以在使用者切換到當月再動態取得資料。
 * 簡易使用，安裝套件後使用 **snowCalendar** 標籤即可。
 * 提供完整的月曆視圖：月曆、週曆、日曆、事件曆。
@@ -36,8 +35,8 @@ import snowCalendar from 'snow-calendar'
 * 事件資料 (events)
 * 日曆本資料 (sources)
 * 預設的預覽模式 (defaultMode)
-* 預設的月曆時間 (defaultMainCal)，若沒有設定則會呈現今天
-* 預設的小月曆時間 (defaultRefCal)，若沒有設定則會呈現今天
+* 預設的月曆時間 (defaultMainCal)
+* 預設的小月曆時間 (defaultRefCal)
 
 設定方式如下：
 ```
@@ -51,7 +50,7 @@ import snowCalendar from 'snow-calendar'
 ```
 
 ### 事件資料 (events)
-事件資料提供介面可顯示操作的事件。事件資料為一陣列，陣列中囊括一個一個的事件物件，每個事件物件需有以下資料：
+事件資料提供介面可顯示、操作的事件。事件資料為一陣列，陣列中囊括一個一個的事件物件，每個事件物件需有以下資料：
 * 起始日期 (startTime)
 * 結束日期 (endTime)
 * 唯一值 (sn)
@@ -89,7 +88,7 @@ let eventObject = [
 請注意日曆本歸屬的值，必須對應日曆本的 sn。由於呈現事件的顏色是從月曆本提供的，因此 Snow Calendar **不會呈現**找不到日曆歸屬的事件。
 
 ### 日曆本資料 (sources)
-Snow Calendar 提供多月曆本的功能，日曆本提供事件的編輯權限與顏色設定。日曆本資料為一陣列，陣列中囊括一個一個的日曆本，每個日曆本物件需有以下資料：
+Snow Calendar 提供多日曆本的功能，日曆本資料提供事件的編輯權限與顏色設定。日曆本資料為一陣列，陣列中囊括一個一個的日曆本，每個日曆本物件需有以下資料：
 * 唯一值 (sn)
 * 標題 (sub)
 * 敘述 (desc)
@@ -125,7 +124,7 @@ let defaultMode = 'week'
 使用者在操作介面中，仍然可以透過介面切換預覽模式，您也可以使用 cookie 等方法紀錄使用者上次的預覽模式。
 請注意若沒有設定這個值，將會自動呈現為 month 月曆模式。
 
-### 預設的月曆時間 (defaultMainCal) 及預設的小月曆時間 (defaultRefCal)
+### 預設的月曆時間 (defaultMainCal) 及小月曆時間 (defaultRefCal)
 提供預設的月曆時間，您將可以決定使用者第一時間所觀看的月曆、小月曆時間，格式如下：
 ```
 let timeObject = {
