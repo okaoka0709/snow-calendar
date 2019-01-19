@@ -1,10 +1,10 @@
 <template>
     <div class="md calendar-controller">
         <div class="date-selector">
-            <button title="上一則" @click.prevent="getAway('prev')"><</button>
+            <button title="上一則" @click.prevent="getAway('prev')">&lt;</button>
             <span v-if="mode === 'year'" class="thisMonth">{{ mainCal.year }}</span>
             <span v-else class="thisMonth">{{ mainCal.year }}/{{ mainCal.month }}</span>
-            <button title="下一則" @click.prevent="getAway('next')">></button>
+            <button title="下一則" @click.prevent="getAway('next')">&gt;</button>
             <select :value="mode" @change="changeMode">
                 <option value="date">天</option>
                 <option value="week">週</option>
@@ -66,7 +66,7 @@
                     date: _date,
                     hour: _hour,
                     minutes: _minutes
-                }, 'hour');
+                }, 'time');
             }
         }
     }

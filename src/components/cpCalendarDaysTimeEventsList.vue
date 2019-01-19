@@ -20,7 +20,6 @@
 
 <script>
     import cpCalendarDaysTimeEvents from './cpCalendarDaysTimeEvents'
-import { POINT_CONVERSION_COMPRESSED } from 'constants';
 
     export default {
         components: {
@@ -125,7 +124,7 @@ import { POINT_CONVERSION_COMPRESSED } from 'constants';
                 let $event = this.moveNode,
                     $startTime = $event.startTime;
 
-                if( this.moveType === 'resize' ){
+                if( this.moveType === 'foot' ){
 
                     if( $startTime.date !== obj.date ){ //如果是跨天
 
@@ -162,7 +161,7 @@ import { POINT_CONVERSION_COMPRESSED } from 'constants';
             },
             dropEnter: function(e, obj){
 
-                if( this.moveType === 'move' ){
+                if( this.moveType === 'head' ){
                     let $time = this.computedTime(e.offsetY, 'floor'),
                         $date = this.computedDate(e.target, e.offsetX);
 
@@ -176,7 +175,7 @@ import { POINT_CONVERSION_COMPRESSED } from 'constants';
 
                     this.changeData($set);
 
-                }else if( this.moveType === 'resize' ){
+                }else if( this.moveType === 'foot' ){
                     let $time = this.computedTime(e.offsetY, 'ceil'),
                         $date = this.computedDate(e.target, e.offsetX);
 

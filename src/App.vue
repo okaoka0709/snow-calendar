@@ -13,6 +13,7 @@
         @errorMsg="errorMsg"
 
         @moveResizeEvent="moveResizeEvent"
+        @timeClick="timeClick"
         @addEvent="addEvent"
         @clickEvent="clickEvent"
         @hoverEvent="hoverEvent"
@@ -36,8 +37,39 @@
         },
         data: function(){
             return {
-                events: [],
-                sources: [],
+                events: [
+                    {
+                        "sn":"15478014508230.03843509291948255",
+                        "sub":"庫存警示",
+                        "desc":"<div class=\"md major-table\" style=\"width: 160px\"> <table> <tbody> <tr> <td>副料</td> <td>預計庫存</td> </tr><tr> <td>B-225</td><td>-8072.048</td></tr><tr> <td>CA-ST</td><td>-4150.95</td></tr><tr> <td>EB51-500</td><td>-7786.978</td></tr><tr> <td>FS-102</td><td>-311.936</td></tr><tr> <td>HAL-70</td><td>-8905.098</td></tr><tr> <td>HDPE</td><td>-43200</td></tr><tr> <td>PEROXIDE</td><td>-146.216</td></tr><tr> <td>TALC</td><td>-4016.74</td></tr><tr> <td>YC-15FF</td><td>-177.428</td></tr></tbody> </table></div>",
+                        "cal":1,
+                        "location":"",
+                        "startTime":{
+                            "year":2019,
+                            "month":1,
+                            "date":3,
+                            "hour":0,
+                            "minutes":0
+                        },
+                        "endTime":{
+                            "year":2019,
+                            "month":1,
+                            "date":4,
+                            "hour":0,
+                            "minutes":0
+                        }
+                    }
+                ],
+                sources: [
+                    {
+                        "sn": 1,
+                        "sub": "產線1",
+                        "color": "#1d88e5",
+                        "editable": true,
+                        "desc": "產線1",
+                        "active": true
+                    }
+                ],
                 mainCal: {},
                 refCal: {},
                 mode: 'month'
@@ -61,6 +93,9 @@
             },
             addEvent: function(time, mode){
                 console.log('新增事件', time, mode);
+            },
+            timeClick: function(time, mode){
+                console.log('點選時間', time, mode);
             },
             clickEvent: function(event, mouseEvent){ //popup 顯示 event
                 console.log('點擊事件', event, mouseEvent);

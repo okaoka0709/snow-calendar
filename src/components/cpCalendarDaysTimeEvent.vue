@@ -5,7 +5,7 @@
         :style="'background-color: '+ cal.color +';height: '+ timeHeight +'px;top: '+ timeTop +'px;'"
         @click.prevent.stop="clickEvent"
         @mouseover.stop="hoverEvent"
-        @dragstart="startDropStatus($event, 'move')"
+        @dragstart="startDropStatus($event, 'head')"
         @dragend="endDropStatus"
     >
         {{ obj.sub }}<br>
@@ -13,7 +13,7 @@
         <i class="resize"
             v-if="cal.editable"
             draggable="true"
-            @dragstart.stop="startDropStatus($event, 'resize')"
+            @dragstart.stop="startDropStatus($event, 'foot')"
             @dragend.stop="endDropStatus"
         ></i>
     </a>

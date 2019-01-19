@@ -12,7 +12,7 @@
         </div>
         <div
             class="events"
-            @click.prevent="addEvt"
+            @click.prevent="computedTimeClick"
         >
             <cpCalendarMonthEvent
                 v-for="event in events"
@@ -185,7 +185,7 @@
             receiveEvent: function(){ //將收到的方法，推送給其他方法執行
                 this.$okaTool.receiveEvent(this, arguments);
             },
-            addEvt: function(evt){ //用寬度算點擊的是哪一天
+            computedTimeClick: function(evt){ //用寬度算點擊的是哪一天
                 let $self = this;
 
                 let $week = $self.obj,
@@ -202,9 +202,7 @@
                     _month = $date.month,
                     _date = $date.date;
 
-                let _mode = 'date';
-
-                this.$emit('sendEvent', 'addEvent', {
+                this.$emit('sendEvent', 'timeClick', {
                     year: _year,
                     month: _month,
                     date: _date,

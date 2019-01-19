@@ -71,9 +71,8 @@
                 this.moveNode = obj.data;
             },
             endDropStatus: function(obj){
-                if( this.moveType === 'resize' ){
+                if( this.moveType === 'foot' ){
                     this.$emit('sendEvent', 'moveResizeEvent', this.moveNode, this.moveTime, this.moveType, 'date', true);
-
                 }
 
                 this.moveType = null;
@@ -91,14 +90,14 @@
                 let $event = this.moveNode,
                     $startTime = $event.startTime;
 
-                if( this.moveType === 'move' ){
+                if( this.moveType === 'head' ){
 
                     if( $startTime.month === obj.month && $startTime.date === obj.date ){ //同個事件拖到同一天
                         return false;
                     }
 
                     _isFinally = true;
-                }else if( this.moveType === 'resize' ){
+                }else if( this.moveType === 'foot' ){
                     let $endTime = $event.endTime;
 
                     let a = $startTime.year > obj.year,
@@ -124,7 +123,7 @@
                 this.$emit('sendEvent', 'moveResizeEvent', this.moveNode, this.moveTime, this.moveType, 'date', _isFinally);
             },
             dropDone: function(obj){
-                if( this.moveType === 'move' ){
+                if( this.moveType === 'head' ){
                     this.changeData(obj);
                     this.removeClass();
                 }
@@ -132,9 +131,9 @@
                 this.endDropStatus();
             },
             dropEnter: function(obj){
-                if( this.moveType === 'move' ){
+                if( this.moveType === 'head' ){
                     this.addClass(obj);
-                }else if( this.moveType === 'resize' ){
+                }else if( this.moveType === 'foot' ){
                     this.changeData(obj);
                 }
             },

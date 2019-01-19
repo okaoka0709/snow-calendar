@@ -15,7 +15,7 @@
 
         @click.prevent.stop="clickEvent"
         @mouseover.stop="hoverEvent"
-        @dragstart="startDropStatus($event, 'move')"
+        @dragstart="startDropStatus($event, 'head')"
         @dragend="endDropStatus"
     >
         <i class="circle" :style="'background-color: '+ cal.color +';'"></i>{{ startHours }}:{{ startMinutes }} {{ obj.sub }}
@@ -30,14 +30,14 @@
 
         @click.prevent.stop="clickEvent"
         @mouseover.stop="hoverEvent"
-        @dragstart="startDropStatus($event, 'move')"
+        @dragstart="startDropStatus($event, 'head')"
         @dragend="endDropStatus"
     >
         全天 {{ obj.sub }}
         <i class="resize"
             draggable="true"
             v-if="cal.editable"
-            @dragstart.stop="startDropStatus($event, 'resize')"
+            @dragstart.stop="startDropStatus($event, 'foot')"
             @dragend.stop="endDropStatus"
         ></i>
     </a>

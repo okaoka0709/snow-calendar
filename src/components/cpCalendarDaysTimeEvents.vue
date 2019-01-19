@@ -2,7 +2,7 @@
     <div
         class="day"
         :class="[isToday ? 'is-today': '']"
-        @click="addEvt"
+        @click="timeClick"
     >
         <div
             v-if="isToday"
@@ -172,7 +172,7 @@
             receiveEvent: function (func, opt){ //將收到的方法，推送給其他方法執行
                 this.$okaTool.receiveEvent(this, arguments);
             },
-            addEvt: function (evt){ //用高度算新增時間
+            timeClick: function (evt){ //用高度算新增時間
                 let _offsetY = evt.offsetY;
 
                 let _startHour = Math.floor(_offsetY / 60),
@@ -184,13 +184,13 @@
                     _startMinutes = 30;
                 }
 
-                this.$emit('sendEvent', 'addEvent', {
+                this.$emit('sendEvent', 'timeClick', {
                     year: this.obj.year,
                     month: this.obj.month,
                     date: this.obj.date,
                     hour: _startHour,
                     minutes: _startMinutes
-                }, 'hour');
+                }, 'time');
             },
             getNow: function(){
                 let $now = new Date(),

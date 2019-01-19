@@ -2,7 +2,7 @@
     <div
         class="day"
         :class="[isToday? 'is-today': '', obj.thisMonth? '': 'not-thisMonth', isActive? 'is-active': '']"
-        @click="addEvt"
+        @click="timeClick"
     >
         <a
             class="date"
@@ -56,8 +56,8 @@
 
                 this.$emit('sendEvent', 'updateMode', 'date');
             },
-            addEvt: function(evt){
-                this.$emit('sendEvent', 'addEvent', {
+            timeClick: function(evt){
+                this.$emit('sendEvent', 'timeClick', {
                     year: this.obj.year,
                     month: this.obj.month,
                     date: this.obj.date,
