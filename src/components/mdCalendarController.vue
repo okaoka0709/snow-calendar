@@ -47,10 +47,7 @@
                 this.$emit('sendEvent', 'updateMode', evt.target.value);
             },
             backToToday: function(){
-                this.$emit('sendEvent', 'updateCal', {
-                    cal: 'main',
-                    data: this.today
-                });
+                this.$emit('sendEvent', 'updateCal', 'main', this.today);
             },
             addEvt: function(){
                 let $time = new Date(),

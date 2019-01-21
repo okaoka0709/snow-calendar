@@ -279,13 +279,10 @@
                 // console.log(arguments)
                 this.$okaTool.receiveEvent(this, arguments);
             },
-            updateCal: function(opt){
-                let _cal = opt.cal,
-                    $data = opt.data;
-
-                let _year = $data.year,
-                    _month = $data.month,
-                    _date = $data.date;
+            updateCal: function(cal, date){
+                let _year = date.year,
+                    _month = date.month,
+                    _date = date.date;
 
                 let _lastDay = new Date(_year, _month, 0).getDate();
 
@@ -293,11 +290,15 @@
                     _date = _lastDay;
                 }
 
-                this[_cal +'Cal'].year = _year;
-                this[_cal +'Cal'].month = _month;
-                this[_cal +'Cal'].date = _date;
+                this[cal +'Cal'].year = _year;
+                this[cal +'Cal'].month = _month;
+                this[cal +'Cal'].date = _date;
 
-                this.$emit('updateCal', opt);
+                this.$emit('updateCal', cal, {
+                    year: _year,
+                    month: _month,
+                    date: _date
+                });
             },
             updateMode: function(opt){ //改變模式
                 this.mode = opt;
@@ -477,10 +478,7 @@
                     }
                 }
 
-                this.updateCal({
-                    cal: _cal,
-                    data: $result
-                });
+                this.updateCal(_cal, $result);
             },
             getDate: function(opt, days){ //取天數(含事件)，第二個參數為天，並回覆一個與天相符的陣列
                 let $result = [];
@@ -774,8 +772,8 @@
             errorMsg: function(msg){
                 this.$emit('errorMsg', msg);
             },
-            moveResizeEvent: function(event, time, type, mode, isFinally){ //移動、縮放物件
-                this.$emit('moveResizeEvent', event, time, type, mode, isFinally);
+            dropEvent: function(event, time, type, mode, isFinally){ //移動、縮放物件
+                this.$emit('dropEvent', event, time, type, mode, isFinally);
             },
             clickTime: function(time, mode){ //點選時間
                 this.$emit('clickTime', time, mode);

@@ -41,13 +41,10 @@
         },
         methods: {
             update: function(){
-                this.$emit('sendEvent', 'updateCal', {
-                    cal: 'main',
-                    data : {
-                        year: this.obj.year,
-                        month: this.obj.month,
-                        date: this.obj.date,
-                    }
+                this.$emit('sendEvent', 'updateCal', 'main', {
+                    year: this.obj.year,
+                    month: this.obj.month,
+                    date: this.obj.date
                 });
 
                 this.$emit('sendEvent', 'updateMode', 'date');

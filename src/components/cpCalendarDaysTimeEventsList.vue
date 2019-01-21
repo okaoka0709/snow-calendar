@@ -152,10 +152,10 @@
 
                 this.moveTime = obj;
 
-                this.$emit('sendEvent', 'moveResizeEvent', this.moveNode, this.moveTime, this.moveType, 'time', false);
+                this.$emit('sendEvent', 'dropEvent', this.moveNode, this.moveTime, this.moveType, 'time', false);
             },
             dropDone: function(){
-                this.$emit('sendEvent', 'moveResizeEvent', this.moveNode, this.moveTime, this.moveType, 'time', true);
+                this.$emit('sendEvent', 'dropEvent', this.moveNode, this.moveTime, this.moveType, 'time', true);
 
                 this.endDropStatus();
             },

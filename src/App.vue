@@ -12,7 +12,7 @@
         @initMonth="initMonth"
         @errorMsg="errorMsg"
 
-        @moveResizeEvent="moveResizeEvent"
+        @dropEvent="dropEvent"
         @clickTime="clickTime"
         @addEvent="addEvent"
         @clickEvent="clickEvent"
@@ -45,8 +45,8 @@
             }
         },
         methods: {
-            updateCal: function(opt){ //切換月曆(ref or main)
-                console.log('切換行事曆', opt.cal, '切換時間', opt.data);
+            updateCal: function(cal, date){ //切換月曆(ref or main)
+                console.log('切換行事曆', cal, '切換時間', date);
             },
             updateMode: function(opt){ //改變模式
                 console.log('切換模式', opt);
@@ -57,7 +57,7 @@
             errorMsg: function(msg){ //推送錯誤訊息
                 console.log('推送錯誤訊息', msg);
             },
-            moveResizeEvent: function(event, time, type, mode, isFinally){
+            dropEvent: function(event, time, type, mode, isFinally){
                 console.log('移動或增減事件長度', event, time, type, mode, isFinally);
             },
             addEvent: function(time, mode){

@@ -1,3 +1,9 @@
+<a href="https://www.npmjs.com/package/snow-calendar">
+  <img src="https://img.shields.io/npm/v/snow-calendar.svg">
+  <img src="https://img.shields.io/npm/l/snow-calendar.svg">
+  <img src="https://img.shields.io/npm/dt/snow-calendar.svg">
+</a>
+
 # Snow Calendar
 Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的前端日曆套件，其特色如下：
 * 將事件與資料完全開放，您可自行設計操作介面的邏輯及資料交互的方式。
@@ -16,7 +22,15 @@ Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的�
   
   
 ## Demo
-Demo 範例在 [https://github.com/okaoka0709/snow-calendar-demo](https://github.com/okaoka0709/snow-calendar-demo)
+簡易的 Demo 只要在本專案執行即可，先執行 npm 安裝依賴：
+```
+npm install
+```
+接著在本機開啟：
+```
+npm run serve
+```
+包含額外的 popup、tooltip 等完整的演示範例請至另一個專案： [https://github.com/okaoka0709/snow-calendar-demo](https://github.com/okaoka0709/snow-calendar-demo)
 
 
 ## 安裝方式
@@ -161,7 +175,7 @@ Snow Calendar 提供以下幾種事件：
 * 第一次檢視該月(initMonth)
 * 顯示錯誤的訊息(errorMsg)
 * 點擊時間(clickTime)
-* 拖曳行程(moveResizeEvent)
+* 拖曳行程(dropEvent)
 * 新增行程(addEvent)
 * 點擊行程(clickEvent)
 * 滑入行程(hoverEvent)
@@ -180,7 +194,7 @@ Snow Calendar 提供以下幾種事件：
   v-on:initMonth="someFunction"
   v-on:errorMsg="someFunction"
   v-on:clickTime="someFunction"
-  v-on:moveResizeEvent="someFunction"
+  v-on:dropEvent="someFunction"
   v-on:addEvent="someFunction"
   v-on:clickEvent="someFunction"
   v-on:hoverEvent="someFunction"
@@ -196,30 +210,27 @@ Snow Calendar 沒有提供修改、移除的事件，是因為您可以在任何
 
 ### 切換觀看時間(updateCal)
 當使用者切換日曆及小日曆的觀看時間時，觸發該事件。
-updateCal 提供一個參數 option (Object)，包含以下兩個資訊：
-* option.cal (String) => 指明切換的是日曆(main) 或是 小日曆(ref)
-* option.data (Object) => 切換的時間
-```
-function(option)
-```
-看起來像以下這樣：
+updateCal 提供兩個參數分別是 cal(String) 與 date(Object)。
+cal 參數指明使用者切換的是日曆或是小日曆，有可能是以下的值：
+* main(日曆)
+* ref(小日曆)
+
+date 參數指明使用者點選的時間，看起來像以下這樣：
 ```
 {
-  cal: 'main',
-  data: {
-    year: 2019,
-    month: 1,
-    date: 1
-  }
+  year: 2019,
+  month: 1,
+  date: 1
 }
 ```
+
 
 ### 切換預覽模式(updateMode)
 當使用者切換日曆預覽模式時，觸發該事件。
 
 ![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/snowCalendar_viewMode.png)
 
-updateMode 提供一個參數 mode (String)，指明使用者選取的預覽模式。
+updateMode 提供一個參數 mode(String)，指明使用者選取的預覽模式。
 ```
 function(mode)
 ```
@@ -235,7 +246,7 @@ function(mode)
 當使用者第一次需要取得該月的資訊時，觸發該事件。
 建議可以在此事件觸發時取得本月的行程並加入至行程資料(events)。
 
-updateMode 提供一個參數 date(Object)
+updateMode 提供一個參數 date(Object)。
 ```
 function(date)
 ```
@@ -250,14 +261,14 @@ function(date)
 
 ### 顯示錯誤的訊息(errorMsg)
 當使用者操作錯誤，系統需提示使用者訊息時觸發。
-errorMsg 提供一個參數 error(String)
+errorMsg 提供一個參數 error(String)。
 ```
 function(error)
 ```
 
 ### 點擊時間(clickTime)
 在天、4天、週、月預覽模式時，使用者以游標點選時間方格時觸發。
-clickTime 提供兩個參數分別是 time(Object) 與 mode(String)
+clickTime 提供兩個參數分別是 time(Object) 與 mode(String)。
 ```
 function(time, mode)
 ```
@@ -278,9 +289,9 @@ mode 參數指明使用者選取的是天或是時間，有可能是以下的值
 請注意，當使用者選取整天時，hour 與 minutes 都會為 0。
 通常日曆的選時間行為都被定義為新增行程功能，因此 clickTime 提供與 addEvent 一致的參數，以方便您直接串連兩個功能。
 
-### 拖曳行程(moveResizeEvent)
+### 拖曳行程(dropEvent)
 當使用者在天、4天、週、月預覽模式時，使用者以游標拖曳行程時觸發。
-moveResizeEvent 提供五個參數分別是 event(Object)、time(Object)、type(String)、mode(String) 與 finally(Boolean)
+dropEvent 提供五個參數分別是 event(Object)、time(Object)、type(String)、mode(String) 與 finally(Boolean)。
 ```
 function(event, time, type, mode, finally)
 ```
@@ -322,21 +333,20 @@ type 參數指明使用者拖曳的類型，有可能是以下的值：
 * head (拖曳行程區塊整體)
 * foot (拖曳行程區塊尾端)
 
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/dropArea_daysTime.png)
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/dropArea_days.png)
 ![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/dropArea_month.png)
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/dropArea_daysDate.png)
 
 mode 參數指明使用者拖曳的模式是天或是時間，有可能是以下的值：
 * date(天)
 * time(時間)
 
-finally 參數指明使用者拖曳是否為最後結果，例如一個 2019/1/1(二) 的行程在介面上拖曳至 2019/1/4(五)，moveResizeEvent 事件將被觸發 3 次(2019/1/2(三)、2019/1/3(四)、2019/1/4(五) 各觸發一次)，但僅有最後一次 2019/1/4(五) 的 finally 參數為 true。建議當 finally 參數為 true 時再將修改資料傳送到後端。
+finally 參數指明使用者拖曳是否為最後結果，例如一個 2019/1/1(二) 的行程在介面上拖曳至 2019/1/4(五)，dropEvent 事件將被觸發 3 次(2019/1/2(三)、2019/1/3(四)、2019/1/4(五) 各觸發一次)，但僅有最後一次 2019/1/4(五) 的 finally 參數為 true。建議當 finally 參數為 true 時再將修改資料傳送到後端。
 
 ### 新增行程(addEvent)
 當使用者點選**新增行程**按鈕時觸發。
 addEvent 提供的的參數與 clickTime 一致。
 
-addEvent 提供兩個參數分別是 time(Object) 與 mode(String)
+addEvent 提供兩個參數分別是 time(Object) 與 mode(String)。
 ```
 function(time, mode)
 ```
@@ -357,13 +367,7 @@ mode 參數指明使用者選取的是天或是時間，有可能是以下的值
 請注意，當使用者選取整天時，hour 與 minutes 都會為 0。
 
 ### 點擊行程(clickEvent)
-當使用者點選行程時觸發。以下是各個不同觀看模式的行程：
-
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/event_month.png)
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/event_days.png)
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/event_event.png)
-
-clickEvent 提供兩個參數分別是 event(Object) 與 MouseEvent(MouseEvent)
+當使用者點選行程時觸發。clickEvent 提供兩個參數分別是 event(Object) 與 MouseEvent(MouseEvent)。
 ```
 function(event, MouseEvent)
 ```
@@ -400,7 +404,7 @@ hoverEvent 提供的的參數與 clickEvent 一致。
 ### 點擊”還有n則“(clickMore)
 
 當使用者點擊”還有n則“文字時觸發。
-hoverEvent 提供兩個參數分別是 event(Object) 與 MouseEvent(MouseEvent)
+hoverEvent 提供兩個參數分別是 event(Object) 與 MouseEvent(MouseEvent)。
 ```
 function(event, MouseEvent)
 ```
@@ -478,7 +482,7 @@ hoverMore 提供的的參數與 clickMore 一致。
 
 ![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/source.png)
 
-clickSource 提供兩個參數分別是 source(Object) 與 MouseEvent(MouseEvent)
+clickSource 提供兩個參數分別是 source(Object) 與 MouseEvent(MouseEvent)。
 ```
 function(source, MouseEvent)
 ```
@@ -501,8 +505,6 @@ hoverSource 提供的的參數與 clickSource 一致。
   
 ## 未來功能
 預計未來提供功能與修改：
-* 拆分 updateCal 的參數
-* 更名 moveResizeEvent 為 dropEvent
 * 可由開發者直接控制日曆/小日曆的觀看時間
 * 可由開發者直接控制預覽模式
 * 可指定要顯示的控制項

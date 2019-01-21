@@ -72,7 +72,7 @@
             },
             endDropStatus: function(obj){
                 if( this.moveType === 'foot' ){
-                    this.$emit('sendEvent', 'moveResizeEvent', this.moveNode, this.moveTime, this.moveType, 'date', true);
+                    this.$emit('sendEvent', 'dropEvent', this.moveNode, this.moveTime, this.moveType, 'date', true);
                 }
 
                 this.moveType = null;
@@ -120,7 +120,7 @@
                 }
 
                 this.moveTime = $obj;
-                this.$emit('sendEvent', 'moveResizeEvent', this.moveNode, this.moveTime, this.moveType, 'date', _isFinally);
+                this.$emit('sendEvent', 'dropEvent', this.moveNode, this.moveTime, this.moveType, 'date', _isFinally);
             },
             dropDone: function(obj){
                 if( this.moveType === 'head' ){
