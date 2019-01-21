@@ -59,18 +59,18 @@ Vue.use(snowCalendar)
 在 Snow Calendar 中，您可以提供以下幾種資料：
 * 行程資料(events)
 * 日曆本資料(sources)
-* 預設的預覽模式(defaultMode)
-* 預設的日曆觀看時間(defaultMainCal)
-* 預設的小日曆觀看時間(defaultRefCal)
+* 觀看模式(mode)
+* 曆觀看時間(mainCal)
+* 小日曆觀看時間(refCal)
 
 設定方式如下：
 ```
 <snowCalendar
   v-bind:events="eventObject"
   v-bind:sources="sourceObject"
-  v-bind:defaultMode="modeString"
-  v-bind:defaultMainCal="timeObject"
-  v-bind:defaultRefCal="timeObject"
+  v-bind:mode="modeString"
+  v-bind:mainCal="timeObject"
+  v-bind:refCal="timeObject"
 ></snowCalendar>
 ```
 
@@ -140,8 +140,8 @@ let sourceObject = [
 請注意日曆本的 editable 屬性僅供參考，點擊行程還是會回傳該事件，開發者必須自行決定如何使用屬性。
 修改日曆本資料後，其結果會直接更新在介面上。
 
-### 預設的預覽模式(defaultMode)
-提供預設的預覽模式，您將可以決定使用者第一時間所使用的預覽模式，Snow Calendar 提供的預覽模式有：
+### 觀看模式(mode)
+您可以指定使用者所使用的觀看模式，Snow Calendar 提供的觀看模式有：
 * 年(year)
 * 月(month)
 * 週(week)
@@ -151,13 +151,14 @@ let sourceObject = [
 
 提供 Snow Calendar 字串格式即可。
 ```
-let defaultMode = 'week'
+let modeString = 'week'
 ```
-使用者在操作介面中，仍然可以透過介面切換預覽模式，您也可以使用 cookie 等方法紀錄使用者上次的預覽模式。
-請注意若沒有設定這個值，將會自動呈現為 month 月曆模式。
+使用者在操作介面中，仍然可以透過介面切換觀看模式，您也可以使用 cookie 等方法紀錄使用者上次的觀看模式。
+您也可以藉由修改 mode 的值，立即改變使用者的觀看模式。
+請注意若沒有設定這個值，或設定了錯的值，將會自動呈現為 month 月曆模式。
 
-### 預設的日曆觀看時間(defaultMainCal) 及小日曆觀看時間(defaultRefCal)
-提供預設的日曆觀看時間，您將可以決定使用者第一時間所觀看的日曆、小日曆時間，格式如下：
+### 日曆觀看時間(mainCal) 及小日曆觀看時間(refCal)
+您可以決定使用者所觀看的日曆、小日曆時間，格式如下：
 ```
 let timeObject = {
     "year": 2019,
@@ -166,13 +167,14 @@ let timeObject = {
   }
 ```
 使用者在操作介面中，仍然可以透過介面切換觀看時間，您也可以使用 cookie 等方法紀錄使用者上次的時間。
-請注意若沒有設定這個值，觀看時間將會自動設定為今日。
+您也可以藉由修改 timeObject 的值，立即改變使用者的觀看時間。
+請注意若沒有設定這個值，或設定了錯的值，觀看時間將會自動設定為今日。
 
 
 ## 日曆事件
 Snow Calendar 提供以下幾種事件：
 * 切換觀看時間(updateCal)
-* 切換預覽模式(updateMode)
+* 切換觀看模式(updateMode)
 * 第一次檢視該月(initMonth)
 * 顯示錯誤的訊息(errorMsg)
 * 點擊時間(clickTime)
@@ -226,12 +228,12 @@ date 參數指明使用者點選的時間，看起來像以下這樣：
 ```
 
 
-### 切換預覽模式(updateMode)
-當使用者切換日曆預覽模式時，觸發該事件。
+### 切換觀看模式(updateMode)
+當使用者切換日曆觀看模式時，觸發該事件。
 
 ![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/snowCalendar_viewMode.png)
 
-updateMode 提供一個參數 mode(String)，指明使用者選取的預覽模式。
+updateMode 提供一個參數 mode(String)，指明使用者選取的觀看模式。
 ```
 function(mode)
 ```
@@ -268,7 +270,7 @@ function(error)
 ```
 
 ### 點擊時間(clickTime)
-在天、4天、週、月預覽模式時，使用者以游標點選時間方格時觸發。
+在天、4天、週、月觀看模式時，使用者以游標點選時間方格時觸發。
 clickTime 提供兩個參數分別是 time(Object) 與 mode(String)。
 ```
 function(time, mode)
@@ -291,7 +293,7 @@ mode 參數指明使用者選取的是天或是時間，有可能是以下的值
 通常日曆的選時間行為都被定義為新增行程功能，因此 clickTime 提供與 addEvent 一致的參數，以方便您直接串連兩個功能。
 
 ### 拖曳行程(dropEvent)
-當使用者在天、4天、週、月預覽模式時，使用者以游標拖曳行程時觸發。
+當使用者在天、4天、週、月觀看模式時，使用者以游標拖曳行程時觸發。
 dropEvent 提供五個參數分別是 event(Object)、time(Object)、type(String)、mode(String) 與 finally(Boolean)。
 ```
 function(event, time, type, mode, finally)
@@ -506,8 +508,6 @@ hoverSource 提供的的參數與 clickSource 一致。
   
 ## 未來功能
 預計未來提供功能與修改：
-* 可由開發者直接控制日曆/小日曆的觀看時間
-* 可由開發者直接控制預覽模式
 * 可指定要顯示的控制項
 * 可指定要顯示的日曆類型
 * 可指定要顯示的組件

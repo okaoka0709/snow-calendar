@@ -97,12 +97,18 @@
             mdCalendarSource
         },
         data: function(){
+            let $today = new Date(),
+                _year = $today.getFullYear(),
+                _month = $today.getMonth() + 1,
+                _date = $today.getDate();
+
             return {
-                today: {}, //存今日日期
-                library: {}, //存所有日曆資料
-                mainCal: {},
-                refCal: {},
-                mode: ''
+                today: { //存今日日期
+                    year: _year,
+                    month: _month,
+                    date: _date
+                },
+                library: {} //存所有日曆資料
             }
         },
         props: {
@@ -120,17 +126,42 @@
                     return []
                 }
             },
-            defaultMainCal: { //存主要日曆日期
+            mainCal: { //存主要日曆日期
                 type: Object,
-                require: false
+                require: false,
+                default: function(){
+                    let $today = new Date(),
+                        _year = $today.getFullYear(),
+                        _month = $today.getMonth() + 1,
+                        _date = $today.getDate();
+
+                    return { //存今日日期
+                        year: _year,
+                        month: _month,
+                        date: _date
+                    }
+                }
             },
-            defaultRefCal: { //存參考日曆日期
+            refCal: { //存參考日曆日期
                 type: Object,
-                require: false
+                require: false,
+                default: function(){
+                    let $today = new Date(),
+                        _year = $today.getFullYear(),
+                        _month = $today.getMonth() + 1,
+                        _date = $today.getDate();
+
+                    return { //存今日日期
+                        year: _year,
+                        month: _month,
+                        date: _date
+                    }
+                }
             },
-            defaultMode: { //存月曆模式
+            mode: { //存月曆模式
                 type: String,
-                require: false
+                require: false,
+                default: 'month'
             }
         },
         computed: {
@@ -812,15 +843,15 @@
                 _month = $today.getMonth() + 1,
                 _date = $today.getDate();
 
-            this.$set(this, 'today', {
-                year: _year,
-                month: _month,
-                date: _date
-            });
+            if( this.mainCal.year === undefined ) {
 
-            if( this.defaultMainCal && this.defaultMainCal.year && this.defaultMainCal.month && this.defaultMainCal.date) {
-                this.$set(this, 'mainCal', this.defaultMainCal);
+            }
+
+            if( this.mainCal.year && this.mainCal.month && this.mainCal.date) {
+
             }else {
+                console.error('mainCal 時間資料錯誤');
+
                 this.$set(this, 'mainCal', {
                     year: _year,
                     month: _month,
@@ -828,9 +859,11 @@
                 });
             }
 
-            if( this.defaultRefCal && this.defaultRefCal.year && this.defaultRefCal.month ) {
-                this.$set(this, 'refCal', this.defaultRefCal);
+            if( this.refCal.year && this.refCal.month && this.refCal.date ) {
+
             }else {
+                console.error('refCal 時間資料錯誤');
+
                 this.$set(this, 'refCal', {
                     year: _year,
                     month: _month,
@@ -838,9 +871,11 @@
                 });
             }
 
-            if( this.defaultMode === 'year' || this.defaultMode === 'month' || this.defaultMode === 'event' || this.defaultMode === 'week' || this.defaultMode === '4days' ) {
-                this.mode = this.defaultMode;
+            if( this.mode === 'year' || this.mode === 'month' || this.mode === 'event' || this.mode === 'week' || this.mode === '4days' ) {
+
             }else {
+                console.error('month 字串錯誤');
+
                 this.mode = 'month';
             }
         }
