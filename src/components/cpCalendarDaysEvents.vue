@@ -10,7 +10,7 @@
                 @sendEvent="receiveEvent"
             ></cpCalendarDaysEventDay> <!-- days-dayeventdays -->
         </div>
-        <div class="events" @click="timeClick">
+        <div class="events" @click="clickTime">
             <cpCalendarDaysEventItem
                 v-for="item in events"
                 :obj="item"
@@ -170,7 +170,7 @@
             }
         },
         methods: {
-            timeClick: function(evt){ //先用寬度算點擊的是哪一天
+            clickTime: function(evt){ //先用寬度算點擊的是哪一天
                 let _days = this.obj.date;
 
                 let $date = null;
@@ -191,7 +191,7 @@
                     $date = $week[_index];
                 }
 
-                this.$emit('sendEvent', 'timeClick', {
+                this.$emit('sendEvent', 'clickTime', {
                     year: $date.year,
                     month: $date.month,
                     date: $date.date,

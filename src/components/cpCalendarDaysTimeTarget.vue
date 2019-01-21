@@ -1,5 +1,5 @@
 <template>
-    <div class="time" :class="[isToday ? 'is-today': '', isActive? 'is-active': '']" @click="timeClick">
+    <div class="time" :class="[isToday ? 'is-today': '', isActive? 'is-active': '']" @click="clickTime">
         <a class="inner" @click.prevent.stop="update">
             <div class="date">{{ obj.month }}月{{ obj.date }}日</div>
             <div class="day">({{ obj.chineseDay }})</div>
@@ -52,8 +52,8 @@
 
                 this.$emit('sendEvent', 'updateMode', 'date');
             },
-            timeClick: function(evt){
-                this.$emit('sendEvent', 'timeClick', {
+            clickTime: function(evt){
+                this.$emit('sendEvent', 'clickTime', {
                     year: this.obj.year,
                     month: this.obj.month,
                     date: this.obj.date,

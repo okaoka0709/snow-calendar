@@ -777,8 +777,8 @@
             moveResizeEvent: function(event, time, type, mode, isFinally){ //移動、縮放物件
                 this.$emit('moveResizeEvent', event, time, type, mode, isFinally);
             },
-            timeClick: function(time, mode){ //點選時間
-                this.$emit('timeClick', time, mode);
+            clickTime: function(time, mode){ //點選時間
+                this.$emit('clickTime', time, mode);
             },
             addEvent: function(time, mode){ //新增事件，設定好時間，將其他事情交給 popup
                 this.$emit('addEvent', time, mode);
