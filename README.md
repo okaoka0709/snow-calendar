@@ -7,6 +7,9 @@ Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的�
 * 提供多曆本的設計。
 * 提供檢視的小日曆、完整的操作功能列。
 
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/readMe/snowCalendar_month.png)
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/readMe/snowCalendar_week.png)
+
 
 ## 操作影片
 您可以觀看 [https://youtu.be/1tL3BEmg6Sk](https://youtu.be/1tL3BEmg6Sk)
@@ -213,6 +216,9 @@ function(option)
 
 ### 切換預覽模式(updateMode)
 當使用者切換日曆預覽模式時，觸發該事件。
+
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/readMe/snowCalendar_viewMode.png)
+
 updateMode 提供一個參數 mode (String)，指明使用者選取的預覽模式。
 ```
 function(mode)
@@ -316,6 +322,10 @@ type 參數指明使用者拖曳的類型，有可能是以下的值：
 * head (拖曳行程區塊整體)
 * foot (拖曳行程區塊尾端)
 
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/readMe/dropArea_daysTime.png)
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/readMe/dropArea_month.png)
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/readMe/dropArea_daysDate.png)
+
 mode 參數指明使用者拖曳的模式是天或是時間，有可能是以下的值：
 * date(天)
 * time(時間)
@@ -347,7 +357,12 @@ mode 參數指明使用者選取的是天或是時間，有可能是以下的值
 請注意，當使用者選取整天時，hour 與 minutes 都會為 0。
 
 ### 點擊行程(clickEvent)
-當使用者點選行程時觸發。
+當使用者點選行程時觸發。以下是各個不同觀看模式的行程：
+
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/readMe/event-month.png)
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/readMe/event-days.png)
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/readMe/event-event.png)
+
 clickEvent 提供兩個參數分別是 event(Object) 與 MouseEvent(MouseEvent)
 ```
 function(event, MouseEvent)
@@ -383,6 +398,7 @@ MouseEvent 參數回傳原生事件。
 hoverEvent 提供的的參數與 clickEvent 一致。
 
 ### 點擊”還有n則“(clickMore)
+
 當使用者點擊”還有n則“文字時觸發。
 hoverEvent 提供兩個參數分別是 event(Object) 與 MouseEvent(MouseEvent)
 ```
@@ -457,8 +473,11 @@ hoverMore 提供的的參數與 clickMore 一致。
 ### 匯入日曆本(importSource)
 當使用者點選**匯入日曆**按鈕時觸發。
 
-### 游標點擊日曆本(clickSource)
+### 點擊日曆本(clickSource)
 當使用者點選日曆本右方設定圖示時觸發。
+
+![image](https://github.com/okaoka0709/snow-calendar/blob/master/readMe/source.png)
+
 clickSource 提供兩個參數分別是 source(Object) 與 MouseEvent(MouseEvent)
 ```
 function(source, MouseEvent)
@@ -476,7 +495,7 @@ source 參數回傳使用者操作的日曆資訊，看起來像以下這樣：
 ```
 MouseEvent 參數回傳原生事件。
 
-### 游標滑入日曆本(hoverSource)
+### 滑入日曆本(hoverSource)
 當使用者滑入日曆標題文字時觸發。
 hoverSource 提供的的參數與 clickSource 一致。
   
@@ -484,7 +503,6 @@ hoverSource 提供的的參數與 clickSource 一致。
 預計未來提供功能與修改：
 * 拆分 updateCal 的參數
 * 更名 moveResizeEvent 為 dropEvent
-* 提供本說明圖片
 * 可由開發者直接控制日曆/小日曆的觀看時間
 * 可由開發者直接控制預覽模式
 * 可指定要顯示的控制項
