@@ -59,7 +59,7 @@ Vue.use(snowCalendar)
 在 Snow Calendar 中，您可以提供以下幾種資料：
 * 行程資料(events)
 * 日曆本資料(sources)
-* 觀看模式(mode)
+* 預設的觀看模式(defaultMode)
 * 曆觀看時間(mainCal)
 * 小日曆觀看時間(refCal)
 
@@ -68,7 +68,7 @@ Vue.use(snowCalendar)
 <snowCalendar
   v-bind:events="eventObject"
   v-bind:sources="sourceObject"
-  v-bind:mode="modeString"
+  v-bind:defaultMode="modeString"
   v-bind:mainCal="timeObject"
   v-bind:refCal="timeObject"
 ></snowCalendar>
@@ -140,8 +140,8 @@ let sourceObject = [
 請注意日曆本的 editable 屬性僅供參考，點擊行程還是會回傳該事件，開發者必須自行決定如何使用屬性。
 修改日曆本資料後，其結果會直接更新在介面上。
 
-### 觀看模式(mode)
-您可以指定使用者所使用的觀看模式，Snow Calendar 提供的觀看模式有：
+### 預設的觀看模式(defaultMode)
+您可以指定使用者**進入月曆時**所使用的觀看模式，Snow Calendar 提供的觀看模式有：
 * 年(year)
 * 月(month)
 * 週(week)
@@ -154,7 +154,6 @@ let sourceObject = [
 let modeString = 'week'
 ```
 使用者在操作介面中，仍然可以透過介面切換觀看模式，您也可以使用 cookie 等方法紀錄使用者上次的觀看模式。
-您也可以藉由修改 mode 的值，立即改變使用者的觀看模式。
 請注意若沒有設定這個值，或設定了錯的值，將會自動呈現為 month 月曆模式。
 
 ### 日曆觀看時間(mainCal) 及小日曆觀看時間(refCal)

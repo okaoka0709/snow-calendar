@@ -108,7 +108,8 @@
                     month: _month,
                     date: _date
                 },
-                library: {} //存所有日曆資料
+                library: {}, //存所有日曆資料
+                mode: 'month'
             }
         },
         props: {
@@ -158,10 +159,9 @@
                     }
                 }
             },
-            mode: { //存月曆模式
+            defaultMode: { //存月曆模式
                 type: String,
-                require: false,
-                default: 'month'
+                require: false
             }
         },
         computed: {
@@ -871,12 +871,10 @@
                 });
             }
 
-            if( this.mode === 'year' || this.mode === 'month' || this.mode === 'event' || this.mode === 'week' || this.mode === '4days' ) {
-
-            }else {
+            if( this.defaultMode === 'year' || this.defaultMode === 'month' || this.defaultMode === 'event' || this.defaultMode === 'week' || this.defaultMode === '4days' ) {
+                this.mode = this.defaultMode;
+            }else if( this.defaultMode !== undefined ){
                 console.error('month 字串錯誤');
-
-                this.mode = 'month';
             }
         }
     }
