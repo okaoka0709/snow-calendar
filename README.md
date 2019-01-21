@@ -141,7 +141,7 @@ let sourceObject = [
 修改日曆本資料後，其結果會直接更新在介面上。
 
 ### 預設的觀看模式(defaultMode)
-您可以指定使用者**進入月曆時**所使用的觀看模式，Snow Calendar 提供的觀看模式有：
+您可以指定使用者**進入月曆時**所使用的觀看模式，Snow Calendar 提供的觀看模式有：
 * 年(year)
 * 月(month)
 * 週(week)
