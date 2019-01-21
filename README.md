@@ -13,8 +13,8 @@ Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的�
 * 提供多曆本的設計。
 * 提供檢視的小日曆、完整的操作功能列。
 
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/snowCalendar_month.png)
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/snowCalendar_week.png)
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/snowCalendar_month.png)
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/snowCalendar_week.png)
 
 
 ## 操作影片
@@ -22,7 +22,8 @@ Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的�
   
   
 ## Demo
-簡易的 Demo 只要在本專案執行即可，先執行 npm 安裝依賴：
+簡易的 Demo 只要在本專案執行即可。
+先執行 npm 安裝依賴：
 ```
 npm install
 ```
@@ -228,7 +229,7 @@ date 參數指明使用者點選的時間，看起來像以下這樣：
 ### 切換預覽模式(updateMode)
 當使用者切換日曆預覽模式時，觸發該事件。
 
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/snowCalendar_viewMode.png)
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/snowCalendar_viewMode.png)
 
 updateMode 提供一個參數 mode(String)，指明使用者選取的預覽模式。
 ```
@@ -333,8 +334,8 @@ type 參數指明使用者拖曳的類型，有可能是以下的值：
 * head (拖曳行程區塊整體)
 * foot (拖曳行程區塊尾端)
 
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/dropArea_days.png)
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/dropArea_month.png)
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/dropArea_days.png)
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/dropArea_month.png)
 
 mode 參數指明使用者拖曳的模式是天或是時間，有可能是以下的值：
 * date(天)
@@ -480,7 +481,7 @@ hoverMore 提供的的參數與 clickMore 一致。
 ### 點擊日曆本(clickSource)
 當使用者點選日曆本右方設定圖示時觸發。
 
-![image](https://github.com/okaoka0709/snow-calendar/blob/master/src/assets/readme-img/source.png)
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/source.png)
 
 clickSource 提供兩個參數分別是 source(Object) 與 MouseEvent(MouseEvent)。
 ```
