@@ -6,10 +6,14 @@ Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的�
 * 提供完整的日曆視圖：年、月、週、4天、天、事件
 * 提供多曆本的設計。
 * 提供檢視的小日曆、完整的操作功能列。
+
+
+## 操作影片
+您可以觀看 [https://youtu.be/1tL3BEmg6Sk](https://youtu.be/1tL3BEmg6Sk)
   
   
 ## Demo
-Demo 的範例在 [https://github.com/okaoka0709/snow-calendar-demo](https://github.com/okaoka0709/snow-calendar-demo)
+Demo 範例在 [https://github.com/okaoka0709/snow-calendar-demo](https://github.com/okaoka0709/snow-calendar-demo)
 
 
 ## 安裝方式
@@ -454,7 +458,7 @@ hoverMore 提供的的參數與 clickMore 一致。
 當使用者點選**匯入日曆**按鈕時觸發。
 
 ### 游標點擊日曆本(clickSource)
-當使用者點選行程時觸發。
+當使用者點選日曆本右方設定圖示時觸發。
 clickSource 提供兩個參數分別是 source(Object) 與 MouseEvent(MouseEvent)
 ```
 function(source, MouseEvent)
@@ -480,7 +484,6 @@ hoverSource 提供的的參數與 clickSource 一致。
 預計未來提供功能與修改：
 * 拆分 updateCal 的參數
 * 更名 moveResizeEvent 為 dropEvent
-* 更名拖曳類型 head 為 body
 * 提供本說明圖片
 * 可由開發者直接控制日曆/小日曆的觀看時間
 * 可由開發者直接控制預覽模式
