@@ -9,4 +9,5 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-import './sass/global.scss'
+// import './sass/global.scss'
+import './css/snowCalendar.css'
