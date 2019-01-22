@@ -307,7 +307,7 @@
         },
         watch: {
             mode: function(mode) {
-                if(mode === 'year' || mode === 'month' || mode === 'event' || mode === 'week' || mode === '4days') {
+                if(mode === 'year' || mode === 'month' || mode === 'event' || mode === 'week' || mode === '4days' || mode === 'date') {
                     this.modeType = mode;
                 } else {
                     console.error('month 字串錯誤');
@@ -881,8 +881,8 @@
                 });
             }
 
-            if( this.mode === 'year' || this.mode === 'month' || this.mode === 'event' || this.mode === 'week' || this.mode === '4days' ) {
-                this.mode = this.modeType;
+            if( this.mode === 'year' || this.mode === 'month' || this.mode === 'event' || this.mode === 'week' || this.mode === '4days' || this.mode === 'date' ) {
+                this.modeType = this.mode;
             }else if( this.mode !== undefined ){
                 console.error('month 字串錯誤');
             }

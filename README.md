@@ -150,7 +150,6 @@ let sourceObject = [
 * 天(date)
 * 事件(event)
 
-字串格式即可。
 ```
 let modeString = 'week'
 ```
@@ -511,6 +510,5 @@ hoverSource 提供的的參數與 clickSource 一致。
 ## 未來功能
 預計未來提供功能與修改：
 * 可指定要顯示的控制項
-* 可指定要顯示的日曆類型
 * 可指定要顯示的組件
 * 可傳入 solt 至工具列與右側列表
