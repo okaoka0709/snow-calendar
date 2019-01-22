@@ -17,19 +17,19 @@
         <div class="g article-content">
             <mdCalendarController
                 :mainCal="mainCal"
-                :mode="mode"
+                :mode="modeType"
                 :today="today"
                 @sendEvent="receiveEvent"
             ></mdCalendarController>
             <mdCalendarYear
-                v-if="mode === 'year'"
+                v-if="modeType === 'year'"
                 :mainCal="mainCal"
                 :obj="initYear({year: mainCal.year})"
                 :today="today"
                 @sendEvent="receiveEvent"
             ></mdCalendarYear>
             <mdCalendarMonth
-                v-if="mode === 'month'"
+                v-if="modeType === 'month'"
                 :obj="getMonth({year: mainCal.year, month: mainCal.month})"
                 :today="today"
                 :event="eventCompile"
@@ -38,7 +38,7 @@
                 @sendEvent="receiveEvent"
             ></mdCalendarMonth>
             <mdCalendarEvent
-                v-if="mode === 'event'"
+                v-if="modeType === 'event'"
                 :obj="getMonth({year: mainCal.year, month: mainCal.month})"
                 :today="today"
                 :event="eventCompile"
@@ -47,7 +47,7 @@
                 @sendEvent="receiveEvent"
             ></mdCalendarEvent>
             <mdCalendarDays
-                v-if="mode === 'week'"
+                v-if="modeType === 'week'"
                 :obj="getDate({year: mainCal.year, month: mainCal.month, date: mainCal.date}, 7)"
                 :today="today"
                 :event="eventCompile"
@@ -56,7 +56,7 @@
                 @sendEvent="receiveEvent"
             ></mdCalendarDays>
             <mdCalendarDays
-                v-if="mode === '4days'"
+                v-if="modeType === '4days'"
                 :obj="getDate({year: mainCal.year, month: mainCal.month, date: mainCal.date}, 4)"
                 :today="today"
                 :event="eventCompile"
@@ -65,7 +65,7 @@
                 @sendEvent="receiveEvent"
             ></mdCalendarDays>
             <mdCalendarDays
-                v-if="mode === 'date'"
+                v-if="modeType === 'date'"
                 :obj="getDate({year: mainCal.year, month: mainCal.month, date: mainCal.date}, 1)"
                 :today="today"
                 :event="eventCompile"
@@ -109,7 +109,7 @@
                     date: _date
                 },
                 library: {}, //存所有日曆資料
-                mode: 'month'
+                modeType: 'month'
             }
         },
         props: {
@@ -159,7 +159,7 @@
                     }
                 }
             },
-            defaultMode: { //存月曆模式
+            mode: { //存月曆模式
                 type: String,
                 require: false
             }
@@ -303,7 +303,17 @@
                 });
 
                 return $sourcesTree;
-            },
+            }
+        },
+        watch: {
+            mode: function(mode) {
+                if(mode === 'year' || mode === 'month' || mode === 'event' || mode === 'week' || mode === '4days') {
+                    this.modeType = mode;
+                } else {
+                    console.error('month 字串錯誤');
+                    this.modeType = 'month';
+                }
+            }
         },
         methods: {
             receiveEvent: function(){ //將收到的方法，推送給其他方法執行
@@ -332,7 +342,7 @@
                 });
             },
             updateMode: function(opt){ //改變模式
-                this.mode = opt;
+                this.modeType = opt;
 
                 this.$emit('updateMode', opt);
             },
@@ -871,9 +881,9 @@
                 });
             }
 
-            if( this.defaultMode === 'year' || this.defaultMode === 'month' || this.defaultMode === 'event' || this.defaultMode === 'week' || this.defaultMode === '4days' ) {
-                this.mode = this.defaultMode;
-            }else if( this.defaultMode !== undefined ){
+            if( this.mode === 'year' || this.mode === 'month' || this.mode === 'event' || this.mode === 'week' || this.mode === '4days' ) {
+                this.mode = this.modeType;
+            }else if( this.mode !== undefined ){
                 console.error('month 字串錯誤');
             }
         }
