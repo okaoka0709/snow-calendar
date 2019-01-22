@@ -59,18 +59,20 @@ Vue.use(snowCalendar)
 在 Snow Calendar 中，您可以提供以下幾種資料：
 * 行程資料(events)
 * 日曆本資料(sources)
-* 預設的觀看模式(defaultMode)
+* 預設的觀看模式(mode)
 * 曆觀看時間(mainCal)
 * 小日曆觀看時間(refCal)
+* 顯示/隱藏組件(uiVisible)
 
 設定方式如下：
 ```
 <snowCalendar
   v-bind:events="eventObject"
   v-bind:sources="sourceObject"
-  v-bind:defaultMode="modeString"
+  v-bind:mode="modeString"
   v-bind:mainCal="timeObject"
   v-bind:refCal="timeObject"
+  v-bind:uiVisible="setObject"
 ></snowCalendar>
 ```
 
@@ -169,8 +171,24 @@ let timeObject = {
 ```
 使用者在操作介面中，仍然可以透過介面切換觀看時間，您也可以使用 cookie 等方法紀錄使用者上次的時間。
 您也可以藉由修改 timeObject 的值，立即改變使用者的觀看時間，或實作自己的切換介面。
-若沒有設定這個值，或設定了錯的值，觀看時間將會自動設定為今日。
+若沒有設定這個物件，或設定了錯的值，觀看時間將會自動設定為今日。
 
+
+### 顯示/隱藏組件(uiVisible)
+您可以決定哪些組件該隱藏、顯示，格式如下：
+```
+let setObject = {
+        control: true,
+        refCal: true,
+        source: true
+    }
+```
+除了主日曆之外，控制列(control)、小日曆(refCal)、日曆本(source) 等組建都可以設為 false 隱藏。
+若沒有設定這個物件，或設定了錯的值，組件將會自動設定為顯示。
+
+若您隱藏了預設的控制列，您可以透過操控**觀看模式(mode)** 及**日曆觀看時間(mainCal)** 實作自定義的的控制列。
+
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/visible.png)
 
 ## 日曆事件
 Snow Calendar 提供以下幾種事件：
@@ -506,9 +524,3 @@ MouseEvent 參數回傳原生事件。
 ### 滑入日曆本(hoverSource)
 當使用者滑入日曆標題文字時觸發。
 hoverSource 提供的的參數與 clickSource 一致。
-  
-## 未來功能
-預計未來提供功能與修改：
-* 可指定要顯示的控制項
-* 可指定要顯示的組件
-* 可傳入 solt 至工具列與右側列表

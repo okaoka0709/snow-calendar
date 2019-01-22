@@ -5,6 +5,7 @@
         :defaultMainCal="mainCal"
         :defaultRefCal="refCal"
         :defaultMode="mode"
+        :uiVisible="uiVisible"
 
         @updateCal="updateCal"
         @updateMode="updateMode"
@@ -42,7 +43,12 @@
                 sources: [],
                 mainCal: {},
                 refCal: {},
-                mode: 'month'
+                mode: 'month',
+                uiVisible: {
+                    control: true,
+                    refCal: true,
+                    source: true
+                }
             }
         },
         methods: {

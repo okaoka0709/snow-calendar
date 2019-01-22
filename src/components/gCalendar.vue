@@ -1,7 +1,8 @@
 <template>
     <div class="g article-layout">
-        <div class="g article-aside">
+        <div class="g article-aside" v-if="uiVisible.refCal !== false || uiVisible.source !== false">
             <mdCalendarMini
+                v-if="uiVisible.refCal !== false"
                 :refCal="refCal"
                 :mainCal="mainCal"
                 :obj="initMonth({year: refCal.year, month: refCal.month})"
@@ -10,12 +11,14 @@
                 @sendEvent="receiveEvent"
             ></mdCalendarMini>
             <mdCalendarSource
+                v-if="uiVisible.source !== false"
                 :source="sources"
                 @sendEvent="receiveEvent"
             ></mdCalendarSource>
         </div>
         <div class="g article-content">
             <mdCalendarController
+                v-if="uiVisible.control !== false"
                 :mainCal="mainCal"
                 :mode="modeType"
                 :today="today"
@@ -162,6 +165,17 @@
             mode: { //存月曆模式
                 type: String,
                 require: false
+            },
+            uiVisible: { //是否顯示組件
+                type: Object,
+                require: false,
+                default: function(){
+                    return {
+                        control: true,
+                        refCal: true,
+                        source: true
+                    }
+                }
             }
         },
         computed: {
@@ -317,7 +331,6 @@
         },
         methods: {
             receiveEvent: function(){ //將收到的方法，推送給其他方法執行
-                // console.log(arguments)
                 this.$okaTool.receiveEvent(this, arguments);
             },
             updateCal: function(cal, date){
