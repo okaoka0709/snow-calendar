@@ -142,7 +142,7 @@ let sourceObject = [
 
 
 ### 觀看模式(mode)
-您可以指定使用者所使用的觀看模式，Snow Calendar 提供的觀看模式有：
+您可以指定使用者所使用的觀看模式，Snow Calendar 提供的觀看模式有：
 * 年(year)
 * 月(month)
 * 週(week)
