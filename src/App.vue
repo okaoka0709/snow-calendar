@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import gCalendar from '@/components/gCalendar'
+    import gCalendar from './components/gCalendar'
 
     export default {
         components: {

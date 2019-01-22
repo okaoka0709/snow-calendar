@@ -22,8 +22,13 @@ Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的�
   
   
 ## Demo
-簡易的 Demo 只要在本專案執行即可。
-先執行 npm 安裝依賴：
+Snow Calendar 範本，您可以至 Source 取得原始碼：
+[Demo](https://snow-calendar-extend.000webhostapp.com)、[Source](https://github.com/okaoka0709/snow-calendar-demo)
+
+基本的 Snow Calendar：
+[Demo](https://snow-calendar.000webhostapp.com)
+
+如果您有 Vue Cli，您也可以在本機建立簡易的 Demo。先執行 npm 安裝依賴：
 ```
 npm install
 ```
@@ -31,7 +36,6 @@ npm install
 ```
 npm run serve
 ```
-包含額外的 popup、tooltip 等完整的演示範例請至另一個專案： [https://github.com/okaoka0709/snow-calendar-demo](https://github.com/okaoka0709/snow-calendar-demo)
 
 
 ## 安裝方式
@@ -275,7 +279,7 @@ function(mode)
 
 ### 第一次檢視該月(initMonth)
 當使用者第一次需要取得該月的資訊時，觸發該事件。
-建議可以在此事件觸發時取得本月的行程並加入至行程資料(events)。
+建議在此事件觸發時，取得本月的行程並加入至行程資料(events)。
 
 updateMode 提供一個參數 date(Object)。
 ```
@@ -299,6 +303,7 @@ function(error)
 
 ### 點擊時間(clickTime)
 在天、4天、週、月觀看模式時，使用者以游標點選時間方格時觸發。
+點選時間通常被定義為新增行程功能，因此 clickTime 提供與 addEvent 一致的參數，以方便您直接串接。
 clickTime 提供兩個參數分別是 time(Object) 與 mode(String)。
 ```
 function(time, mode)
@@ -317,11 +322,10 @@ mode 參數指明使用者選取的是天或是時間，有可能是以下的值
 * date(天)
 * time(時間)
 
-請注意，當使用者選取整天時，hour 與 minutes 都會為 0。
-通常日曆的選時間行為都被定義為新增行程功能，因此 clickTime 提供與 addEvent 一致的參數，以方便您直接串連兩個功能。
+當使用者選取整天時，hour 與 minutes 都會為 0。
 
 ### 拖曳行程(dropEvent)
-當使用者在天、4天、週、月觀看模式時，使用者以游標拖曳行程時觸發。
+當使用者在天、4天、週、月觀看模式時，使用者以拖曳行程時觸發。
 dropEvent 提供五個參數分別是 event(Object)、time(Object)、type(String)、mode(String) 與 finally(Boolean)。
 ```
 function(event, time, type, mode, finally)
@@ -371,7 +375,7 @@ mode 參數指明使用者拖曳的模式是天或是時間，有可能是以下
 * date(天)
 * time(時間)
 
-finally 參數指明使用者拖曳是否為最後結果，例如一個 2019/1/1(二) 的行程在介面上拖曳至 2019/1/4(五)，dropEvent 事件將被觸發 3 次(2019/1/2(三)、2019/1/3(四)、2019/1/4(五) 各觸發一次)，但僅有最後一次 2019/1/4(五) 的 finally 參數為 true。建議當 finally 參數為 true 時再將修改資料傳送到後端。
+finally 參數指明使用者拖曳是否為最後結果，例如 2019/1/1 拖曳至 2019/1/3，dropEvent 事件將被觸發 2 次(2019/1/2、2019/1/3 各一次)，但僅有最後一次的 finally 參數為 true。建議當 finally 參數為 true 時再將修改資料傳送到後端。
 
 ### 新增行程(addEvent)
 當使用者點選**新增行程**按鈕時觸發。
@@ -395,7 +399,7 @@ mode 參數指明使用者選取的是天或是時間，有可能是以下的值
 * date(天)
 * time(時間)
 
-請注意，當使用者選取整天時，hour 與 minutes 都會為 0。
+當使用者選取整天時，hour 與 minutes 都會為 0。
 
 ### 點擊行程(clickEvent)
 當使用者點選行程時觸發。clickEvent 提供兩個參數分別是 event(Object) 與 MouseEvent(MouseEvent)。
