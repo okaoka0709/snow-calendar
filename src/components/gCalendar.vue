@@ -333,6 +333,12 @@
             receiveEvent: function(){ //將收到的方法，推送給其他方法執行
                 this.$okaTool.receiveEvent(this, arguments);
             },
+            getRealEvent: function(event){
+                let $events = this.events,
+                    _sn = event.sn;
+
+                return $events.find($event => { return $event.sn === _sn });
+            },
             updateCal: function(cal, date){
                 let _year = date.year,
                     _month = date.month,
@@ -827,7 +833,9 @@
                 this.$emit('errorMsg', msg);
             },
             dropEvent: function(event, time, type, mode, isFinally){ //移動、縮放物件
-                this.$emit('dropEvent', event, time, type, mode, isFinally);
+                let $event = this.getRealEvent(event);
+
+                this.$emit('dropEvent', $event, time, type, mode, isFinally);
             },
             clickTime: function(time, mode){ //點選時間
                 this.$emit('clickTime', time, mode);
@@ -836,10 +844,14 @@
                 this.$emit('addEvent', time, mode);
             },
             clickEvent: function(event, mouseEvent){
-                this.$emit('clickEvent', event, mouseEvent);
+                let $event = this.getRealEvent(event);
+                
+                this.$emit('clickEvent', $event, mouseEvent);
             },
             hoverEvent: function(event, mouseEvent){
-                this.$emit('hoverEvent', event, mouseEvent);
+                let $event = this.getRealEvent(event);
+
+                this.$emit('hoverEvent', $event, mouseEvent);
             },
             clickMore: function(event, mouseEvent){
                 this.$emit('clickMore', event, mouseEvent);

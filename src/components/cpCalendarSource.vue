@@ -3,7 +3,7 @@
         <div class="cp input checkbox">
             <input type="checkbox" v-model="cal.active" :id="'cal-'+ cal.sn">
             <label :for="'cal-'+ cal.sn" :style="'color:'+ cal.color">
-                <span @mouseover.stop="hoverSource">{{ cal.sub }}</span>
+                <span  @click.prevent.stop="clickSource" @mouseover.stop="hoverSource">{{ cal.sub }}</span>
             </label>
         </div>
         <a class="set icon-font more_vert icon-font-only" @click.prevent.stop="clickSource"></a>
