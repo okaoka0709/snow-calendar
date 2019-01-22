@@ -350,7 +350,7 @@
                 let _cal = opt.cal,
                     _way = opt.way;
 
-                let _mode = this.mode;
+                let _mode = this.modeType;
 
                 let _year = this[_cal +'Cal'].year,
                     _month = this[_cal +'Cal'].month,

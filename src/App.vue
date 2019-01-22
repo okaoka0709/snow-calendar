@@ -12,8 +12,9 @@
         @initMonth="initMonth"
         @errorMsg="errorMsg"
 
-        @dropEvent="dropEvent"
         @clickTime="clickTime"
+
+        @dropEvent="dropEvent"
         @addEvent="addEvent"
         @clickEvent="clickEvent"
         @hoverEvent="hoverEvent"
@@ -57,14 +58,14 @@
             errorMsg: function(msg){ //推送錯誤訊息
                 console.log('推送錯誤訊息', msg);
             },
+            clickTime: function(time, mode){
+                console.log('點選時間', time, mode);
+            },
             dropEvent: function(event, time, type, mode, isFinally){
                 console.log('移動或增減事件長度', event, time, type, mode, isFinally);
             },
             addEvent: function(time, mode){
                 console.log('新增事件', time, mode);
-            },
-            clickTime: function(time, mode){
-                console.log('點選時間', time, mode);
             },
             clickEvent: function(event, mouseEvent){ //popup 顯示 event
                 console.log('點擊事件', event, mouseEvent);
