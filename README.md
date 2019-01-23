@@ -4,9 +4,9 @@
   <img src="https://img.shields.io/npm/dt/snow-calendar.svg">
 </a>
 
-#english version on the below.
+# english version on the below.
 
-#@0.1.17 您現在必須顯式的指定 css
+# @0.1.17 您現在必須顯式的指定 css
 ```
 import 'snow-calendar/src/css/snowCalendar.css'
 ```
