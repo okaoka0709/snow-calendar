@@ -1,8 +1,8 @@
 <template>
     <div class="md calendar-source">
         <ul class="func">
-            <li><button @click.prevent.stop="addSource">新增日曆</button></li>
-            <li><button @click.prevent.stop="importSource">匯入日曆</button></li>
+            <li><button @click.prevent.stop="addSource">{{ lang.addCalendar }}</button></li>
+            <li><button @click.prevent.stop="importSource">{{ lang.importCalendar }}</button></li>
         </ul>
         <ul class="list">
             <li
@@ -25,6 +25,9 @@
         },
         props: {
             source: {
+                require: true
+            },
+            lang: {
                 require: true
             }
         },

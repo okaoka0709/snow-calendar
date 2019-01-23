@@ -1,13 +1,7 @@
 <template>
     <div class="md calendar-month" :class="[dropState? 'is-drop':'']">
         <div class="calendar-caption">
-            <div>週一</div>
-            <div>週二</div>
-            <div>週三</div>
-            <div>週四</div>
-            <div>週五</div>
-            <div>週六</div>
-            <div>週日</div>
+            <div v-for="day in obj.week[0]" :key="'dayTag-'+ day.language_day">{{ day.language_day }}</div>
         </div>
         <div class="calendar-day">
             <cpCalendarMonthWeek
@@ -18,6 +12,7 @@
                 :source="source"
                 :activeNode="activeNode"
                 :weeksn="monthsn +'week'+ n"
+                :lang="lang"
                 :key="'week'+ n"
                 @sendEvent="receiveEvent"
             ></cpCalendarMonthWeek>
@@ -59,6 +54,9 @@
                 require: true
             },
             source: {
+                require: true
+            },
+            lang: {
                 require: true
             }
         },

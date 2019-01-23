@@ -7,7 +7,7 @@
         <a
             class="date"
             @click.prevent.stop="update"
-        >{{ obj.month }}月{{ obj.date }}日</a>
+        >{{ obj.month }}/{{ obj.date }}</a>
         <div class="sensor"
             @drop.prevent="dropDone"
             @dragenter.prevent="dropEnter"

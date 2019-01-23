@@ -3,7 +3,7 @@
         <a @click.prevent.stop="clickEvent" @mouseover.stop="hoverEvent" :class="[obj.extend.isOver? 'is-over': '']">
             <span class="mark" v-if="obj.extend.cover >= 1">
                 <i :style="'background-color: '+ cal.color +';'"></i>
-                <em>整日</em>
+                <em>{{ lang.allDay }}</em>
             </span>
             <span class="mark" v-else>
                 <i :style="'background-color: '+ cal.color +';'"></i>
@@ -24,6 +24,9 @@
                 require: true
             },
             source: {
+                require: true
+            },
+            lang: {
                 require: true
             }
         },

@@ -1,16 +1,10 @@
 <template>
     <li>
-        <div class="caption">{{ obj.chineseMonth }}月</div>
+        <div class="caption">{{ obj.language_month }}</div>
         <div class="calendar-day">
             <div class="week">
                 <div class="title">
-                    <div>一</div>
-                    <div>二</div>
-                    <div>三</div>
-                    <div>四</div>
-                    <div>五</div>
-                    <div>六</div>
-                    <div>日</div>
+                    <div v-for="day in obj.week[0]" :key="'dayTag-'+ day.language_day">{{ day.language_day[0] }}</div>
                 </div>
             </div>
             <cpCalendarYearWeek

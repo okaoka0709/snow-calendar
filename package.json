@@ -1,6 +1,6 @@
 {
     "name": "snow-calendar",
-    "version": "0.1.15",
+    "version": "0.1.17",
     "description": "A Vue Calendar like FullCalendar and Google Calendar.",
     "main": "index.js",
     "scripts": {

@@ -4,11 +4,20 @@
   <img src="https://img.shields.io/npm/dt/snow-calendar.svg">
 </a>
 
+english version on the below.
+
+@0.1.17 您現在必須顯式的指定 css
+```
+import 'snow-calendar/src/css/snowCalendar.css'
+```
+
 # Snow Calendar
 Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的前端日曆套件，其特色如下：
+* 不包含 jquery
 * 將事件與資料完全開放，您可自行設計操作介面的邏輯及資料交互的方式。
 * 以月為單位初始化資料，您可以在使用者切換到當月再動態取得資料。
 * 簡易使用，安裝套件後使用 **&lt;snowCalendar&gt;&lt;/snowCalendar&gt;** 標籤使用即可。
+* 提供多語系：繁體中文、簡體中文、英文、日文
 * 提供完整的日曆視圖：年、月、週、4天、天、事件
 * 提供多曆本的設計。
 * 提供檢視的小日曆、完整的操作功能列。
@@ -28,13 +37,10 @@ Snow Calendar 範本，您可以至 Source 取得原始碼：
 基本的 Snow Calendar：
 [Demo](https://snow-calendar.000webhostapp.com)
 
-如果您有 Vue Cli，您也可以在本機建立簡易的 Demo。先執行 npm 安裝依賴：
+如果您有 Vue Cli，您也可以使用本專案建立簡易的本機 Demo。先執行 npm 安裝依賴：
 ```
-npm install
-```
-接著在本機開啟：
-```
-npm run serve
+$ npm install
+$ npm run serve
 ```
 
 
@@ -45,10 +51,11 @@ $ npm install snow-calendar --save
 
 
 ## 使用方式
-安裝之後，在您的 main.js 檔案中引用 snow-calendar 並 use：
+安裝之後，在您的 main.js 檔案中引用 snow-calendar 並 use，再引入 css 檔案即可：
 ```
 import Vue from 'vue'
 import snowCalendar from 'snow-calendar'
+import 'snow-calendar/src/css/snowCalendar.css'
 
 Vue.use(snowCalendar)
 ```
@@ -61,12 +68,13 @@ Vue.use(snowCalendar)
 
 ## 提供日曆資料
 在 Snow Calendar 中，您可以提供以下幾種資料：
-* 行程資料(events)
 * 日曆本資料(sources)
-* 預設的觀看模式(mode)
+* 行程資料(events)
+* 觀看模式(mode)
 * 曆觀看時間(mainCal)
 * 小日曆觀看時間(refCal)
 * 顯示/隱藏組件(uiVisible)
+* 語系(lang)
 
 設定方式如下：
 ```
@@ -77,6 +85,7 @@ Vue.use(snowCalendar)
   :mainCal="timeObject"
   :refCal="timeObject"
   :uiVisible="setObject"
+  :lang="langString"
 ></snowCalendar>
 ```
 
@@ -158,7 +167,7 @@ Snow Calendar **不呈現**找不到日曆歸屬的事件，因此**建立行程
 let modeString = 'week'
 ```
 使用者在操作介面中，仍然可以切換觀看模式。
-您也可以修改 mode 的值，改變使用者的觀看模式。
+您也可以動態修改 mode 的值，改變使用者的觀看模式。
 若沒有設定這個值，或設定了錯的值，將會預設呈現 month 月曆模式。
 
 請注意，當使用者透過預設介面切換觀看模式時，**並不會**跟著更動 mode 的值，因為子組件無權修改的父組件屬性，但您可以藉由 **切換觀看模式(updateMode)** 方法，取得切換的觀看模式。
@@ -178,7 +187,7 @@ let timeObject = {
   }
 ```
 使用者在操作介面中，仍然可以切換觀看時間。
-您也可以修改 timeObject 的值，改變使用者的觀看時間，。
+您也可以動態修改 timeObject 的值，改變使用者的觀看時間。
 若沒有設定這個物件，或設定了錯的值，觀看時間將會自動設定為今日。
 
 ### 顯示/隱藏組件(uiVisible):Object
@@ -200,6 +209,20 @@ let setObject = {
 
 ![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/visible.png)
 
+### 語系(lang):String
+您可以指定使用者所使用的語系，目前提供的觀看模式有：
+* 繁體中文(tw)
+* 簡體中文(cn)
+* 英文(en)
+* 日文(jp)
+
+```
+let langString = 'jp'
+```
+若沒有設定這個值，或設定了錯的值，語系將會自動設定為英文。
+徵求志願人員幫忙翻譯語言，請來信 [okaoka0709@gmail.com](mailto:okaoka0709@gmail.com)。
+
+
 ## 日曆事件
 Snow Calendar 提供以下幾種事件：
 * 切換觀看時間(updateCal)
@@ -211,8 +234,8 @@ Snow Calendar 提供以下幾種事件：
 * 新增行程(addEvent)
 * 點擊行程(clickEvent)
 * 滑入行程(hoverEvent)
-* 點擊”還有n則“(clickMore)
-* 滑入”還有n則“(hoverMore)
+* 點擊更多(clickMore)
+* 滑入更多(hoverMore)
 * 新增日曆本(addSource)
 * 匯入日曆本(importSource)
 * 點擊日曆本(clickSource)
@@ -258,7 +281,6 @@ date 參數指明使用者點選的時間，看起來像以下這樣：
   date: 1
 }
 ```
-
 
 ### 切換觀看模式(updateMode)
 當使用者切換日曆觀看模式時，觸發該事件。
@@ -432,12 +454,13 @@ event 參數回傳使用者操作的行程資訊，看起來像以下這樣：
 ```
 MouseEvent 參數回傳原生事件。
 
+
 ### 滑入行程(hoverEvent)
 當使用者滑入行程時觸發。
 hoverEvent 提供的的參數與 clickEvent 一致。
 
-### 點擊”還有n則“(clickMore)
 
+### 點擊更多(clickMore)
 當使用者點擊”還有n則“文字時觸發。
 hoverEvent 提供兩個參數分別是 event(Object) 與 MouseEvent(MouseEvent)。
 ```
@@ -502,8 +525,8 @@ event 參數回傳使的行程資訊與一般行程資訊相似，但該資訊�
 ```
 MouseEvent 參數回傳原生事件。
 
-### 滑入”還有n則“(hoverMore)
-當使用者滑入”還有n則“文字時觸發。
+### 滑入更多(hoverMore)
+當使用者滑入更多文字時觸發。
 hoverMore 提供的的參數與 clickMore 一致。
 
 ### 新增日曆本(addSource)
@@ -537,3 +560,552 @@ MouseEvent 參數回傳原生事件。
 ### 滑入日曆本(hoverSource)
 當使用者滑入日曆標題文字時觸發。
 hoverSource 提供的的參數與 clickSource 一致。
+
+
+
+# Snow Calendar
+Snow Calendar is a front-end calendar plugin for **vue** like google calendar or FullCalendar:
+* no jquery
+* Open the event and data, you can operation it by yourself.
+* Initialize data by month, you can get your data when user change calendar time.
+* Easy to use, just install it and use **&lt;snowCalendar&gt;&lt;/snowCalendar&gt;** tag.
+* Provide Traditional Chinese, Simplified Chinese, English and Japanese
+* Provide year view, month view, week view, 4 days view, day view and list view
+* Provide multi Calendar.
+* Provides a mini calendar and a complete control bar.
+
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/snowCalendar_month.png)
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/snowCalendar_week.png)
+
+
+## Operating video
+You can watch [https://youtu.be/1tL3BEmg6Sk](https://youtu.be/1tL3BEmg6Sk)
+  
+  
+## Demo
+Snow Calendar sample, you can also get the source:
+[Demo](https://snow-calendar-extend.000webhostapp.com), [Source](https://github.com/okaoka0709/snow-calendar-demo)
+
+Basic Snow Calendar:
+[Demo](https://snow-calendar.000webhostapp.com)
+
+If you have Vue Cli, you can also use this project to build a basic Demo on your computer.
+```
+$ npm install
+$ npm run serve
+```
+
+
+## Install
+```
+$ npm install snow-calendar --save
+```
+
+
+## How to use
+After install, import snow-calendar and use it in your main.js, and then import the css file:
+```
+Import Vue from 'vue'
+Import snowCalendar from 'snow-calendar'
+Import 'snow-calendar/src/css/snowCalendar.css'
+
+Vue.use(snowCalendar)
+```
+Then use snowCalendar tag in the .vue file:
+```
+<template>
+  <snowCalendar></snowCalendar>
+</template>
+```
+
+## Calendar information
+you can bind those information on Snow Calendar:
+* Calendar information (sources)
+* Event data (events)
+* View mode (mode)
+* Main calendar time (mainCal)
+* Mini calendar time (refCal)
+* Show/Hide component (uiVisible)
+* Language (lang)
+
+like this:
+```
+<snowCalendar
+  :sources="sourceObject"
+  :events="eventObject"
+  :mode="modeString"
+  :mainCal="timeObject"
+  :refCal="timeObject"
+  :uiVisible="setObject"
+  :lang="langString"
+></snowCalendar>
+```
+
+### Calendar information (sources): Array
+Snow Calendar provide multi calendar, which provides event color and user editable.
+The calendar data is an array containing calendar items. The data includes:
+* Unique value (sn): String or Number
+* Title (sub): String
+* Discriptyion (desc): String
+* Editable (editable): Boolean
+* Color (color): String hex
+* display (active): Boolean
+
+like this:
+```
+let sourceObject = [
+    {
+      "sn": 1,
+      "sub": "calendar title",
+      "desc": "calendar discriptyion",
+      "editable": true,
+      "color": "#e54288",
+      "active": true
+    }
+  ]
+```
+you have to decide how to use the editable attribute yourself.
+
+### Event data (events): Array
+The event data is an array, and the array contains the event items. The data includes:
+* Start date (startTime): Object
+* End date (endTime): Object
+* Unique value (sn): String or Number
+* Title (sub): String
+* Discription (desc): String
+* Calendar (cal): String or Number
+* Location (location): String
+
+The format is as follows:
+```
+let eventObject = [
+    {
+      "startTime": {
+        "year": 2019,
+        "month": 1,
+        "date": 1,
+        "hour": 12,
+        "minutes": 0
+      },
+        "endTime": {
+        "year": 2019,
+        "month": 1,
+        "date": 1,
+        "hour": 20,
+        "minutes": 30
+      },
+      "sn": 1,
+      "sub": "event title",
+      "desc": "event discription",
+      "cal": 1,
+      "location": "location"
+    }
+  ]
+```
+the value of the calendar(cal) attribute, which must correspond to the sn attribute of the calendar.
+Snow Calendar ** does not render ** events that cannot be found by calendar, so **Before creating events,you have to create calendar information first.**.
+
+### View mode (mode): String
+You can set view mode for your users:
+* year (year)
+* month (month)
+* week (week)
+* 4 days (4days)
+* days (date)
+* list (event)
+
+```
+let modeString = 'week'
+```
+The user can still switch the viewing mode in the operation interface.
+You can also dynamically change the value of mode to change the user's viewing mode.
+If this value is not set, or if the wrong value is set, it will be month mode.
+
+when user switches the viewing mode through the preset interface, **the mode value will not change**, because the child component can't replace the parent component value, but you can get mode value by **updateMode** method.
+
+### Main calendar time (mainCal) / mini calendar time (refCal): Object
+You can set the main calendar and small calendar time for user:
+* Year(year): Number
+* Month(month): Number
+* Date(date): Number
+
+like this:
+```
+let timeObject = {
+    "year": 2019,
+    "month": 10,
+    "date": 8
+  }
+```
+The user can still switch the viewing time in the operation interface.
+You can also dynamically change the value of timeObject to change the user's viewing time.
+If this object is not set, or if the wrong value is set, it will be today.
+
+### Show/Hide component (uiVisible): Object
+You can decide which components will be show or hidden:
+* Control bar (control): Boolean
+* Mini calendar (refCal): Boolean
+* Calendar (source): Boolean
+
+like this:
+```
+let setObject = {
+    Control: true,
+    refCal: true,
+    Source: true
+  }
+```
+If this object is not set, or if the wrong value is set, any component will be show.
+If you hide the default control bar, you can use **view mode (mode)** and **calendar time (mainCal)** to create a new custom control bar.
+
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/visible.png)
+
+### Language (lang): String
+You can set the UI language:
+* Traditional Chinese (tw)
+* Simplified Chinese (cn)
+* English (en)
+* Japanese (jp)
+
+```
+let langString = 'jp'
+```
+If this value is not set, or if the wrong value is set, it will be English.
+For volunteers to help translate, please contact me [okaoka0709@gmail.com] (mailto:okaoka0709@gmail.com).
+
+
+## Calendar event
+Snow Calendar provides those events:
+* Change calendar time (updateCal)
+* Switch mode (updateMode)
+* Initialize month (initMonth)
+* Show error message (errorMsg)
+* Click time (clickTime)
+* Drop event (dropEvent)
+* Add event (addEvent)
+* Click event (clickEvent)
+* Hover event (hoverEvent)
+* Click more (clickMore)
+* Hover more (hoverMore)
+* Add calendar (addSource)
+* Import calendar (importSource)
+* Click calendar (clickSource)
+* Hover calendar (hoverSource)
+
+like this:
+```
+<snowCalendar
+  @updateCal="someFunction"
+  @updateMode="someFunction"
+  @initMonth="someFunction"
+  @errorMsg="someFunction"
+  @clickTime="someFunction"
+  @dropEvent="someFunction"
+  @addEvent="someFunction"
+  @clickEvent="someFunction"
+  @hoverEvent="someFunction"
+  @clickMore="someFunction"
+  @hoverMore="someFunction"
+  @addSource="someFunction"
+  @importSource="someFunction"
+  @clickSource="someFunction"
+  @hoverSource="someFunction"
+></snowCalendar>
+```
+Snow Calendar don't provide edit or remove event(calendar) function, you have to do it yourself.
+
+### Change calendar time (updateCal)
+This event is triggered when the user change the calendar time(main calendar or mini calendar).
+updateCal provides two parameters, cal(String) and date(Object).
+```
+Function(cal, date)
+```
+The cal parameter show which calendar will change:
+* main (calendar)
+* ref (mini calendar)
+
+The date parameter show what time it is, which looks like this:
+```
+{
+  Year: 2019,
+  Month: 1,
+  Date: 1
+}
+```
+
+### Switch mode (updateMode)
+This event is triggered when the user switches the calendar viewing mode.
+
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/snowCalendar_viewMode.png)
+
+updateMode provides a parameter mode(String) show which mode selected.
+```
+Function(mode)
+```
+There may be the following values:
+* year (year)
+* month (month)
+* week (week)
+* 4days (4 days)
+* date (days)
+* list (event)
+
+### Initialize month (initMonth)
+This event is triggered when the user first time watch the month.
+It is recommended that when this event is triggered, you can get your event data and add them to event data.
+
+updateMode provides a parameter date(Object).
+```
+Function(date)
+```
+It looks like this:
+```
+{
+  Year: 2019,
+  Month: 1,
+  Date: 1
+}
+```
+
+### Show error message (errorMsg)
+This event is triggered when snow calendar need send some error message to user.
+errorMsg provides a parameter error(String).
+```
+Function(error)
+```
+
+### Click time (clickTime)
+In the day mode, 4 days mode, week mode, and month mode, user can pick a time.
+The click time is usually defined as the new trip function, so clickTime provides parameters that are consistent with addEvent so that you can connect directly.
+The two parameters provided by clickTime are time(Object) and mode(String).
+```
+Function(time, mode)
+```
+The time parameter indicates when the user clicked, which looks like this:
+```
+{
+  Year: 2019,
+  Month: 1,
+  Date: 1,
+  Hour: 12,
+  Minutes: 0
+}
+```
+The mode parameter indicates whether the user selected the day or time, which may be the following values:
+* date (days)
+* time (time)
+
+When the user picks up all day, both hour and minutes will be 0.
+
+### Drop event (dropEvent)
+In the day mode, 4 days mode, week mode, and month mode, the user triggers when dragging the event.
+The five parameters provided by dropEvent are event(Object), time(Object), type(String), mode(String), and finally(Boolean).
+```
+Function(event, time, type, mode, finally)
+```
+The event parameter returns the trip information for the user action, which looks like this:
+```
+{
+  "startTime": {
+    "year": 2019,
+    "month": 1,
+    "date": 1,
+    "hour": 12,
+    "minutes": 0
+  },
+  "endTime": {
+    "year": 2019,
+    "month": 1,
+    "date": 1,
+    "hour": 20,
+    "minutes": 30
+  },
+  "sn": 1,
+  "sub": "event title",
+  "desc": "event discription",
+  "cal": 1,
+  "location": "location"
+}
+```
+The time parameter indicates the time the user is currently dragging, which looks like this:
+```
+{
+  Year: 2019,
+  Month: 1,
+  Date: 1,
+  Hour: 12,
+  Minutes: 0
+}
+```
+The type parameter indicates the type of user drag, which may be the following values:
+* head (towed block block overall)
+* foot (towing the end of the block)
+
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/dropArea_days.png)
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/dropArea_month.png)
+
+The mode parameter indicates whether the mode dragged by the user is day or time, and may be the following values:
+* date (days)
+* time (time)
+
+The finally parameter indicates whether the user drag is the last result, for example, 2019/1/1 is dragged to 2019/1/3, and the dropEvent event will be triggered twice (2019/1/2, 2019/1/3 each), but only The last finally parameter is true. It is recommended to pass the modified data to the backend when the finally parameter is true.
+
+### Add event (addEvent)
+Triggered when the user clicks the **Add event** button.
+The parameters provided by addEvent are consistent with clickTime.
+
+addEvent provides two parameters: time(Object) and mode(String).
+```
+Function(time, mode)
+```
+The time parameter indicates when the user clicked, which looks like this:
+```
+{
+  Year: 2019,
+  Month: 1,
+  Date: 1,
+  Hour: 12,
+  Minutes: 0
+}
+```
+The mode parameter indicates whether the user selected the day or time, which may be the following values:
+* date (days)
+* time (time)
+
+When the user picks up all day, both hour and minutes will be 0.
+
+### Click event (clickEvent)
+Triggered when the user clicks on the event. The clickEvent provides two parameters: event(Object) and MouseEvent(MouseEvent).
+```
+Function(event, MouseEvent)
+```
+The event parameter returns the event information for the user action, which looks like this:
+```
+{
+  "startTime": {
+    "year": 2019,
+    "month": 1,
+    "date": 1,
+    "hour": 12,
+    "minutes": 0
+  },
+  "endTime": {
+    "year": 2019,
+    "month": 1,
+    "date": 1,
+    "hour": 20,
+    "minutes": 30
+  },
+  "sn": 1,
+  "sub": "event title",
+  "desc": "event discription",
+  "cal": 1,
+  "location": "location"
+}
+```
+The MouseEvent parameter returns a native event.
+
+### Hover event (hoverEvent)
+Triggered when the user hover the event.
+The parameters provided by hoverEvent are consistent with clickEvent.
+
+### Click more (clickMore)
+Triggered when the user clicks "more".
+hoverEvent provides two parameters: event(Object) and MouseEvent(MouseEvent).
+```
+Function(event, MouseEvent)
+```
+The event parameter is looks like normal event information, but it provided extend.moreEvent array to content more event information.
+It looks like this:
+```
+{
+  "sn": 1,
+  "sub": "+2 more",
+  "year": 2019,
+  "month": 1,
+  "date": 1,
+  "extend": {
+    "moreEvent": [
+      {
+        "startTime": {
+          "year": 2019,
+          "month": 1,
+          "date": 1,
+          "hour": 12,
+          "minutes": 0
+        },
+        "endTime": {
+          "year": 2019,
+          "month": 1,
+          "date": 1,
+          "hour": 20,
+          "minutes": 30
+        },
+        "sn": 1,
+        "sub": "More Events 1",
+        "desc": "event discription",
+        "cal": 1,
+        "location": "location"
+      },
+      {
+        "startTime": {
+          "year": 2019,
+          "month": 1,
+          "date": 1,
+          "hour": 12,
+          "minutes": 0
+        },
+        "endTime": {
+          "year": 2019,
+          "month": 1,
+          "date": 1,
+          "hour": 20,
+          "minutes": 30
+        },
+        "sn": 1,
+        "sub": "More Events 2",
+        "desc": "event discription",
+        "cal": 1,
+        "location": "location"
+      }
+    ]
+  }
+}
+```
+The MouseEvent parameter returns a native event.
+
+### Hover more (hoverMore)
+Triggered when the user hover "more".
+The parameters provided by hoverMore are consistent with clickMore.
+
+### Add calendar (addSource)
+Triggered when the user clicks the **Add Calendar** button.
+
+### Import calendar (importSource)
+Triggered when the user clicks the **Import Calendar** button.
+
+### Click calendar (clickSource)
+Triggered when the user clicks the setting icon on the right side of the calendar.
+
+![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/source.png)
+
+The clickSource provides two parameters: source(Object) and MouseEvent(MouseEvent).
+```
+Function(source, MouseEvent)
+```
+The source parameter returns the calendar information, which looks like this:
+```
+{
+  "sn": 1,
+  "sub": "calendar title",
+  "desc": "calendar Discription",
+  "editable": true,
+  "color": "#e54288",
+  "active": true
+}
+```
+The MouseEvent parameter returns a native event.
+
+### Hover calendar (hoverSource)
+Triggered when the user hover the calendar title text.
+The parameters provided by hoverSource are consistent with clickSource.

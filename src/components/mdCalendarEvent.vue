@@ -8,6 +8,7 @@
                 :today="today"
                 :event="event"
                 :source="source"
+                :lang="lang"
                 :key="monthsn +'date'+ index"
                 @sendEvent="receiveEvent"
             ></li>
@@ -36,6 +37,9 @@
                 require: true
             },
             source: {
+                require: true
+            },
+            lang: {
                 require: true
             }
         },

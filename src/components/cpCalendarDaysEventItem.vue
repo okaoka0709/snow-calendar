@@ -12,7 +12,7 @@
         @dragstart="startDropStatus($event, 'head')"
         @dragend="endDropStatus"
     >
-        全天 {{ obj.sub }}
+        {{ obj.sub }}
         <i class="resize"
             v-if="cal.editable"
             draggable="true"

@@ -6,7 +6,7 @@
                 <span @mouseover.stop="hoverSource">{{ cal.sub }}</span>
             </label>
         </div>
-        <a class="set icon-font more_vert icon-font-only" @click.prevent.stop="clickSource"></a>
+        <a class="set" @click.prevent.stop="clickSource">⋯</a>
     </li>
 </template>
 

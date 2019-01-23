@@ -1,8 +1,8 @@
 <template>
     <div class="time" :class="[isToday ? 'is-today': '', isActive? 'is-active': '']" @click="clickTime">
         <a class="inner" @click.prevent.stop="update">
-            <div class="date">{{ obj.month }}月{{ obj.date }}日</div>
-            <div class="day">({{ obj.chineseDay }})</div>
+            <div class="date">{{ obj.month }}/{{ obj.date }}</div>
+            <div class="day">({{ obj.language_day }})</div>
         </a>
         <div class="sensor"
             @drop.prevent="dropDone"

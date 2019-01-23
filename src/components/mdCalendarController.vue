@@ -1,23 +1,23 @@
 <template>
     <div class="md calendar-controller">
         <div class="date-selector">
-            <button title="上一則" @click.prevent="getAway('prev')">&lt;</button>
+            <button @click.prevent="getAway('prev')">&lt;</button>
             <span v-if="mode === 'year'" class="thisMonth">{{ mainCal.year }}</span>
             <span v-else class="thisMonth">{{ mainCal.year }}/{{ mainCal.month }}</span>
-            <button title="下一則" @click.prevent="getAway('next')">&gt;</button>
+            <button @click.prevent="getAway('next')">&gt;</button>
             <select :value="mode" @change="changeMode">
-                <option value="date">天</option>
-                <option value="week">週</option>
-                <option value="month">月</option>
-                <option value="year">年</option>
-                <option value="event">事件</option>
-                <option value="4days">4天</option>
+                <option value="date">{{ lang.mode1Day }}</option>
+                <option value="week">{{ lang.modeWeek }}</option>
+                <option value="month">{{ lang.modeMonth }}</option>
+                <option value="year">{{ lang.modeYear }}</option>
+                <option value="event">{{ lang.modeEvents }}</option>
+                <option value="4days">{{ lang.mode4Days }}</option>
             </select>
         </div>
         <div class="calendar-btns">
             <ul>
-                <li class="change-toToday"><button @click.prevent="backToToday">今天</button></li>
-                <li class="add-event"><button @click.prevent="addEvt">新增行程</button></li>
+                <li class="change-toToday"><button @click.prevent="backToToday">{{ lang.today }}</button></li>
+                <li class="add-event"><button @click.prevent="addEvt">{{ lang.addEvent }}</button></li>
             </ul>
         </div>
     </div>
@@ -33,6 +33,9 @@
                 require: true
             },
             today: {
+                require: true
+            },
+            lang: {
                 require: true
             }
         },

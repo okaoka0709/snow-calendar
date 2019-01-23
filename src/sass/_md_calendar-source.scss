@@ -6,10 +6,10 @@
         &.func  {
 
             li {
-                float: left;
-                width: 50%;
-                box-sizing: border-box;
-                padding: 1px;
+
+                + li {
+                    margin-top: $interval-xs;
+                }
             }
 
             button {
@@ -28,7 +28,7 @@
                 @extend %card;
                 position: relative;
                 padding: $interval-s $interval-m;
-                padding-right: 25px;
+                padding-right: 30px;
 
                 + li {
                     margin-top: 2px;
@@ -48,6 +48,7 @@
                 font-size: $font-size-s;
 
                 span {
+                    padding-left: $interval-xs;
                     color: $deep;
                 }
             }
@@ -55,8 +56,9 @@
             /*a*/.set {
                 display: none;
                 position: absolute;
-                top: 8px;
-                right: 4px;
+                top: 50%;
+                margin-top: -14px;
+                right: 8px;
                 cursor: pointer;
 
                 &:before {

@@ -1,20 +1,14 @@
 <template>
     <div class="md calendar-mini">
         <div class="calendar-selector">
-            <button title="上一則" @click.prevent="getAway('prev')"><</button>
+            <button @click.prevent="getAway('prev')">&lt;</button>
             <span class="thisMonth">{{ refCal.year }}/{{ refCal.month }}</span>
-            <button title="下一則" @click.prevent="getAway('next')">></button>
+            <button @click.prevent="getAway('next')">&gt;</button>
         </div>
         <div class="calendar-day">
             <div class="week">
                 <div class="title">
-                    <div>一</div>
-                    <div>二</div>
-                    <div>三</div>
-                    <div>四</div>
-                    <div>五</div>
-                    <div>六</div>
-                    <div>日</div>
+                        <div v-for="day in obj.week[0]" :key="'dayTag-'+ day.language_day">{{ day.language_day[0] }}</div>
                 </div>
             </div>
             <cpCalendarMiniWeek

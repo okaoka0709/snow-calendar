@@ -51,6 +51,9 @@
             source: {
                 require: true
             },
+            lang: {
+                require: true
+            },
             weeksn: {
                 require: true
             }
@@ -156,7 +159,7 @@
                             year: date.year,
                             month: date.month,
                             date: date.date,
-                            sub: '還有' + ($more.length) + '則',
+                            sub: '+' + ($more.length) + ' '+ this.lang.more,
                             extend: {
                                 cover: null,
                                 moreEvent: $more,

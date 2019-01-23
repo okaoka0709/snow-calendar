@@ -1,11 +1,12 @@
 <template>
     <gCalendar
-        :events="events"
         :sources="sources"
+        :events="events"
         :defaultMainCal="mainCal"
         :defaultRefCal="refCal"
         :defaultMode="mode"
         :uiVisible="uiVisible"
+        :lang="lang"
 
         @updateCal="updateCal"
         @updateMode="updateMode"
@@ -39,6 +40,32 @@
         },
         data: function(){
             return {
+                sources: [
+                    {
+                        "sn": 1,
+                        "sub": "personal",
+                        "color": "#1d88e5",
+                        "editable": true,
+                        "desc": "test1",
+                        "active": true
+                    },
+                    {
+                        "sn": 2,
+                        "sub": "share",
+                        "color": "#e57a1d",
+                        "editable": true,
+                        "desc": "test2",
+                        "active": true
+                    },
+                    {
+                        "sn": 3,
+                        "sub": "holiday",
+                        "color": "#e54288",
+                        "editable": false,
+                        "desc": "test3",
+                        "active": false
+                    }
+                ],
                 events: [
                     {
                         "startTime":{
@@ -56,7 +83,7 @@
                             "minutes":0
                         },
                         "sn":"1",
-                        "sub":"元旦",
+                        "sub":"new year",
                         "desc":"",
                         "cal":3,
                         "location":""
@@ -77,7 +104,7 @@
                             "minutes":0
                         },
                         "sn":"2",
-                        "sub":"週末",
+                        "sub":"weekend",
                         "desc":"",
                         "cal":3,
                         "location":""
@@ -98,7 +125,7 @@
                             "minutes":0
                         },
                         "sn":"3",
-                        "sub":"週末",
+                        "sub":"weekend",
                         "desc":"",
                         "cal":3,
                         "location":""
@@ -119,7 +146,7 @@
                             "minutes":0
                         },
                         "sn":"4",
-                        "sub":"週末",
+                        "sub":"weekend",
                         "desc":"",
                         "cal":3,
                         "location":""
@@ -140,7 +167,7 @@
                             "minutes":0
                         },
                         "sn":"5",
-                        "sub":"週末",
+                        "sub":"weekend",
                         "desc":"",
                         "cal":3,
                         "location":""
@@ -161,14 +188,14 @@
                             "minutes":0
                         },
                         "sn":"6",
-                        "sub":"過年",
+                        "sub":"chinese new year",
                         "desc":"",
                         "cal":3,
                         "location":""
                     },
                     {
                         "sn":"15481221368660.41220879862838866",
-                        "sub":"多日行程1",
+                        "sub":"multi days 1",
                         "desc":"",
                         "cal":1,
                         "location":"",
@@ -189,7 +216,7 @@
                     },
                     {
                         "sn":"15481221650990.44713779233230055",
-                        "sub":"多日行程2",
+                        "sub":"multi days 2",
                         "desc":"",
                         "cal":2,
                         "location":"",
@@ -210,7 +237,7 @@
                     },
                     {
                         "sn":"15481222011690.03933619529261567",
-                        "sub":"單日行程3",
+                        "sub":"multi days 3",
                         "desc":"",
                         "cal":1,
                         "location":"",
@@ -231,7 +258,7 @@
                     },
                     {
                         "sn":"15481222192250.760487592672817",
-                        "sub":"跨日行程1",
+                        "sub":"over days 1",
                         "desc":"",
                         "cal":2,
                         "location":"",
@@ -252,7 +279,7 @@
                     },
                     {
                         "sn":"15481222380220.6967396095320946",
-                        "sub":"單日行程1",
+                        "sub":"one day 1",
                         "desc":"",
                         "cal":1,
                         "location":"",
@@ -273,7 +300,7 @@
                     },
                     {
                         "sn":"15481222664620.009442966902011074",
-                        "sub":"單日行程2",
+                        "sub":"one day 2",
                         "desc":"",
                         "cal":2,
                         "location":"",
@@ -294,7 +321,7 @@
                     },
                     {
                         "sn":"15481223193260.1601370668143176",
-                        "sub":"多日行程",
+                        "sub":"multi days 4",
                         "desc":"",
                         "cal":1,
                         "location":"",
@@ -314,32 +341,6 @@
                         }
                     }
                 ],
-                sources: [
-                    {
-                        "sn": 1,
-                        "sub": "個人行事曆",
-                        "color": "#1d88e5",
-                        "editable": true,
-                        "desc": "測試一",
-                        "active": true
-                    },
-                    {
-                        "sn": 2,
-                        "sub": "分享行事曆",
-                        "color": "#e57a1d",
-                        "editable": true,
-                        "desc": "測試二",
-                        "active": true
-                    },
-                    {
-                        "sn": 3,
-                        "sub": "假日",
-                        "color": "#e54288",
-                        "editable": false,
-                        "desc": "行政院人事行政總處公佈",
-                        "active": false
-                    }
-                ],
                 mainCal: {},
                 refCal: {},
                 mode: 'month',
@@ -347,66 +348,67 @@
                     control: true,
                     refCal: true,
                     source: true
-                }
+                },
+                lang: 'en'
             }
         },
         methods: {
             updateCal: function(cal, date){ //切換月曆(ref or main)
-                console.log('切換行事曆', cal, '切換時間', date);
+                console.log('cal', cal, 'date', date);
             },
             updateMode: function(opt){ //改變模式
-                console.log('切換模式', opt);
+                console.log('updateMode', opt);
             },
             initMonth: function(opt){ //第一次造訪該月
-                console.log('第一次取得該月', opt);
+                console.log('initMonth', opt);
             },
             errorMsg: function(msg){ //推送錯誤訊息
-                console.log('推送錯誤訊息', msg);
+                console.log('errorMsg', msg);
             },
             clickTime: function(time, mode){
-                console.log('點選時間', time, mode);
+                console.log('clickTime', time, mode);
             },
             dropEvent: function(event, time, type, mode, isFinally){
-                console.log('移動或增減事件長度', event, time, type, mode, isFinally);
+                console.log('dropEvent', event, time, type, mode, isFinally);
             },
             addEvent: function(time, mode){
-                console.log('新增事件', time, mode);
+                console.log('addEvent', time, mode);
             },
             clickEvent: function(event, mouseEvent){ //popup 顯示 event
-                console.log('點擊事件', event, mouseEvent);
+                console.log('clickEvent', event, mouseEvent);
             },
             hoverEvent: function(event, mouseEvent){ //tooltip 顯示 event
-                console.log('滑入事件', event, mouseEvent);
+                console.log('hoverEvent', event, mouseEvent);
             },
             clickMore: function(event, mouseEvent){
-                console.log('點擊更多', event, mouseEvent);
+                console.log('clickMore', event, mouseEvent);
             },
             hoverMore: function(event, mouseEvent){
-                console.log('滑入更多', event, mouseEvent);
+                console.log('hoverMore', event, mouseEvent);
             },
             addSource: function(){
-                console.log('新增月曆');
+                console.log('addSource');
             },
             importSource: function(){
-                console.log('匯入月曆');
+                console.log('importSource');
             },
             clickSource: function(source, mouseEvent){
-                console.log('編輯行事曆', source);
+                console.log('clickSource', source);
             },
             hoverSource: function(source, mouseEvent){
-                console.log('編輯行事曆', source, mouseEvent);
+                console.log('hoverSource', source, mouseEvent);
             },
             updateEvent: function(event, isFinally){
-                console.log('更新事件', event, isFinally);
+                console.log('updateEvent', event, isFinally);
             },
             removeEvent: function(event, isFinally){
-                console.log('移除事件', event, isFinally);
+                console.log('removeEvent', event, isFinally);
             },
             editEvent: function(event){
-                console.log('編輯事件', event);
+                console.log('editEvent', event);
             },
             updateSource: function(source){
-                console.log('更新行事曆', source);
+                console.log('updateSource', source);
             }
         }
     }

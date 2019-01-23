@@ -13,6 +13,7 @@
             <mdCalendarSource
                 v-if="uiVisible.source !== false"
                 :source="sources"
+                :lang="langType"
                 @sendEvent="receiveEvent"
             ></mdCalendarSource>
         </div>
@@ -22,6 +23,7 @@
                 :mainCal="mainCal"
                 :mode="modeType"
                 :today="today"
+                :lang="langType"
                 @sendEvent="receiveEvent"
             ></mdCalendarController>
             <mdCalendarYear
@@ -38,6 +40,7 @@
                 :event="eventCompile"
                 :source="sourceCompile"
                 :monthsn="'Month-'+ mainCal.year +'month'+ mainCal.month"
+                :lang="langType"
                 @sendEvent="receiveEvent"
             ></mdCalendarMonth>
             <mdCalendarEvent
@@ -46,6 +49,7 @@
                 :today="today"
                 :event="eventCompile"
                 :source="sourceCompile"
+                :lang="langType"
                 :monthsn="'Event-'+ mainCal.year +'month'+ mainCal.month"
                 @sendEvent="receiveEvent"
             ></mdCalendarEvent>
@@ -89,6 +93,11 @@
     import mdCalendarEvent from './mdCalendarEvent'
     import mdCalendarSource from './mdCalendarSource'
 
+    import tw from '../lang/tw'
+    import cn from '../lang/cn'
+    import jp from '../lang/jp'
+    import en from '../lang/en'
+
     export default {
         components: {
             mdCalendarMini,
@@ -112,7 +121,8 @@
                     date: _date
                 },
                 library: {}, //存所有日曆資料
-                modeType: 'month'
+                modeType: 'month',
+                langType: {}
             }
         },
         props: {
@@ -176,6 +186,11 @@
                         source: true
                     }
                 }
+            },
+            lang: {
+                type: String,
+                require: false,
+                default: 'en'
             }
         },
         computed: {
@@ -332,6 +347,12 @@
         methods: {
             receiveEvent: function(){ //將收到的方法，推送給其他方法執行
                 this.$okaTool.receiveEvent(this, arguments);
+            },
+            getRealEvent: function(event){
+                let $events = this.events,
+                    _sn = event.sn;
+
+                return $events.find($event => { return $event.sn === _sn });
             },
             updateCal: function(cal, date){
                 let _year = date.year,
@@ -712,8 +733,8 @@
                         $week = [],
                         $date = [];
 
-                    let $chineseDay = ['日', '一', '二', '三', '四', '五', '六'],
-                        $chineseMonth = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
+                    let $language_day = this.langType.day,
+                        $language_month = this.langType.month;
 
                     let $last = new Date(_year, _month, 0),
                         $lastDate = $last.getDate(),
@@ -732,7 +753,7 @@
                                 day: _day,
                                 thisMonth: true,
                                 isActive: false,
-                                chineseDay: $chineseDay[_day]
+                                language_day: $language_day[_day]
                             };
 
                         $week.push($date_obj);
@@ -765,7 +786,7 @@
                                     day: _day,
                                     thisMonth: false,
                                     isActive: false,
-                                    chineseDay: $chineseDay[_day]
+                                    language_day: $language_day[_day]
                                 };
 
                             $week.unshift($date_obj);
@@ -798,7 +819,7 @@
                                     day: _day,
                                     thisMonth: false,
                                     isActive: false,
-                                    chineseDay: $chineseDay[_day]
+                                    language_day: $language_day[_day]
                                 };
 
                             $week.push($date_obj);
@@ -812,7 +833,7 @@
                     this.library[_year][_month] = {
                         year: _year,
                         month: _month,
-                        chineseMonth: $chineseMonth[_month - 1],
+                        language_month: $language_month[_month - 1],
                         count: $lastDate,
                         date: $date,
                         allDate: $week,
@@ -827,7 +848,9 @@
                 this.$emit('errorMsg', msg);
             },
             dropEvent: function(event, time, type, mode, isFinally){ //移動、縮放物件
-                this.$emit('dropEvent', event, time, type, mode, isFinally);
+                let $event = this.getRealEvent(event);
+
+                this.$emit('dropEvent', $event, time, type, mode, isFinally);
             },
             clickTime: function(time, mode){ //點選時間
                 this.$emit('clickTime', time, mode);
@@ -836,10 +859,14 @@
                 this.$emit('addEvent', time, mode);
             },
             clickEvent: function(event, mouseEvent){
-                this.$emit('clickEvent', event, mouseEvent);
+                let $event = this.getRealEvent(event);
+
+                this.$emit('clickEvent', $event, mouseEvent);
             },
             hoverEvent: function(event, mouseEvent){
-                this.$emit('hoverEvent', event, mouseEvent);
+                let $event = this.getRealEvent(event);
+
+                this.$emit('hoverEvent', $event, mouseEvent);
             },
             clickMore: function(event, mouseEvent){
                 this.$emit('clickMore', event, mouseEvent);
@@ -866,10 +893,6 @@
                 _month = $today.getMonth() + 1,
                 _date = $today.getDate();
 
-            if( this.mainCal.year === undefined ) {
-
-            }
-
             if( this.mainCal.year && this.mainCal.month && this.mainCal.date) {
 
             }else {
@@ -892,6 +915,16 @@
                     month: _month,
                     date: _date
                 });
+            }
+
+            if( this.lang === 'tw' ) {
+                this.$set(this, 'langType', tw)
+            }else if( this.lang === 'ch' ) {
+                this.$set(this, 'langType', ch)
+            }else if( this.lang === 'jp' ) {
+                this.$set(this, 'langType', jp)
+            }else{
+                this.$set(this, 'langType', en)
             }
 
             if( this.mode === 'year' || this.mode === 'month' || this.mode === 'event' || this.mode === 'week' || this.mode === '4days' || this.mode === 'date' ) {

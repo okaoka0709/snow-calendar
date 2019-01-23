@@ -5,8 +5,8 @@
     >
         <div class="time">
             <a class="inner" @click.prevent="update">
-                <div class="date">{{ obj.month }}月{{ obj.date }}日</div>
-                <div class="day">({{ obj.chineseDay }})</div>
+                <div class="date">{{ obj.month }}/{{ obj.date }}</div>
+                <div class="day">({{ obj.language_day }})</div>
             </a>
         </div>
         <div class="event">
@@ -16,6 +16,7 @@
                     v-for="item in events"
                     :obj="item"
                     :source="source"
+                    :lang="lang"
                     :key="item.cal +'-'+ item.sn"
                     @sendEvent="receiveEvent"
                 ></li>
@@ -26,7 +27,7 @@
         <div class="time">
             <a class="inner" @click.prevent="update">
                 <div class="date">{{ obj.month }}/{{ obj.date }}</div>
-                <div class="day">({{ obj.chineseDay }})</div>
+                <div class="day">({{ obj.language_day }})</div>
             </a>
         </div>
         <div class="event"><ul><li><a><span class="name">無事件</span></a></li></ul></div>
@@ -51,6 +52,9 @@
                 require: true
             },
             source: {
+                require: true
+            },
+            lang: {
                 require: true
             }
         },
