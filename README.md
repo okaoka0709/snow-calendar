@@ -10,6 +10,12 @@ english version on the below.
 ```
 import 'snow-calendar/src/css/snowCalendar.css'
 ```
+指定語系(lang)：
+```
+<snowCalendar
+  :lang="tw"
+></snowCalendar>
+```
 
 # Snow Calendar
 Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的前端日曆套件，其特色如下：
