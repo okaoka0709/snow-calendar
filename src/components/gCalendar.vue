@@ -354,6 +354,48 @@
 
                 return $events.find($event => { return $event.sn === _sn });
             },
+            computedTime: function(time1, time2){ //計算時間
+                let $newTime = null,
+                    $time = this.$okaTool.copy(time1);
+
+                if( typeof time2 === 'object' ){ //可傳入月曆定義時間物件
+                    for( let unit in time2 ){
+                        $time[unit] = $time[unit] + time2[unit];
+                    }
+
+                    $newTime = new Date($time.year, $time.month - 1, $time.date, $time.hour, $time.minutes);
+                }else if( typeof time2 === 'number' ){ //也可以傳入毫秒
+                    let _time = new Date($time.year, $time.month - 1, $time.date, $time.hour, $time.minutes).getTime();
+
+                    _time += time2;
+
+                    $newTime = new Date(_time);
+                }
+
+                return {
+                    year: $newTime.getFullYear(),
+                    month: $newTime.getMonth() + 1,
+                    date: $newTime.getDate(),
+                    hour: $newTime.getHours(),
+                    minutes: $newTime.getMinutes()
+                }
+            },
+            differenceTime: function(time1, time2, mode){ //計算兩時間之差
+                return this.returnTime(time1, mode) - this.returnTime(time2, mode);
+            },
+            returnTime: function(time, mode){
+                let _year = time.year || 0,
+                    _month = time.month || 0,
+                    _date = time.date || 0,
+                    _hour = time.hour || 0,
+                    _minutes = time.minutes || 0;
+
+                if( mode === 'date' ){
+                    return new Date(_year, _month -1, _date);
+                }else if( mode === 'time' ){
+                    return new Date(_year, _month -1, _date, _hour, _minutes);
+                }
+            },
             updateCal: function(cal, date){
                 let _year = date.year,
                     _month = date.month,
@@ -582,9 +624,11 @@
                 $result.push($date); //推這一天進陣列
 
                 if (_days === 7){ //如果是 7 天，就給符合星期一至星期日的天數
+                    let _format = this.langType.firstDatSet; //台灣從星期一開始(0)、美國從星期日開始(1)
+
                     let _day = $date.day,
-                        _before = (_day + 13) % 7,
-                        _after = (7 - _day) % 7;
+                        _before = ((_day + 13) % 7) + _format,
+                        _after = ((7 - _day) % 7) - _format;
 
                     for (let b = 0; b < _before; b++){
                         let __date = _date - 2 - b;
@@ -734,7 +778,9 @@
                         $date = [];
 
                     let $language_day = this.langType.day,
-                        $language_month = this.langType.month;
+                        $language_shortDay = this.langType.shortDay,
+                        $language_month = this.langType.month,
+                        $language_shortMonth = this.langType.shortMonth;
 
                     let $last = new Date(_year, _month, 0),
                         $lastDate = $last.getDate(),
@@ -753,14 +799,17 @@
                                 day: _day,
                                 thisMonth: true,
                                 isActive: false,
-                                language_day: $language_day[_day]
+                                language_day: $language_day[_day],
+                                language_shortDay: $language_shortDay[_day]
                             };
 
                         $week.push($date_obj);
                         $date.push($date_obj);
                     }
 
-                    let _before_int = (_start_Day + 6) % 7; //前面要補幾天
+                    let _format = this.langType.firstDatSet; //台灣從星期一開始(0)、美國從星期日開始(1)
+
+                    let _before_int = ((_start_Day + 6) % 7) + _format; //前面要補幾天
 
                     if (_before_int > 0){
                         let __year = 0,
@@ -786,14 +835,15 @@
                                     day: _day,
                                     thisMonth: false,
                                     isActive: false,
-                                    language_day: $language_day[_day]
+                                    language_day: $language_day[_day],
+                                    language_shortDay: $language_shortDay[_day]
                                 };
 
                             $week.unshift($date_obj);
                         }
                     }
 
-                    let _after_int = 42 - _before_int - $lastDate; //前面要補幾天
+                    let _after_int = 42 - _before_int - $lastDate; //後面要補幾天
 
                     if (_after_int > 0){
                         let __year = 0,
@@ -819,7 +869,8 @@
                                     day: _day,
                                     thisMonth: false,
                                     isActive: false,
-                                    language_day: $language_day[_day]
+                                    language_day: $language_day[_day],
+                                    language_shortDay: $language_shortDay[_day]
                                 };
 
                             $week.push($date_obj);
@@ -834,6 +885,7 @@
                         year: _year,
                         month: _month,
                         language_month: $language_month[_month - 1],
+                        language_shortMonth: $language_shortMonth[_month - 1],
                         count: $lastDate,
                         date: $date,
                         allDate: $week,
@@ -850,7 +902,37 @@
             dropEvent: function(event, time, type, mode, isFinally){ //移動、縮放物件
                 let $event = this.getRealEvent(event);
 
-                this.$emit('dropEvent', $event, time, type, mode, isFinally);
+                if( mode === 'date' && type === 'head' ){
+                    let _difference = this.differenceTime(time, $event.startTime, mode);
+
+                    $event.startTime = this.computedTime($event.startTime, _difference);
+                    $event.endTime = this.computedTime($event.endTime, _difference);
+                }else if( mode === 'date' && type === 'foot' ){
+                    $event.endTime.year = time.year;
+                    $event.endTime.month = time.month;
+                    $event.endTime.date = time.date;
+                }else if( mode === 'time' && type === 'head' ){
+                    let _difference = this.differenceTime(time, $event.startTime, mode);
+
+                    $event.startTime = this.computedTime($event.startTime, _difference);
+                    $event.endTime = this.computedTime($event.endTime, _difference);
+                }else if( mode === 'time' && type === 'foot' ){
+                    $event.endTime.year = time.year;
+                    $event.endTime.month = time.month;
+                    $event.endTime.date = time.date;
+                    $event.endTime.hour = time.hour;
+                    $event.endTime.minutes = time.minutes;
+
+                    if( !$event.extend ) {
+                        $event.extend = {};
+                    }
+
+                    $event.extend.cover = 0;
+                }
+
+                if(isFinally) {
+                    this.$emit('dropEvent', $event);
+                }
             },
             clickTime: function(time, mode){ //點選時間
                 this.$emit('clickTime', time, mode);

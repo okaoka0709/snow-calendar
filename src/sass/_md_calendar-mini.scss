@@ -49,6 +49,7 @@
                 float: left;
                 width: (100% / 7);
                 text-align: center;
+                font-size: $font-size-xs;
                 color: $gray;
             }
 
@@ -88,7 +89,7 @@
                 height: $size;
                 width: $size;
                 line-height: $size;
-                font-size: $font-size-s;
+                font-size: $font-size-xs;
                 color: $deep;
                 border-radius: $size;
                 transition: $transition;

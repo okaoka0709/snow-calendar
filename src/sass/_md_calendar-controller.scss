@@ -34,6 +34,7 @@
 
         select {
             display: inline-block;
+            margin-left: $interval-xs;
             vertical-align: middle;
             width: auto;
 
@@ -62,7 +63,7 @@
             }
 
             &.add-event {
-
+                margin-left: $interval-xs;
             }
 
             + li {

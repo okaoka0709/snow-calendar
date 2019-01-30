@@ -349,7 +349,7 @@
                     refCal: true,
                     source: true
                 },
-                lang: 'en'
+                lang: 'tw'
             }
         },
         methods: {
@@ -368,8 +368,8 @@
             clickTime: function(time, mode){
                 console.log('clickTime', time, mode);
             },
-            dropEvent: function(event, time, type, mode, isFinally){
-                console.log('dropEvent', event, time, type, mode, isFinally);
+            dropEvent: function(event){
+                console.log('dropEvent', event);
             },
             addEvent: function(time, mode){
                 console.log('addEvent', time, mode);

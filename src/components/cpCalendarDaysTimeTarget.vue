@@ -2,7 +2,7 @@
     <div class="time" :class="[isToday ? 'is-today': '', isActive? 'is-active': '']" @click="clickTime">
         <a class="inner" @click.prevent.stop="update">
             <div class="date">{{ obj.month }}/{{ obj.date }}</div>
-            <div class="day">({{ obj.language_day }})</div>
+            <div class="day">({{ obj.language_shortDay }})</div>
         </a>
         <div class="sensor"
             @drop.prevent="dropDone"

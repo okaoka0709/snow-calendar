@@ -8,7 +8,7 @@
         <div class="calendar-day">
             <div class="week">
                 <div class="title">
-                        <div v-for="day in obj.week[0]" :key="'dayTag-'+ day.language_day">{{ day.language_day[0] }}</div>
+                    <div v-for="day in obj.week[0]" :key="'dayTag-'+ day.language_day">{{ day.language_shortDay }}</div>
                 </div>
             </div>
             <cpCalendarMiniWeek

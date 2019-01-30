@@ -49,6 +49,9 @@
         .day {
             display: inline-block;
             vertical-align: baseline;
+            font-size: $font-size-xs;
+            color: $deep-gray;
+            margin-left: $interval-xs;
         }
     }
 
@@ -71,6 +74,8 @@
             color: $deep;
             transition: $transition;
             background-color: $white;
+            border: $border;
+            border-radius: $border-radius;
             cursor: pointer;
 
             &:hover {

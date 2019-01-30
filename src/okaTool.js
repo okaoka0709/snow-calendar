@@ -154,9 +154,5 @@ export default {
 
             env.$emit.apply(env, arg); //送到上面的 'sendEvent'
         }
-    },
-    siteConfig: {
-        url : 'http://10.153.196.78:11609',
-        errorMsg: '發生錯誤，請檢查您的網路連線，或聯絡我們以為您服務。'
     }
 }

@@ -4,24 +4,13 @@
   <img src="https://img.shields.io/npm/dt/snow-calendar.svg">
 </a>
 
-# english version on the below.
-
-# @0.1.17 您現在必須顯式的指定 css
-```
-import 'snow-calendar/src/css/snowCalendar.css'
-```
-指定語系(lang)：
-```
-<snowCalendar
-  :lang="tw"
-></snowCalendar>
-```
+## english version on the below
 
 # Snow Calendar
 Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的前端日曆套件，其特色如下：
 * 不包含 jquery
-* 將事件與資料完全開放，您可自行設計操作介面的邏輯及資料交互的方式。
-* 以月為單位初始化資料，您可以在使用者切換到當月再動態取得資料。
+* 您可自行設計操作介面及資料交互方式, 因為事件與資料完全開放。
+* 以月為單位初始化資料，使用者切換到當月再動態取得資料。
 * 簡易使用，安裝套件後使用 **&lt;snowCalendar&gt;&lt;/snowCalendar&gt;** 標籤使用即可。
 * 提供多語系：繁體中文、簡體中文、英文、日文
 * 提供完整的日曆視圖：年、月、週、4天、天、事件
@@ -38,10 +27,10 @@ Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的�
   
 ## Demo
 Snow Calendar 範本，您可以至 Source 取得原始碼：
-[Demo](https://snow-calendar-extend.000webhostapp.com)、[Source](https://github.com/okaoka0709/snow-calendar-demo)
+<a href="https://snow-calendar-extend.000webhostapp.com" target="_blank">Demo</a>、<a href="https://github.com/okaoka0709/snow-calendar-demo" target="_blank">Source</a>
 
 基本的 Snow Calendar：
-[Demo](https://snow-calendar.000webhostapp.com)
+<a href="https://snow-calendar.000webhostapp.com" target="_blank">Demo</a>
 
 如果您有 Vue Cli，您也可以使用本專案建立簡易的本機 Demo。先執行 npm 安裝依賴：
 ```
@@ -57,7 +46,7 @@ $ npm install snow-calendar --save
 
 
 ## 使用方式
-安裝之後，在您的 main.js 檔案中引用 snow-calendar 並 use，再引入 css 檔案即可：
+安裝之後，在您的 main.js 檔案中引用 snow-calendar 並 use，再引入 css 檔案：
 ```
 import Vue from 'vue'
 import snowCalendar from 'snow-calendar'
@@ -65,7 +54,7 @@ import 'snow-calendar/src/css/snowCalendar.css'
 
 Vue.use(snowCalendar)
 ```
-接著在您希望呈現的 .vue 檔案中引用即可：
+接著在您希望呈現的 .vue 檔案中引用：
 ```
 <template>
   <snowCalendar></snowCalendar>
@@ -96,7 +85,7 @@ Vue.use(snowCalendar)
 ```
 
 ### 日曆本資料(sources):Array
-Snow Calendar 提供多日曆本的功能，日曆本提供事件的編輯權限與顏色。
+Snow Calendar 提供多日曆本的功能，日曆本提供編輯權限與顏色。
 日曆本資料為一陣列，陣列中包含日曆本物件，資料有：
 * 唯一值(sn):String or Number
 * 標題(sub):String
@@ -118,7 +107,7 @@ let sourceObject = [
     }
   ]
 ```
-日曆本的 editable 屬性僅供參考，點擊行程時參數還是會回傳該事件，開發者需自行決定如何使用該屬性。
+當 editable 屬性為 false，會自動關閉拖曳事件。
 
 ### 行程資料 (events):Array
 行程資料提供介面可顯示、操作的事件。
@@ -226,6 +215,7 @@ let setObject = {
 let langString = 'jp'
 ```
 若沒有設定這個值，或設定了錯的值，語系將會自動設定為英文。
+不同語言會得到不同的月曆配置，例如 en 將以週日做為一週的起始，tw 將以週一做為一週的起始。
 徵求志願人員幫忙翻譯語言，請來信 [okaoka0709@gmail.com](mailto:okaoka0709@gmail.com)。
 
 
@@ -354,9 +344,9 @@ mode 參數指明使用者選取的是天或是時間，有可能是以下的值
 
 ### 拖曳行程(dropEvent)
 當使用者在天、4天、週、月觀看模式時，使用者以拖曳行程時觸發。
-dropEvent 提供五個參數分別是 event(Object)、time(Object)、type(String)、mode(String) 與 finally(Boolean)。
+dropEvent 只提供一個參數 event(Object)。
 ```
-function(event, time, type, mode, finally)
+function(event)
 ```
 event 參數回傳使用者操作的行程資訊，看起來像以下這樣：
 ```
@@ -382,28 +372,7 @@ event 參數回傳使用者操作的行程資訊，看起來像以下這樣：
   "location": "地點"
 }
 ```
-time 參數指明使用者目前拖曳到的時間，看起來像以下這樣：
-```
-{
-  year: 2019,
-  month: 1,
-  date: 1,
-  hour: 12,
-  minutes: 0
-}
-```
-type 參數指明使用者拖曳的類型，有可能是以下的值：
-* head (拖曳行程區塊整體)
-* foot (拖曳行程區塊尾端)
-
-![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/dropArea_days.png)
-![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/dropArea_month.png)
-
-mode 參數指明使用者拖曳的模式是天或是時間，有可能是以下的值：
-* date(天)
-* time(時間)
-
-finally 參數指明使用者拖曳是否為最後結果，例如 2019/1/1 拖曳至 2019/1/3，dropEvent 事件將被觸發 2 次(2019/1/2、2019/1/3 各一次)，但僅有最後一次的 finally 參數為 true。建議當 finally 參數為 true 時再將修改資料傳送到後端。
+dropEvent 將回傳一個已修改結果的 event，您只要將事件更新至 server 即可。
 
 ### 新增行程(addEvent)
 當使用者點選**新增行程**按鈕時觸發。
@@ -572,7 +541,7 @@ hoverSource 提供的的參數與 clickSource 一致。
 # Snow Calendar
 Snow Calendar is a front-end calendar plugin for **vue** like google calendar or FullCalendar:
 * no jquery
-* Open the event and data, you can operation it by yourself.
+* You can make your own UI, because the event and data is opened.
 * Initialize data by month, you can get your data when user change calendar time.
 * Easy to use, just install it and use **&lt;snowCalendar&gt;&lt;/snowCalendar&gt;** tag.
 * Provide Traditional Chinese, Simplified Chinese, English and Japanese
@@ -590,10 +559,10 @@ You can watch [https://youtu.be/1tL3BEmg6Sk](https://youtu.be/1tL3BEmg6Sk)
   
 ## Demo
 Snow Calendar sample, you can also get the source:
-[Demo](https://snow-calendar-extend.000webhostapp.com), [Source](https://github.com/okaoka0709/snow-calendar-demo)
+<a href="https://snow-calendar-extend.000webhostapp.com" target="_blank">Demo</a>、<a href="https://github.com/okaoka0709/snow-calendar-demo" target="_blank">Source</a>
 
 Basic Snow Calendar:
-[Demo](https://snow-calendar.000webhostapp.com)
+<a href="https://snow-calendar.000webhostapp.com" target="_blank">Demo</a>
 
 If you have Vue Cli, you can also use this project to build a basic Demo on your computer.
 ```
@@ -669,8 +638,7 @@ let sourceObject = [
       "active": true
     }
   ]
-```
-you have to decide how to use the editable attribute yourself.
+when editable is false. the event can't trigger drop event.
 
 ### Event data (events): Array
 The event data is an array, and the array contains the event items. The data includes:
@@ -777,6 +745,7 @@ You can set the UI language:
 let langString = 'jp'
 ```
 If this value is not set, or if the wrong value is set, it will be English.
+languge setting will change layput. for example. when you use 'en', sunday will be first day. but if you use 'jp'. monday will be first day.
 For volunteers to help translate, please contact me [okaoka0709@gmail.com] (mailto:okaoka0709@gmail.com).
 
 
@@ -905,9 +874,9 @@ When the user picks up all day, both hour and minutes will be 0.
 
 ### Drop event (dropEvent)
 In the day mode, 4 days mode, week mode, and month mode, the user triggers when dragging the event.
-The five parameters provided by dropEvent are event(Object), time(Object), type(String), mode(String), and finally(Boolean).
+Only one parameters provided by dropEvent is event(Object).
 ```
-Function(event, time, type, mode, finally)
+Function(event)
 ```
 The event parameter returns the trip information for the user action, which looks like this:
 ```
@@ -935,20 +904,7 @@ The event parameter returns the trip information for the user action, which look
 ```
 The time parameter indicates the time the user is currently dragging, which looks like this:
 ```
-{
-  Year: 2019,
-  Month: 1,
-  Date: 1,
-  Hour: 12,
-  Minutes: 0
-}
-```
-The type parameter indicates the type of user drag, which may be the following values:
-* head (towed block block overall)
-* foot (towing the end of the block)
-
-![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/dropArea_days.png)
-![image](https://raw.githubusercontent.com/okaoka0709/snow-calendar/master/src/assets/readme-img/dropArea_month.png)
+the dropEvent will return a complite event. you only need to update the event to your server.
 
 The mode parameter indicates whether the mode dragged by the user is day or time, and may be the following values:
 * date (days)

@@ -148,12 +148,16 @@
                 .date {
                     display: inline-block;
                     vertical-align: baseline;
+                    font-size: $font-size-l;
                 }
 
                 .day {
                     position: relative;
                     display: inline-block;
                     vertical-align: baseline;
+                    font-size: $font-size-xs;
+                    color: $deep-gray;
+                    margin-left: $interval-xs;
                 }
 
                 .sensor {

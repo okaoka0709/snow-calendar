@@ -13,6 +13,7 @@
             }
 
             button {
+                display: block;
                 width: 100%;
             }
 
@@ -22,7 +23,7 @@
         }
 
         &.list {
-            padding: 1px;
+            margin-top: $interval-xs;
 
             li {
                 @extend %card;
@@ -31,7 +32,7 @@
                 padding-right: 30px;
 
                 + li {
-                    margin-top: 2px;
+                    margin-top: $interval-xs;
                 }
 
                 &:hover {

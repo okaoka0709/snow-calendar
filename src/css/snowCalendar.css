@@ -468,6 +468,7 @@
       float: left;
       width: 14.28571%;
       text-align: center;
+      font-size: 0.7rem;
       color: #aaaaaa; }
     .md.calendar-mini .calendar-day .days.is-before-1:before {
       content: "\200B";
@@ -507,7 +508,7 @@
       height: 26px;
       width: 26px;
       line-height: 26px;
-      font-size: 0.85rem;
+      font-size: 0.7rem;
       color: #343434;
       border-radius: 26px;
       -webkit-transition: 200ms;
@@ -549,6 +550,7 @@
       font-size: 1.3rem; }
   .md.calendar-controller .date-selector select {
     display: inline-block;
+    margin-left: 3px;
     vertical-align: middle;
     width: auto; }
     @media screen and (max-width: 768px) {
@@ -565,6 +567,8 @@
       @media screen and (max-width: 768px) {
         .md.calendar-controller .calendar-btns li.change-toToday {
           display: none; } }
+      .md.calendar-controller .calendar-btns li.add-event {
+        margin-left: 3px; }
 
 .md.calendar-month .top-1 {
   top: 0em; }
@@ -676,6 +680,7 @@
         z-index: 2; }
     .md.calendar-month .calendar-day .days .date {
       color: inherit;
+      font-size: 0.85rem;
       cursor: pointer; }
       .md.calendar-month .calendar-day .days .date:hover {
         text-decoration: underline; }
@@ -763,6 +768,7 @@
     float: left;
     width: 14.28571%;
     text-align: center;
+    font-size: 0.7rem;
     color: #aaaaaa; }
   .md.calendar-year .calendar-day .days.is-before-1:before {
     content: "\200B";
@@ -802,7 +808,7 @@
     height: 26px;
     width: 26px;
     line-height: 26px;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     color: #343434;
     border-radius: 26px;
     -webkit-transition: 200ms;
@@ -976,11 +982,15 @@
             text-decoration: underline; }
         .md.calendar-days .caption-area .calendar-caption .time .date {
           display: inline-block;
-          vertical-align: baseline; }
+          vertical-align: baseline;
+          font-size: 1.15rem; }
         .md.calendar-days .caption-area .calendar-caption .time .day {
           position: relative;
           display: inline-block;
-          vertical-align: baseline; }
+          vertical-align: baseline;
+          font-size: 0.7rem;
+          color: #646464;
+          margin-left: 3px; }
         .md.calendar-days .caption-area .calendar-caption .time .sensor {
           display: none;
           position: absolute;
@@ -1406,7 +1416,10 @@
     vertical-align: baseline; }
   .md.calendar-events .time .day {
     display: inline-block;
-    vertical-align: baseline; }
+    vertical-align: baseline;
+    font-size: 0.7rem;
+    color: #646464;
+    margin-left: 3px; }
 
 .md.calendar-events .event {
   -webkit-box-flex: 1;
@@ -1422,6 +1435,8 @@
     -webkit-transition: 200ms;
     transition: 200ms;
     background-color: #ffffff;
+    border: 1px solid #e4e4e4;
+    border-radius: 3px;
     cursor: pointer; }
     .md.calendar-events .event a:hover {
       opacity: 0.8; }
@@ -1474,10 +1489,11 @@
   margin-top: 3px; }
 
 .md.calendar-source ul.func button {
+  display: block;
   width: 100%; }
 
 .md.calendar-source ul.list {
-  padding: 1px;
+  margin-top: 3px;
   /*.cp*/
   /*a*/ }
   .md.calendar-source ul.list li {
@@ -1485,7 +1501,7 @@
     padding: 6px 10px;
     padding-right: 30px; }
     .md.calendar-source ul.list li + li {
-      margin-top: 2px; }
+      margin-top: 3px; }
     .md.calendar-source ul.list li:hover {
       /*a*/ }
       .md.calendar-source ul.list li:hover .set {
