@@ -5,7 +5,6 @@
 </a>
 
 ## english version on the below
-
 # Snow Calendar
 Snow Calendar 是一個類似 google calendar 或 FullCalendar 的 **vue** 的前端日曆套件，其特色如下：
 * 不包含 jquery
@@ -60,6 +59,7 @@ Vue.use(snowCalendar)
   <snowCalendar></snowCalendar>
 </template>
 ```
+
 
 ## 提供日曆資料
 在 Snow Calendar 中，您可以提供以下幾種資料：
@@ -429,11 +429,9 @@ event 參數回傳使用者操作的行程資訊，看起來像以下這樣：
 ```
 MouseEvent 參數回傳原生事件。
 
-
 ### 滑入行程(hoverEvent)
 當使用者滑入行程時觸發。
 hoverEvent 提供的的參數與 clickEvent 一致。
-
 
 ### 點擊更多(clickMore)
 當使用者點擊”還有n則“文字時觸發。
@@ -537,6 +535,10 @@ MouseEvent 參數回傳原生事件。
 hoverSource 提供的的參數與 clickSource 一致。
 
 
+## 聯絡我
+<a href="mailto:okaoka0709@gmail.com" target="_blank">okaoka0709@gmail.com</a>
+
+
 
 # Snow Calendar
 Snow Calendar is a front-end calendar plugin for **vue** like google calendar or FullCalendar:
@@ -555,8 +557,8 @@ Snow Calendar is a front-end calendar plugin for **vue** like google calendar or
 
 ## Operating video
 You can watch [https://youtu.be/1tL3BEmg6Sk](https://youtu.be/1tL3BEmg6Sk)
-  
-  
+
+
 ## Demo
 Snow Calendar sample, you can also get the source:
 <a href="https://snow-calendar-extend.000webhostapp.com" target="_blank">Demo</a>、<a href="https://github.com/okaoka0709/snow-calendar-demo" target="_blank">Source</a>
@@ -592,6 +594,7 @@ Then use snowCalendar tag in the .vue file:
   <snowCalendar></snowCalendar>
 </template>
 ```
+
 
 ## Calendar information
 you can bind those information on Snow Calendar:
@@ -638,6 +641,7 @@ let sourceObject = [
       "active": true
     }
   ]
+```
 when editable is false. the event can't trigger drop event.
 
 ### Event data (events): Array
@@ -747,7 +751,6 @@ let langString = 'jp'
 If this value is not set, or if the wrong value is set, it will be English.
 languge setting will change layput. for example. when you use 'en', sunday will be first day. but if you use 'jp'. monday will be first day.
 For volunteers to help translate, please contact me [okaoka0709@gmail.com] (mailto:okaoka0709@gmail.com).
-
 
 ## Calendar event
 Snow Calendar provides those events:
@@ -901,8 +904,6 @@ The event parameter returns the trip information for the user action, which look
   "cal": 1,
   "location": "location"
 }
-```
-The time parameter indicates the time the user is currently dragging, which looks like this:
 ```
 the dropEvent will return a complite event. you only need to update the event to your server.
 
@@ -1071,3 +1072,7 @@ The MouseEvent parameter returns a native event.
 ### Hover calendar (hoverSource)
 Triggered when the user hover the calendar title text.
 The parameters provided by hoverSource are consistent with clickSource.
+
+
+## contact me
+<a href="mailto:okaoka0709@gmail.com" target="_blank">okaoka0709@gmail.com</a>

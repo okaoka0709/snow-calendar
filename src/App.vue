@@ -349,7 +349,7 @@
                     refCal: true,
                     source: true
                 },
-                lang: 'tw'
+                lang: 'en'
             }
         },
         methods: {
@@ -410,6 +410,9 @@
             updateSource: function(source){
                 console.log('updateSource', source);
             }
+        },
+        created: function(){
+            alert('open devTool to see logs.')
         }
     }
 </script>
