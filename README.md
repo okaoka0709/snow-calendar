@@ -61,6 +61,22 @@ Vue.use(snowCalendar)
 ```
 
 
+## 使用傳統開發方式(不使用 Vue-cli)
+下載本套件後，您可以在 cdn/index.html 中看到範例。
+在 **&lt;head&gt;&lt;/head&gt;** 標籤中引入樣式、語系檔與主程式。
+```
+<link rel="stylesheet" href="./script/style/snowCalendar.css">
+<script src="./script/lang/tw.js"></script>
+<script src="./script/snowCalendar.js"></script>
+```
+在 **&lt;body&gt;&lt;/body&gt;** 標籤中使用 **&lt;snowCalendar&gt;&lt;/snowCalendar&gt;** ：
+```
+<div id="my-app">
+    <snow-calendar></snow-calendar>
+</div>
+```
+
+
 ## 提供日曆資料
 在 Snow Calendar 中，您可以提供以下幾種資料：
 * 日曆本資料(sources)
@@ -593,6 +609,22 @@ Then use snowCalendar tag in the .vue file:
 <template>
   <snowCalendar></snowCalendar>
 </template>
+```
+
+
+## If you don't use vue cli
+Download this case. you can see how do add this to your page by cdn/index.html.
+import it in **&lt;head&gt;&lt;/head&gt;** :
+```
+<link rel="stylesheet" href="./script/style/snowCalendar.css">
+<script src="./script/lang/tw.js"></script>
+<script src="./script/snowCalendar.js"></script>
+```
+and use **&lt;snowCalendar&gt;&lt;/snowCalendar&gt;** :
+```
+<div id="my-app">
+    <snow-calendar></snow-calendar>
+</div>
 ```
 
 
