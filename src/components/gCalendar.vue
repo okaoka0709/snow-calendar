@@ -900,7 +900,7 @@
                 this.$emit('errorMsg', msg);
             },
             dropEvent: function(event, time, type, mode, isFinally){ //移動、縮放物件
-                let $event = this.getRealEvent(event);
+                let $event = this.$okaTool.copy(event);
 
                 if( mode === 'date' && type === 'head' ){
                     let _difference = this.differenceTime(time, $event.startTime, mode);
@@ -911,6 +911,7 @@
                     $event.endTime.year = time.year;
                     $event.endTime.month = time.month;
                     $event.endTime.date = time.date;
+                    delete $event.extend;
                 }else if( mode === 'time' && type === 'head' ){
                     let _difference = this.differenceTime(time, $event.startTime, mode);
 
@@ -927,8 +928,17 @@
                         $event.extend = {};
                     }
 
-                    $event.extend.cover = 0;
+                    if(isFinally) {
+                        delete $event.extend;
+                    }else {
+                        $event.extend.cover = 0;
+                    }
                 }
+
+                let $realEvent = this.getRealEvent($event),
+                    _index = this.events.indexOf($realEvent);
+
+                this.events.splice(_index, 1, $event);
 
                 if(isFinally) {
                     this.$emit('dropEvent', $event);
@@ -1001,8 +1011,8 @@
 
             if( this.lang === 'tw' ) {
                 this.$set(this, 'langType', tw)
-            }else if( this.lang === 'ch' ) {
-                this.$set(this, 'langType', ch)
+            }else if( this.lang === 'cn' ) {
+                this.$set(this, 'langType', cn)
             }else if( this.lang === 'jp' ) {
                 this.$set(this, 'langType', jp)
             }else{
@@ -1019,5 +1029,6 @@
 </script>
 
 <style scoped>
-
+    body { margin: 0 }
+    .g.article-layout { min-height: 100vh }
 </style>
