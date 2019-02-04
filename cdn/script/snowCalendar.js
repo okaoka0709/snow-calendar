@@ -303,6 +303,11 @@ Vue.component('snowCalendar', { // gCalendar
                     source: true
                 }
             }
+        },
+        lang: {
+            type: String,
+            require: false,
+            default: 'en'
         }
     },
     data: function () {
@@ -1031,7 +1036,7 @@ Vue.component('snowCalendar', { // gCalendar
             this.$emit('errorMsg', msg);
         },
         dropEvent: function(event, time, type, mode, isFinally){ //移動、縮放物件
-            let $event = this.getRealEvent(event);
+            let $event = this.$okaTool.copy(event);
 
             if( mode === 'date' && type === 'head' ){
                 let _difference = this.differenceTime(time, $event.startTime, mode);
@@ -1042,6 +1047,16 @@ Vue.component('snowCalendar', { // gCalendar
                 $event.endTime.year = time.year;
                 $event.endTime.month = time.month;
                 $event.endTime.date = time.date;
+
+                if( !$event.extend ) {
+                    $event.extend = {};
+                }
+
+                if(isFinally) {
+                    delete $event.extend;
+                }else {
+                    $event.extend.cover = Math.max(Math.floor($event.extend.size / 86400000), 1);
+                }
             }else if( mode === 'time' && type === 'head' ){
                 let _difference = this.differenceTime(time, $event.startTime, mode);
 
@@ -1058,8 +1073,17 @@ Vue.component('snowCalendar', { // gCalendar
                     $event.extend = {};
                 }
 
-                $event.extend.cover = 0;
+                if(isFinally) {
+                    delete $event.extend;
+                }else {
+                    $event.extend.cover = 0;
+                }
             }
+
+            let $realEvent = this.getRealEvent($event),
+                _index = this.events.indexOf($realEvent);
+
+            this.events.splice(_index, 1, $event);
 
             if(isFinally) {
                 this.$emit('dropEvent', $event);

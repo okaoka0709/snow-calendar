@@ -911,7 +911,16 @@
                     $event.endTime.year = time.year;
                     $event.endTime.month = time.month;
                     $event.endTime.date = time.date;
-                    delete $event.extend;
+
+                    if( !$event.extend ) {
+                        $event.extend = {};
+                    }
+
+                    if(isFinally) {
+                        delete $event.extend;
+                    }else {
+                        $event.extend.cover = Math.max(Math.floor($event.extend.size / 86400000), 1);
+                    }
                 }else if( mode === 'time' && type === 'head' ){
                     let _difference = this.differenceTime(time, $event.startTime, mode);
 
