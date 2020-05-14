@@ -93,9 +93,9 @@ Vue.use(snowCalendar)
   :sources="sourceObject"
   :events="eventObject"
   :mode="modeString"
-  :mainCal="timeObject"
-  :refCal="timeObject"
-  :uiVisible="setObject"
+  :main-cal="timeObject"
+  :ref-cal="timeObject"
+  :ui-visible="setObject"
   :lang="langString"
 ></snowCalendar>
 ```
