@@ -192,7 +192,7 @@
 
                     days.forEach((item, index) => { //事件
 
-                        if( $nextDateMore ) { //看下一天的 more 有沒有包含自己，且因為剛好自己是第 _showLength 個，所以剛好有長長，要把他縮回去
+                        if( item && $nextDateMore ) { //看下一天的 more 有沒有包含自己，且因為剛好自己是第 _showLength 個，所以剛好有長長，要把他縮回去
                             let $target = $nextDateMore.extend.moreEvent.find(event => {
                                     return event.sn === item.sn;
                                 });
