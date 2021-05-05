@@ -1859,6 +1859,9 @@ Vue.component('cpCalendarMonthWeek', {
             let $events = [],  //事件陣列
                 $results = [];
 
+            let _showLength = 5,
+                _spliceLength = _showLength - 1; 
+
             this.obj.forEach((date, date_i) => { //每周，把週一到週日拿出來跑陣列
                 let $event = [];
 
@@ -1946,9 +1949,9 @@ Vue.component('cpCalendarMonthWeek', {
 
                 let $eventLength = $event.length;
 
-                if ($eventLength > 4){ //大於四個就截掉，塞入"更多"
+                if ($eventLength > _showLength){ //大於 _showLength 個就截掉，塞入"更多"
 
-                    let $more = $dayEvents.splice(3, $eventLength - 3);
+                    let $more = $dayEvents.splice(_spliceLength, $eventLength - _spliceLength);
 
                     $dayEvents.push({
                         sn: this.$okaTool.getUUID(),
@@ -1968,9 +1971,27 @@ Vue.component('cpCalendarMonthWeek', {
                 $events.push($dayEvents); //塞到事件陣列
             });
 
-            $events.forEach(days => { //陣列扁平化為一維，不加入複製的事件
+            $events.forEach((days, index) => { //陣列扁平化為一維，不加入複製的事件
 
-                days.forEach(item => { //事件
+                let $nextDate = $events[index + 1],
+                    $nextDateMore = null;
+
+                if( $nextDate && $nextDate[_spliceLength] && $nextDate[_spliceLength].extend.moreEvent ) {
+                    $nextDateMore = $nextDate[_spliceLength];
+                }
+
+                days.forEach((item, index) => { //事件
+
+                    if( $nextDateMore ) { //看下一天的 more 有沒有包含自己，且因為剛好自己是第 _showLength 個，所以剛好有長長，要把他縮回去
+                        let $target = $nextDateMore.extend.moreEvent.find(event => {
+                                return event.sn === item.sn;
+                            });
+
+                        if( $target ) {
+                            item.extend.width -= 1;
+                        }
+                    }
+
                     if (item && item.original === undefined){ //只加入第一次發生的事件
                         $results.push(item);
                     }
