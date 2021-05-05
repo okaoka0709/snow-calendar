@@ -10,7 +10,7 @@ window.snowCalendar.lang = {
     today: '今天',
     more: '個',
     allDay: '全天',
-    addEvent: '建立',
+    add_event: '建立',
     addCalendar: '新增日曆',
     importCalendar: '匯入日曆',
     mode1Day: '天',

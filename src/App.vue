@@ -2,9 +2,9 @@
     <gCalendar
         :sources="sources"
         :events="events"
-        :defaultMainCal="mainCal"
-        :defaultRefCal="refCal"
-        :defaultMode="mode"
+        :mainCal="mainCal"
+        :refCal="refCal"
+        :mode="mode"
         :uiVisible="uiVisible"
         :lang="lang"
 
@@ -341,8 +341,16 @@
                         }
                     }
                 ],
-                mainCal: {},
-                refCal: {},
+                mainCal: {
+                    year: 2019,
+                    month: 1,
+                    date: 24,
+                },
+                refCal: {
+                    year: 2019,
+                    month: 1,
+                    date: 24,
+                },
                 mode: 'month',
                 uiVisible: {
                     control: true,

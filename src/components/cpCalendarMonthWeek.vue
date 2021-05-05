@@ -64,7 +64,7 @@
                     $results = [];
 
                 let _showLength = 5,
-                    _spliceLength = _showLength - 1;  
+                    _spliceLength = _showLength - 2;  
 
                 this.obj.forEach((date, date_i) => { //每周，把週一到週日拿出來跑陣列
                     let $event = [];

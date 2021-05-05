@@ -168,7 +168,7 @@ let $lang = {
         today: 'Today',
         more: 'more',
         allDay: 'All day',
-        addEvent: 'Create',
+        add_event: 'Create',
         addCalendar: 'Add calendar',
         importCalendar: 'Import',
         mode1Day: 'Day',
@@ -187,18 +187,18 @@ if( !snowCalendar.lang ) {
 Vue.component('snowCalendar', { // gCalendar
     template: `
     <div class="g article-layout">
-        <div class="g article-aside" v-if="uiVisible.refCal !== false || uiVisible.source !== false">
+        <div class="g article-aside" v-if="ui_visible.ref_cal !== false || ui_visible.source !== false">
             <mdCalendarMini
-                v-if="uiVisible.refCal !== false"
-                :refCal="refCal"
-                :mainCal="mainCal"
-                :obj="initMonth({year: refCal.year, month: refCal.month})"
+                v-if="ui_visible.ref_cal !== false"
+                :ref_cal="ref_cal"
+                :main_cal="main_cal"
+                :obj="init_month({year: ref_cal.year, month: ref_cal.month})"
                 :today="today"
-                :monthsn="'ref-'+ refCal.year +'month'+ refCal.month"
+                :monthsn="'ref-'+ ref_cal.year +'month'+ ref_cal.month"
                 @sendEvent="receiveEvent"
             ></mdCalendarMini>
             <mdCalendarSource
-                v-if="uiVisible.source !== false"
+                v-if="ui_visible.source !== false"
                 :source="sources"
                 :lang="langType"
                 @sendEvent="receiveEvent"
@@ -206,8 +206,8 @@ Vue.component('snowCalendar', { // gCalendar
         </div>
         <div class="g article-content">
             <mdCalendarController
-                v-if="uiVisible.control !== false"
-                :mainCal="mainCal"
+                v-if="ui_visible.control !== false"
+                :main_cal="main_cal"
                 :mode="modeType"
                 :today="today"
                 :lang="langType"
@@ -215,56 +215,56 @@ Vue.component('snowCalendar', { // gCalendar
             ></mdCalendarController>
             <mdCalendarYear
                 v-if="modeType === 'year'"
-                :mainCal="mainCal"
-                :obj="initYear({year: mainCal.year})"
+                :main_cal="main_cal"
+                :obj="initYear({year: main_cal.year})"
                 :today="today"
                 @sendEvent="receiveEvent"
             ></mdCalendarYear>
             <mdCalendarMonth
                 v-if="modeType === 'month'"
-                :obj="getMonth({year: mainCal.year, month: mainCal.month})"
+                :obj="getMonth({year: main_cal.year, month: main_cal.month})"
                 :today="today"
                 :event="eventCompile"
                 :source="sourceCompile"
-                :monthsn="'Month-'+ mainCal.year +'month'+ mainCal.month"
+                :monthsn="'Month-'+ main_cal.year +'month'+ main_cal.month"
                 :lang="langType"
                 @sendEvent="receiveEvent"
             ></mdCalendarMonth>
             <mdCalendarEvent
                 v-if="modeType === 'event'"
-                :obj="getMonth({year: mainCal.year, month: mainCal.month})"
+                :obj="getMonth({year: main_cal.year, month: main_cal.month})"
                 :today="today"
                 :event="eventCompile"
                 :source="sourceCompile"
                 :lang="langType"
-                :monthsn="'Event-'+ mainCal.year +'month'+ mainCal.month"
+                :monthsn="'Event-'+ main_cal.year +'month'+ main_cal.month"
                 @sendEvent="receiveEvent"
             ></mdCalendarEvent>
             <mdCalendarDays
                 v-if="modeType === 'week'"
-                :obj="getDate({year: mainCal.year, month: mainCal.month, date: mainCal.date}, 7)"
+                :obj="getDate({year: main_cal.year, month: main_cal.month, date: main_cal.date}, 7)"
                 :today="today"
                 :event="eventCompile"
                 :source="sourceCompile"
-                :monthsn="'Week-'+ mainCal.year +'month'+ mainCal.month"
+                :monthsn="'Week-'+ main_cal.year +'month'+ main_cal.month"
                 @sendEvent="receiveEvent"
             ></mdCalendarDays>
             <mdCalendarDays
                 v-if="modeType === '4days'"
-                :obj="getDate({year: mainCal.year, month: mainCal.month, date: mainCal.date}, 4)"
+                :obj="getDate({year: main_cal.year, month: main_cal.month, date: main_cal.date}, 4)"
                 :today="today"
                 :event="eventCompile"
                 :source="sourceCompile"
-                :monthsn="'4Days-'+ mainCal.year +'month'+ mainCal.month"
+                :monthsn="'4Days-'+ main_cal.year +'month'+ main_cal.month"
                 @sendEvent="receiveEvent"
             ></mdCalendarDays>
             <mdCalendarDays
                 v-if="modeType === 'date'"
-                :obj="getDate({year: mainCal.year, month: mainCal.month, date: mainCal.date}, 1)"
+                :obj="getDate({year: main_cal.year, month: main_cal.month, date: main_cal.date}, 1)"
                 :today="today"
                 :event="eventCompile"
                 :source="sourceCompile"
-                :monthsn="'Date-'+ mainCal.year +'month'+ mainCal.month"
+                :monthsn="'Date-'+ main_cal.year +'month'+ main_cal.month"
                 @sendEvent="receiveEvent"
             ></mdCalendarDays>
         </div>
@@ -284,7 +284,7 @@ Vue.component('snowCalendar', { // gCalendar
                 return []
             }
         },
-        mainCal: { //存主要日曆日期
+        main_cal: { //存主要日曆日期
             type: Object,
             require: false,
             default: function(){
@@ -300,7 +300,7 @@ Vue.component('snowCalendar', { // gCalendar
                 }
             }
         },
-        refCal: { //存參考日曆日期
+        ref_cal: { //存參考日曆日期
             type: Object,
             require: false,
             default: function(){
@@ -320,13 +320,13 @@ Vue.component('snowCalendar', { // gCalendar
             type: String,
             require: false
         },
-        uiVisible: { //是否顯示組件
+        ui_visible: { //是否顯示組件
             type: Object,
             require: false,
             default: function(){
                 return {
                     control: true,
-                    refCal: true,
+                    ref_cal: true,
                     source: true
                 }
             }
@@ -559,7 +559,7 @@ Vue.component('snowCalendar', { // gCalendar
                 return new Date(_year, _month -1, _date, _hour, _minutes);
             }
         },
-        updateCal: function(cal, date){
+        update_cal: function(cal, date){
             let _year = date.year,
                 _month = date.month,
                 _date = date.date;
@@ -574,16 +574,16 @@ Vue.component('snowCalendar', { // gCalendar
             this[cal +'Cal'].month = _month;
             this[cal +'Cal'].date = _date;
 
-            this.$emit('updateCal', cal, {
+            this.$emit('update_cal', cal, {
                 year: _year,
                 month: _month,
                 date: _date
             });
         },
-        updateMode: function(opt){ //改變模式
+        update_mode: function(opt){ //改變模式
             this.modeType = opt;
 
-            this.$emit('updateMode', opt);
+            this.$emit('update_mode', opt);
         },
         computedCal: function(opt){
             let _cal = opt.cal,
@@ -758,7 +758,7 @@ Vue.component('snowCalendar', { // gCalendar
                 }
             }
 
-            this.updateCal(_cal, $result);
+            this.update_cal(_cal, $result);
         },
         getDate: function(opt, days){ //取天數(含事件)，第二個參數為天，並回覆一個與天相符的陣列
             let $result = [];
@@ -892,11 +892,11 @@ Vue.component('snowCalendar', { // gCalendar
                 _year = $set.year,
                 _month = $set.month;
 
-            let $month = this.initMonth($set); //初始化看看
+            let $month = this.init_month($set); //初始化看看
 
             if( !$month.loaded ){ //如果是第一次取得該月
                 $month.loaded = true;
-                this.$emit('initMonth', $set);
+                this.$emit('init_month', $set);
             }
 
             return $month;
@@ -908,13 +908,13 @@ Vue.component('snowCalendar', { // gCalendar
                 }),
                 _year = $set.year;
 
-            this.initMonth(opt); //初始化看看
+            this.init_month(opt); //初始化看看
 
             for (let i = 1; i <= 12; i++){
 
                 if (this.library[_year][i] === undefined){
 
-                    this.initMonth({
+                    this.init_month({
                         year: _year,
                         month: i
                     });
@@ -923,7 +923,7 @@ Vue.component('snowCalendar', { // gCalendar
 
             return this.library[_year];
         },
-        initMonth: function(opt){ // 取指定月份(不含事件)
+        init_month: function(opt){ // 取指定月份(不含事件)
             let $set = this.$okaTool.extend({
                     target: opt,
                     ref: this.today
@@ -1059,10 +1059,10 @@ Vue.component('snowCalendar', { // gCalendar
 
             return this.library[_year][_month];
         },
-        errorMsg: function(msg){
-            this.$emit('errorMsg', msg);
+        error_msg: function(msg){
+            this.$emit('error_msg', msg);
         },
-        dropEvent: function(event, time, type, mode, isFinally){ //移動、縮放物件
+        drop_event: function(event, time, type, mode, isFinally){ //移動、縮放物件
             let $event = this.$okaTool.copy(event);
 
             if( mode === 'date' && type === 'head' ){
@@ -1113,42 +1113,42 @@ Vue.component('snowCalendar', { // gCalendar
             this.events.splice(_index, 1, $event);
 
             if(isFinally) {
-                this.$emit('dropEvent', $event);
+                this.$emit('drop_event', $event);
             }
         },
-        clickTime: function(time, mode){ //點選時間
-            this.$emit('clickTime', time, mode);
+        click_time: function(time, mode){ //點選時間
+            this.$emit('click_time', time, mode);
         },
-        addEvent: function(time, mode){ //新增事件，設定好時間，將其他事情交給 popup
-            this.$emit('addEvent', time, mode);
+        add_event: function(time, mode){ //新增事件，設定好時間，將其他事情交給 popup
+            this.$emit('add_event', time, mode);
         },
-        clickEvent: function(event, mouseEvent){
+        click_event: function(event, mouseEvent){
             let $event = this.getRealEvent(event);
 
-            this.$emit('clickEvent', $event, mouseEvent);
+            this.$emit('click_event', $event, mouseEvent);
         },
-        hoverEvent: function(event, mouseEvent){
+        hover_event: function(event, mouseEvent){
             let $event = this.getRealEvent(event);
 
-            this.$emit('hoverEvent', $event, mouseEvent);
+            this.$emit('hover_event', $event, mouseEvent);
         },
-        clickMore: function(event, mouseEvent){
-            this.$emit('clickMore', event, mouseEvent);
+        click_more: function(event, mouseEvent){
+            this.$emit('click_more', event, mouseEvent);
         },
-        hoverMore: function(event, mouseEvent){
-            this.$emit('hoverMore', event, mouseEvent);
+        hover_more: function(event, mouseEvent){
+            this.$emit('hover_more', event, mouseEvent);
         },
-        addSource: function(){ //按下新增行事曆
-            this.$emit('addSource');
+        add_source: function(){ //按下新增行事曆
+            this.$emit('add_source');
         },
-        importSource: function(){ //按下匯入行事曆
-            this.$emit('importSource');
+        import_source: function(){ //按下匯入行事曆
+            this.$emit('import_source');
         },
-        clickSource: function(source, mouseEvent){ //按下編輯行事曆
-            this.$emit('clickSource', source, mouseEvent);
+        click_source: function(source, mouseEvent){ //按下編輯行事曆
+            this.$emit('click_source', source, mouseEvent);
         },
-        hoverSource: function(source, mouseEvent){ //滑動到行事曆
-            this.$emit('hoverSource', source, mouseEvent);
+        hover_source: function(source, mouseEvent){ //滑動到行事曆
+            this.$emit('hover_source', source, mouseEvent);
         }
     },
     created: function(){
@@ -1157,24 +1157,24 @@ Vue.component('snowCalendar', { // gCalendar
             _month = $today.getMonth() + 1,
             _date = $today.getDate();
 
-        if( this.mainCal.year && this.mainCal.month && this.mainCal.date) {
+        if( this.main_cal.year && this.main_cal.month && this.main_cal.date) {
 
         }else {
-            console.error('mainCal 時間資料錯誤');
+            console.error('main_cal 時間資料錯誤');
 
-            this.$set(this, 'mainCal', {
+            this.$set(this, 'main_cal', {
                 year: _year,
                 month: _month,
                 date: _date
             });
         }
 
-        if( this.refCal.year && this.refCal.month && this.refCal.date ) {
+        if( this.ref_cal.year && this.ref_cal.month && this.ref_cal.date ) {
 
         }else {
-            console.error('refCal 時間資料錯誤');
+            console.error('ref_cal 時間資料錯誤');
 
-            this.$set(this, 'refCal', {
+            this.$set(this, 'ref_cal', {
                 year: _year,
                 month: _month,
                 date: _date
@@ -1194,7 +1194,7 @@ Vue.component('mdCalendarMini', {
     <div class="md calendar-mini">
         <div class="calendar-selector">
             <button @click.prevent="getAway('prev')">&lt;</button>
-            <span class="thisMonth">{{ refCal.year }}/{{ refCal.month }}</span>
+            <span class="thisMonth">{{ ref_cal.year }}/{{ ref_cal.month }}</span>
             <button @click.prevent="getAway('next')">&gt;</button>
         </div>
         <div class="calendar-day">
@@ -1206,7 +1206,7 @@ Vue.component('mdCalendarMini', {
             <cpCalendarMiniWeek
                 v-for="n in 6"
 
-                :mainCal="mainCal"
+                :main_cal="main_cal"
                 :obj="obj.week[n - 1]"
                 :today="today"
                 :weeksn="monthsn +'week'+ n"
@@ -1217,10 +1217,10 @@ Vue.component('mdCalendarMini', {
         </div>
     </div>`,
     props: {
-        refCal: {
+        ref_cal: {
             require: true
         },
-        mainCal: {
+        main_cal: {
             require: true
         },
         obj: {
@@ -1253,7 +1253,7 @@ Vue.component('cpCalendarMiniWeek', {
             <cpCalendarMiniDate
                 v-for="n in 7"
 
-                :mainCal="mainCal"
+                :main_cal="main_cal"
                 :obj="obj[n - 1]"
                 :today="today"
                 :key="weeksn +'date'+ n"
@@ -1263,7 +1263,7 @@ Vue.component('cpCalendarMiniWeek', {
         </div>
     </div>`,
     props: {
-        mainCal: {
+        main_cal: {
             require: true
         },
         obj: {
@@ -1296,7 +1296,7 @@ Vue.component('cpCalendarMiniDate', {
         >{{ obj.date }}</a>
     </div>`,
     props: {
-        mainCal: {
+        main_cal: {
             require: true
         },
         obj: {
@@ -1315,7 +1315,7 @@ Vue.component('cpCalendarMiniDate', {
         },
         isActive: function(){
 
-            if (this.obj.year === this.mainCal.year && this.obj.month === this.mainCal.month && this.obj.date === this.mainCal.date){
+            if (this.obj.year === this.main_cal.year && this.obj.month === this.main_cal.month && this.obj.date === this.main_cal.date){
                 return true;
             }
         }
@@ -1323,10 +1323,10 @@ Vue.component('cpCalendarMiniDate', {
     methods: {
         update: function(){ //推送日期的更新
             if( this.isActive ){
-                this.$emit('sendEvent', 'updateMode', 'date');
+                this.$emit('sendEvent', 'update_mode', 'date');
             }
 
-            this.$emit('sendEvent', 'updateCal', 'main',{
+            this.$emit('sendEvent', 'update_cal', 'main',{
                 year: this.obj.year,
                 month: this.obj.month,
                 date: this.obj.date
@@ -1339,8 +1339,8 @@ Vue.component('mdCalendarSource', {
     template: `
     <div class="md calendar-source">
         <ul class="func">
-            <li><button @click.prevent.stop="addSource">{{ lang.addCalendar }}</button></li>
-            <li><button @click.prevent.stop="importSource">{{ lang.importCalendar }}</button></li>
+            <li><button @click.prevent.stop="add_source">{{ lang.addCalendar }}</button></li>
+            <li><button @click.prevent.stop="import_source">{{ lang.importCalendar }}</button></li>
         </ul>
         <ul class="list">
             <li
@@ -1364,11 +1364,11 @@ Vue.component('mdCalendarSource', {
         receiveEvent: function(){ //將收到的方法，推送給其他方法執行
             this.$okaTool.receiveEvent(this, arguments);
         },
-        addSource: function(){
-            this.$emit('sendEvent', 'addSource');
+        add_source: function(){
+            this.$emit('sendEvent', 'add_source');
         },
-        importSource: function(type){
-            this.$emit('sendEvent', 'importSource');
+        import_source: function(type){
+            this.$emit('sendEvent', 'import_source');
         }
     }
 });
@@ -1379,10 +1379,10 @@ Vue.component('cpCalendarSource', {
         <div class="cp input checkbox">
             <input type="checkbox" v-model="cal.active" :id="'cal-'+ cal.sn">
             <label :for="'cal-'+ cal.sn" :style="'color:'+ cal.color">
-                <span @mouseover.stop="hoverSource">{{ cal.sub }}</span>
+                <span @mouseover.stop="hover_source">{{ cal.sub }}</span>
             </label>
         </div>
-        <a class="set" @click.prevent.stop="clickSource">⋯</a>
+        <a class="set" @click.prevent.stop="click_source">⋯</a>
     </li>`,
     props: {
         cal: {
@@ -1390,11 +1390,11 @@ Vue.component('cpCalendarSource', {
         }
     },
     methods: {
-        clickSource: function(e){
-            this.$emit('sendEvent', 'clickSource', this.cal, e);
+        click_source: function(e){
+            this.$emit('sendEvent', 'click_source', this.cal, e);
         },
-        hoverSource: function(e){
-            this.$emit('sendEvent', 'hoverSource', this.cal, e);
+        hover_source: function(e){
+            this.$emit('sendEvent', 'hover_source', this.cal, e);
         }
     }
 });
@@ -1404,8 +1404,8 @@ Vue.component('mdCalendarController', {
     <div class="md calendar-controller">
         <div class="date-selector">
             <button @click.prevent="getAway('prev')">&lt;</button>
-            <span v-if="mode === 'year'" class="thisMonth">{{ mainCal.year }}</span>
-            <span v-else class="thisMonth">{{ mainCal.year }}/{{ mainCal.month }}</span>
+            <span v-if="mode === 'year'" class="thisMonth">{{ main_cal.year }}</span>
+            <span v-else class="thisMonth">{{ main_cal.year }}/{{ main_cal.month }}</span>
             <button @click.prevent="getAway('next')">&gt;</button>
             <select :value="mode" @change="changeMode">
                 <option value="date">{{ lang.mode1Day }}</option>
@@ -1419,12 +1419,12 @@ Vue.component('mdCalendarController', {
         <div class="calendar-btns">
             <ul>
                 <li class="change-toToday"><button @click.prevent="backToToday">{{ lang.today }}</button></li>
-                <li class="add-event"><button @click.prevent="addEvt">{{ lang.addEvent }}</button></li>
+                <li class="add-event"><button @click.prevent="addEvt">{{ lang.add_event }}</button></li>
             </ul>
         </div>
     </div>`,
     props: {
-        mainCal: {
+        main_cal: {
             require: true
         },
         mode: {
@@ -1445,10 +1445,10 @@ Vue.component('mdCalendarController', {
             });
         },
         changeMode: function(evt){
-            this.$emit('sendEvent', 'updateMode', evt.target.value);
+            this.$emit('sendEvent', 'update_mode', evt.target.value);
         },
         backToToday: function(){
-            this.$emit('sendEvent', 'updateCal', 'main', this.today);
+            this.$emit('sendEvent', 'update_cal', 'main', this.today);
         },
         addEvt: function(){
             let $time = new Date(),
@@ -1458,7 +1458,7 @@ Vue.component('mdCalendarController', {
                 _hour = $time.getHours(),
                 _minutes = $time.getMinutes();
 
-            this.$emit('sendEvent', 'addEvent', {
+            this.$emit('sendEvent', 'add_event', {
                 year: _year,
                 month: _month,
                 date: _date,
@@ -1478,7 +1478,7 @@ Vue.component('mdCalendarYear', {
 
                 v-for="n in 12"
 
-                :mainCal="mainCal"
+                :main_cal="main_cal"
                 :obj="obj[n]"
                 :month="n"
                 :today="today"
@@ -1490,7 +1490,7 @@ Vue.component('mdCalendarYear', {
         </ul>
     </div>`,
     props: {
-        mainCal: {
+        main_cal: {
             require: true
         },
         obj: {
@@ -1520,7 +1520,7 @@ Vue.component('cpCalendarYearMonth', {
             <cpCalendarYearWeek
                 v-for="n in 6"
 
-                :mainCal="mainCal"
+                :main_cal="main_cal"
                 :obj="obj.week[n - 1]"
                 :today="today"
                 :weeksn="monthsn +'week'+ n"
@@ -1531,7 +1531,7 @@ Vue.component('cpCalendarYearMonth', {
         </div>
     </li>`,
     props: {
-        mainCal: {
+        main_cal: {
             require: true
         },
         obj: {
@@ -1560,7 +1560,7 @@ Vue.component('cpCalendarYearWeek', {
         <div class="days">
             <cpCalendarYearDate
                 v-for="n in 7"
-                :mainCal="mainCal"
+                :main_cal="main_cal"
                 :obj="obj[n - 1]"
                 :today="today"
                 :key="weeksn +'date'+ n"
@@ -1569,7 +1569,7 @@ Vue.component('cpCalendarYearWeek', {
         </div>
     </div>`,
     props: {
-        mainCal: {
+        main_cal: {
             require: true
         },
         obj: {
@@ -1602,7 +1602,7 @@ Vue.component('cpCalendarYearDate', {
         >{{ obj.date }}</a>
     </div>`,
     props: {
-        mainCal: {
+        main_cal: {
             require: true
         },
         obj: {
@@ -1619,20 +1619,20 @@ Vue.component('cpCalendarYearDate', {
             }
         },
         isActive: function(){
-            if (this.obj.year === this.mainCal.year && this.obj.month === this.mainCal.month && this.obj.date === this.mainCal.date){
+            if (this.obj.year === this.main_cal.year && this.obj.month === this.main_cal.month && this.obj.date === this.main_cal.date){
                 return true;
             }
         }
     },
     methods: {
         update: function(){
-            this.$emit('sendEvent', 'updateCal', 'main', {
+            this.$emit('sendEvent', 'update_cal', 'main', {
                 year: this.obj.year,
                 month: this.obj.month,
                 date: this.obj.date
             });
 
-            this.$emit('sendEvent', 'updateMode', 'date');
+            this.$emit('sendEvent', 'update_mode', 'date');
         }
     }
 });
@@ -1701,7 +1701,7 @@ Vue.component('mdCalendarMonth', {
         },
         endDropStatus: function(obj){
             if( this.moveType === 'foot' ){
-                this.$emit('sendEvent', 'dropEvent', this.moveNode, this.moveTime, this.moveType, 'date', true);
+                this.$emit('sendEvent', 'drop_event', this.moveNode, this.moveTime, this.moveType, 'date', true);
             }
 
             this.moveType = null;
@@ -1749,7 +1749,7 @@ Vue.component('mdCalendarMonth', {
             }
 
             this.moveTime = $obj;
-            this.$emit('sendEvent', 'dropEvent', this.moveNode, this.moveTime, this.moveType, 'date', _isFinally);
+            this.$emit('sendEvent', 'drop_event', this.moveNode, this.moveTime, this.moveType, 'date', _isFinally);
         },
         dropDone: function(obj){
             if( this.moveType === 'head' ){
@@ -1820,7 +1820,7 @@ Vue.component('cpCalendarMonthWeek', {
         </div>
         <div
             class="events"
-            @click.prevent="computedclickTime"
+            @click.prevent="computedclick_time"
         >
             <cpCalendarMonthEvent
                 v-for="event in events"
@@ -1860,7 +1860,7 @@ Vue.component('cpCalendarMonthWeek', {
                 $results = [];
 
             let _showLength = 5,
-                _spliceLength = _showLength - 1; 
+                _spliceLength = _showLength - 2; 
 
             this.obj.forEach((date, date_i) => { //每周，把週一到週日拿出來跑陣列
                 let $event = [];
@@ -2005,7 +2005,7 @@ Vue.component('cpCalendarMonthWeek', {
         receiveEvent: function(){ //將收到的方法，推送給其他方法執行
             this.$okaTool.receiveEvent(this, arguments);
         },
-        computedclickTime: function(evt){ //用寬度算點擊的是哪一天
+        computedclick_time: function(evt){ //用寬度算點擊的是哪一天
             let $self = this;
 
             let $week = $self.obj,
@@ -2022,7 +2022,7 @@ Vue.component('cpCalendarMonthWeek', {
                 _month = $date.month,
                 _date = $date.date;
 
-            this.$emit('sendEvent', 'clickTime', {
+            this.$emit('sendEvent', 'click_time', {
                 year: _year,
                 month: _month,
                 date: _date,
@@ -2038,7 +2038,7 @@ Vue.component('cpCalendarMonthDate', {
     <div
         class="day"
         :class="[isToday? 'is-today': '', obj.thisMonth? '': 'not-thisMonth', isActive? 'is-active': '']"
-        @click="clickTime"
+        @click="click_time"
     >
         <a
             class="date"
@@ -2077,16 +2077,16 @@ Vue.component('cpCalendarMonthDate', {
     },
     methods: {
         update: function(){ //推送日期的更新
-            this.$emit('sendEvent', 'updateCal', 'main', {
+            this.$emit('sendEvent', 'update_cal', 'main', {
                 year: this.obj.year,
                 month: this.obj.month,
                 date: this.obj.date
             });
 
-            this.$emit('sendEvent', 'updateMode', 'date');
+            this.$emit('sendEvent', 'update_mode', 'date');
         },
-        clickTime: function(evt){
-            this.$emit('sendEvent', 'clickTime', {
+        click_time: function(evt){
+            this.$emit('sendEvent', 'click_time', {
                 year: this.obj.year,
                 month: this.obj.month,
                 date: this.obj.date,
@@ -2109,8 +2109,8 @@ Vue.component('cpCalendarMonthEvent', {
         v-if="obj.extend.cover === null"
         class="more"
         :class="['top-'+ obj.extend.top,'left-'+ obj.extend.left]"
-        @click.prevent.stop="clickMore"
-        @mouseover.stop="hoverMore"
+        @click.prevent.stop="click_more"
+        @mouseover.stop="hover_more"
     >{{ obj.sub }}</a>
     <a
         v-else-if="obj.extend.cover < 1"
@@ -2119,8 +2119,8 @@ Vue.component('cpCalendarMonthEvent', {
         :draggable="cal.editable"
         :class="['top-'+ obj.extend.top,'left-'+ obj.extend.left, obj.extend.isOver? 'is-over': '']"
 
-        @click.prevent.stop="clickEvent"
-        @mouseover.stop="hoverEvent"
+        @click.prevent.stop="click_event"
+        @mouseover.stop="hover_event"
         @dragstart="startDropStatus($event, 'head')"
         @dragend="endDropStatus"
     >
@@ -2134,8 +2134,8 @@ Vue.component('cpCalendarMonthEvent', {
         :class="['top-'+ obj.extend.top,'left-'+ obj.extend.left, 'width-'+ obj.extend.width, obj.extend.isOver? 'is-over': '']"
         :style="'background-color: '+ cal.color +';'"
 
-        @click.prevent.stop="clickEvent"
-        @mouseover.stop="hoverEvent"
+        @click.prevent.stop="click_event"
+        @mouseover.stop="hover_event"
         @dragstart="startDropStatus($event, 'head')"
         @dragend="endDropStatus"
     >
@@ -2168,25 +2168,25 @@ Vue.component('cpCalendarMonthEvent', {
     },
     methods: {
         update: function(){ //推送日期的更新
-            this.$emit('sendEvent', 'updateCal', 'main', {
+            this.$emit('sendEvent', 'update_cal', 'main', {
                 year: this.obj.year,
                 month: this.obj.month,
                 date: this.obj.date
             });
 
-            this.$emit('sendEvent', 'updateMode', 'date');
+            this.$emit('sendEvent', 'update_mode', 'date');
         },
-        clickEvent: function(e){
-            this.$emit('sendEvent', 'clickEvent', this.obj, e);
+        click_event: function(e){
+            this.$emit('sendEvent', 'click_event', this.obj, e);
         },
-        hoverEvent: function(e){
-            this.$emit('sendEvent', 'hoverEvent', this.obj, e);
+        hover_event: function(e){
+            this.$emit('sendEvent', 'hover_event', this.obj, e);
         },
-        clickMore: function(e){
-            this.$emit('sendEvent', 'clickMore', this.obj, e);
+        click_more: function(e){
+            this.$emit('sendEvent', 'click_more', this.obj, e);
         },
-        hoverMore: function(e){
-            this.$emit('sendEvent', 'hoverMore', this.obj, e);
+        hover_more: function(e){
+            this.$emit('sendEvent', 'hover_more', this.obj, e);
         },
         startDropStatus: function(e, type){
             e.dataTransfer.setData('Text', ''); //firefox
@@ -2320,13 +2320,13 @@ Vue.component('cpCalendarEventDays', {
     },
     methods: {
         update: function(){ //推送日期的更新
-            this.$emit('sendEvent', 'updateCal', 'main', {
+            this.$emit('sendEvent', 'update_cal', 'main', {
                 year: this.obj.year,
                 month: this.obj.month,
                 date: this.obj.date
             });
 
-            this.$emit('sendEvent', 'updateMode', 'date');
+            this.$emit('sendEvent', 'update_mode', 'date');
         },
         receiveEvent: function(){ //將收到的方法，推送給其他方法執行
             this.$okaTool.receiveEvent(this, arguments);
@@ -2337,7 +2337,7 @@ Vue.component('cpCalendarEventDays', {
 Vue.component('cpCalendarEventEvents', {
     template: `
     <li>
-        <a @click.prevent.stop="clickEvent" @mouseover.stop="hoverEvent" :class="[obj.extend.isOver? 'is-over': '']">
+        <a @click.prevent.stop="click_event" @mouseover.stop="hover_event" :class="[obj.extend.isOver? 'is-over': '']">
             <span class="mark" v-if="obj.extend.cover >= 1">
                 <i :style="'background-color: '+ cal.color +';'"></i>
                 <em>{{ lang.allDay }}</em>
@@ -2381,11 +2381,11 @@ Vue.component('cpCalendarEventEvents', {
         }
     },
     methods: {
-        clickEvent: function(e){
-            this.$emit('sendEvent', 'clickEvent', this.obj, e);
+        click_event: function(e){
+            this.$emit('sendEvent', 'click_event', this.obj, e);
         },
-        hoverEvent: function(e){
-            this.$emit('sendEvent', 'hoverEvent', this.obj, e);
+        hover_event: function(e){
+            this.$emit('sendEvent', 'hover_event', this.obj, e);
         }
     }
 });
@@ -2403,7 +2403,7 @@ Vue.component('cpCalendarMiniDate', {
         >{{ obj.date }}</a>
     </div>`,
     props: {
-        mainCal: {
+        main_cal: {
             require: true
         },
         obj: {
@@ -2422,7 +2422,7 @@ Vue.component('cpCalendarMiniDate', {
         },
         isActive: function(){
 
-            if (this.obj.year === this.mainCal.year && this.obj.month === this.mainCal.month && this.obj.date === this.mainCal.date){
+            if (this.obj.year === this.main_cal.year && this.obj.month === this.main_cal.month && this.obj.date === this.main_cal.date){
                 return true;
             }
         }
@@ -2430,10 +2430,10 @@ Vue.component('cpCalendarMiniDate', {
     methods: {
         update: function(){ //推送日期的更新
             if( this.isActive ){
-                this.$emit('sendEvent', 'updateMode', 'date');
+                this.$emit('sendEvent', 'update_mode', 'date');
             }
 
-            this.$emit('sendEvent', 'updateCal', 'main',{
+            this.$emit('sendEvent', 'update_cal', 'main',{
                 year: this.obj.year,
                 month: this.obj.month,
                 date: this.obj.date
@@ -2630,7 +2630,7 @@ Vue.component('cpCalendarDaysCaption', {
         },
         endDropStatus: function(obj){
             if( this.moveType === 'foot' ){
-                this.$emit('sendEvent', 'dropEvent', this.moveNode, this.moveTime, this.moveType, 'date', true);
+                this.$emit('sendEvent', 'drop_event', this.moveNode, this.moveTime, this.moveType, 'date', true);
             }
 
             this.moveType = null;
@@ -2682,7 +2682,7 @@ Vue.component('cpCalendarDaysCaption', {
             }
 
             this.moveTime = $obj;
-            this.$emit('sendEvent', 'dropEvent', this.moveNode, this.moveTime, this.moveType, 'date', _isFinally);
+            this.$emit('sendEvent', 'drop_event', this.moveNode, this.moveTime, this.moveType, 'date', _isFinally);
         },
         dropDone: function(obj){
             if( this.moveType === 'head' ){
@@ -2773,7 +2773,7 @@ Vue.component('cpCalendarDaysTimeTargets', {
 
 Vue.component('cpCalendarDaysTimeTarget', {
     template: `
-    <div class="time" :class="[isToday ? 'is-today': '', isActive? 'is-active': '']" @click="clickTime">
+    <div class="time" :class="[isToday ? 'is-today': '', isActive? 'is-active': '']" @click="click_time">
         <a class="inner" @click.prevent.stop="update">
             <div class="date">{{ obj.month }}/{{ obj.date }}</div>
             <div class="day">({{ obj.language_shortDay }})</div>
@@ -2811,16 +2811,16 @@ Vue.component('cpCalendarDaysTimeTarget', {
     },
     methods: {
         update: function(){
-            this.$emit('sendEvent', 'updateCal', 'main', {
+            this.$emit('sendEvent', 'update_cal', 'main', {
                 year: this.obj.year,
                 month: this.obj.month,
                 date: this.obj.date
             });
 
-            this.$emit('sendEvent', 'updateMode', 'date');
+            this.$emit('sendEvent', 'update_mode', 'date');
         },
-        clickTime: function(evt){
-            this.$emit('sendEvent', 'clickTime', {
+        click_time: function(evt){
+            this.$emit('sendEvent', 'click_time', {
                 year: this.obj.year,
                 month: this.obj.month,
                 date: this.obj.date,
@@ -2850,7 +2850,7 @@ Vue.component('cpCalendarDaysEvents', {
                 @sendEvent="receiveEvent"
             ></cpCalendarDaysEventDay> <!-- days-dayeventdays -->
         </div>
-        <div class="events" @click="clickTime">
+        <div class="events" @click="click_time">
             <cpCalendarDaysEventItem
                 v-for="item in events"
                 :obj="item"
@@ -2999,7 +2999,7 @@ Vue.component('cpCalendarDaysEvents', {
         }
     },
     methods: {
-        clickTime: function(evt){ //先用寬度算點擊的是哪一天
+        click_time: function(evt){ //先用寬度算點擊的是哪一天
             let _days = this.obj.date;
 
             let $date = null;
@@ -3020,7 +3020,7 @@ Vue.component('cpCalendarDaysEvents', {
                 $date = $week[_index];
             }
 
-            this.$emit('sendEvent', 'clickTime', {
+            this.$emit('sendEvent', 'click_time', {
                 year: $date.year,
                 month: $date.month,
                 date: $date.date,
@@ -3088,8 +3088,8 @@ Vue.component('cpCalendarDaysEventItem', {
         :title="obj.desc"
         :style="'background-color: '+ cal.color +';'"
 
-        @click.prevent.stop="clickEvent"
-        @mouseover.stop="hoverEvent"
+        @click.prevent.stop="click_event"
+        @mouseover.stop="hover_event"
         @dragstart="startDropStatus($event, 'head')"
         @dragend="endDropStatus"
     >
@@ -3121,11 +3121,11 @@ Vue.component('cpCalendarDaysEventItem', {
         }
     },
     methods: {
-        clickEvent: function(e){
-            this.$emit('sendEvent', 'clickEvent', this.obj, e);
+        click_event: function(e){
+            this.$emit('sendEvent', 'click_event', this.obj, e);
         },
-        hoverEvent: function(e){
-            this.$emit('sendEvent', 'hoverEvent', this.obj, e);
+        hover_event: function(e){
+            this.$emit('sendEvent', 'hover_event', this.obj, e);
         },
         startDropStatus: function(e, type){
             e.dataTransfer.setData('Text', ''); //firefox
@@ -3243,7 +3243,7 @@ Vue.component('cpCalendarDaysTimeEventsList', {
             }
         },
         dropOver: function(){
-            this.$emit('sendEvent', 'errorMsg', '拖曳物件時請勿超過感應區');
+            this.$emit('sendEvent', 'error_msg', '拖曳物件時請勿超過感應區');
             this.dropDone();
         },
         startDropStatus: function(obj){
@@ -3287,10 +3287,10 @@ Vue.component('cpCalendarDaysTimeEventsList', {
 
             this.moveTime = obj;
 
-            this.$emit('sendEvent', 'dropEvent', this.moveNode, this.moveTime, this.moveType, 'time', false);
+            this.$emit('sendEvent', 'drop_event', this.moveNode, this.moveTime, this.moveType, 'time', false);
         },
         dropDone: function(){
-            this.$emit('sendEvent', 'dropEvent', this.moveNode, this.moveTime, this.moveType, 'time', true);
+            this.$emit('sendEvent', 'drop_event', this.moveNode, this.moveTime, this.moveType, 'time', true);
 
             this.endDropStatus();
         },
@@ -3333,7 +3333,7 @@ Vue.component('cpCalendarDaysTimeEvents', {
     <div
         class="day"
         :class="[isToday ? 'is-today': '']"
-        @click="clickTime"
+        @click="click_time"
     >
         <div
             v-if="isToday"
@@ -3493,7 +3493,7 @@ Vue.component('cpCalendarDaysTimeEvents', {
         receiveEvent: function (func, opt){ //將收到的方法，推送給其他方法執行
             this.$okaTool.receiveEvent(this, arguments);
         },
-        clickTime: function (evt){ //用高度算新增時間
+        click_time: function (evt){ //用高度算新增時間
             let _offsetY = evt.offsetY;
 
             let _startHour = Math.floor(_offsetY / 60),
@@ -3505,7 +3505,7 @@ Vue.component('cpCalendarDaysTimeEvents', {
                 _startMinutes = 30;
             }
 
-            this.$emit('sendEvent', 'clickTime', {
+            this.$emit('sendEvent', 'click_time', {
                 year: this.obj.year,
                 month: this.obj.month,
                 date: this.obj.date,
@@ -3548,8 +3548,8 @@ Vue.component('cpCalendarDaysTimeEvent', {
         :draggable="cal.editable"
         :class="['width-'+ obj.extend.col +'-'+ obj.extend.index +'-'+ obj.extend.width, obj.extend.isOver? 'is-over': '']"
         :style="'background-color: '+ cal.color +';height: '+ timeHeight +'px;top: '+ timeTop +'px;'"
-        @click.prevent.stop="clickEvent"
-        @mouseover.stop="hoverEvent"
+        @click.prevent.stop="click_event"
+        @mouseover.stop="hover_event"
         @dragstart="startDropStatus($event, 'head')"
         @dragend="endDropStatus"
     >
@@ -3631,11 +3631,11 @@ Vue.component('cpCalendarDaysTimeEvent', {
         }
     },
     methods: {
-        clickEvent: function(e){
-            this.$emit('sendEvent', 'clickEvent', this.obj, e);
+        click_event: function(e){
+            this.$emit('sendEvent', 'click_event', this.obj, e);
         },
-        hoverEvent: function(e){
-            this.$emit('sendEvent', 'hoverEvent', this.obj, e);
+        hover_event: function(e){
+            this.$emit('sendEvent', 'hover_event', this.obj, e);
         },
         startDropStatus: function(e, type){
             e.dataTransfer.setData('Text', ''); //firefox

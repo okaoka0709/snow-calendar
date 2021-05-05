@@ -24,38 +24,38 @@
         <snow-calendar
             :sources="sources"
             :events="events"
-            :defaultMainCal="mainCal"
-            :defaultRefCal="refCal"
-            :defaultMode="mode"
-            :uiVisible="uiVisible"
-            :lang="lang"
+            :main_cal="main_cal"
+            :ref_cal="ref_cal"
+            :mode="mode"
+            :ui_visible="ui_visible"
 
-            @updateCal="updateCal"
-            @updateMode="updateMode"
+            @update_cal="update_cal"
+            @update_mode="update_mode"
 
-            @initMonth="initMonth"
-            @errorMsg="errorMsg"
+            @init_month="init_month"
+            @error_msg="error_msg"
 
-            @clickTime="clickTime"
+            @click_time="click_time"
 
-            @dropEvent="dropEvent"
-            @addEvent="addEvent"
-            @clickEvent="clickEvent"
-            @hoverEvent="hoverEvent"
+            @drop_event="drop_event"
+            @add_event="add_event"
+            @click_event="click_event"
+            @hover_event="hover_event"
 
-            @clickMore="clickMore"
-            @hoverMore="hoverMore"
+            @click_more="click_more"
+            @hover_more="hover_more"
 
-            @addSource="addSource"
-            @importSource="importSource"
-            @clickSource="clickSource"
-            @hoverSource="hoverSource"
+            @add_source="add_source"
+            @import_source="import_source"
+            @click_source="click_source"
+            @hover_source="hover_source"
         ></snow-calendar>
       </div>
     <script>
         let $snowClaendar = new Vue({
             el: '#my-app',
             data: function(){
+
                 return {
                     sources: [
                         {
@@ -358,62 +358,69 @@
                             }
                         }
                     ],
-                    mainCal: {},
-                    refCal: {},
-                    mode: 'month',
-                    uiVisible: {
-                        control: true,
-                        refCal: true,
-                        source: true
+                    main_cal: {
+                        year: 2019,
+                        month: 1,
+                        date: 1
                     },
-                    lang: 'en'
+                    ref_cal: {
+                        year: 2019,
+                        month: 1,
+                        date: 1
+                    },
+                    mode: 'month',
+                    ui_visible: {
+                        control: true,
+                        ref_cal: true,
+                        source: true
+                    }
                 }
             },
             methods: {
-                updateCal: function(cal, date){ //切換月曆(ref or main)
+                update_cal: function(cal, date){ //切換月曆(ref or main)
                     console.log('cal', cal, 'date', date);
                 },
-                updateMode: function(opt){ //改變模式
-                    console.log('updateMode', opt);
+                update_mode: function(opt){ //改變模式
+                    console.log('update_mode', opt);
                 },
-                initMonth: function(opt){ //第一次造訪該月
-                    console.log('initMonth', opt);
+                init_month: function(opt){ //第一次造訪該月
+                    console.log('init_month', opt);
                 },
-                errorMsg: function(msg){ //推送錯誤訊息
-                    console.log('errorMsg', msg);
+                error_msg: function(msg){ //推送錯誤訊息
+                    console.log('error_msg', msg);
                 },
-                clickTime: function(time, mode){
-                    console.log('clickTime', time, mode);
+                click_time: function(time, mode){
+                    console.log('click_time', time, mode);
                 },
-                dropEvent: function(event){
-                    console.log('dropEvent', event);
+                drop_event: function(event){
+                    console.log('drop_event', event);
                 },
-                addEvent: function(time, mode){
-                    console.log('addEvent', time, mode);
+                add_event: function(time, mode){
+                    console.log('add_event', time, mode);
                 },
-                clickEvent: function(event, mouseEvent){ //popup 顯示 event
-                    console.log('clickEvent', event, mouseEvent);
+                click_event: function(event, mouseEvent){ //popup 顯示 event
+                    console.log('click_event', event, mouseEvent);
                 },
-                hoverEvent: function(event, mouseEvent){ //tooltip 顯示 event
-                    console.log('hoverEvent', event, mouseEvent);
+                hover_event: function(event, mouseEvent){ //tooltip 顯示 event
+                    console.log('hover_event', event, mouseEvent);
                 },
-                clickMore: function(event, mouseEvent){
-                    console.log('clickMore', event, mouseEvent);
+                click_more: function(event, mouseEvent){
+                    console.log('click_more', event, mouseEvent);
                 },
-                hoverMore: function(event, mouseEvent){
-                    console.log('hoverMore', event, mouseEvent);
+                hover_more: function(event, mouseEvent){
+                    console.log('hover_more', event, mouseEvent);
                 },
-                addSource: function(){
-                    console.log('addSource');
+                add_source: function(){
+                    console.log('add_source');
                 },
-                importSource: function(){
-                    console.log('importSource');
+                import_source: function(){
+                    console.log('import_source');
                 },
-                clickSource: function(source, mouseEvent){
-                    console.log('clickSource', source);
+                click_source: function(source, mouseEvent){
+                    console.log('click_source', source);
                 },
-                hoverSource: function(source, mouseEvent){
-                    console.log('hoverSource', source, mouseEvent);
+                hover_source: function(source, mouseEvent){
+                    console.log('hover_source', source, mouseEvent);
                 },
                 updateEvent: function(event, isFinally){
                     console.log('updateEvent', event, isFinally);
